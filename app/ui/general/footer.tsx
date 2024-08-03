@@ -14,7 +14,7 @@ const Footer = (): React.JSX.Element => {
         <h2 className={`${playfairDisplay.className} text-3xl font-bold mb-6 text-center`}>
           Nossas Informações
         </h2>
-        <ul className="space-y-4">
+        <ul className="space-y-4 lg:flex lg:justify-between lg:items-center">
           <li className="flex items-center">
             <MapPin size={32} className="mr-4 text-base-gray" />
             <p className="capitalize">Rua Alferes Ângelo Sampaio, 777, sala 77</p>
