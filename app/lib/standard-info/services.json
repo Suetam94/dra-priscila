@@ -1,0 +1,19 @@
+{
+  "services": [
+    {
+      "imageUrl": "/clinical-dermatology.png",
+      "title": "Dermatologia Clínica",
+      "content": "Tratamento de doenças de pele de uma forma geral e tratamento de doenças cutâneas imunomediadas."
+    },
+    {
+      "imageUrl": "/cancer-dermatology.png",
+      "title": "Oncologia Cutânea",
+      "content": "Diagnóstico, tratamento clínico e cirúrgico de câncer de pele."
+    },
+    {
+      "imageUrl": "/skin-surgery.png",
+      "title": "Cirurgia Dermatológica Geral",
+      "content": "Tratamento cirúrgico de lesões cutâneas diversas."
+    }
+  ]
+}

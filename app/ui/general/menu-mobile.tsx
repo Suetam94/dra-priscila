@@ -17,13 +17,13 @@ const MobileMenu = (): React.JSX.Element => {
   }
 
   return (
-    <div>
+    <div className="lg:hidden">
       <button onClick={toggleMenu} className="p-2">
         {isOpen ? <X size={32} /> : <List size={25} weight="bold" className="text-base-gray" />}
       </button>
       <div
         className={clsx(
-          'fixed top-0 left-0 w-full h-full bg-base-gray text-base-blue flex flex-col items-center justify-center transition-transform duration-300',
+          'fixed top-0 left-0 w-full h-full bg-base-gray text-base-blue flex flex-col items-center justify-center transition-transform duration-300 z-10',
           {
             'transform translate-x-0': isOpen,
             'transform -translate-x-full': !isOpen
