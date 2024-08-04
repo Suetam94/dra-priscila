@@ -17,7 +17,7 @@ const ExpertiseItem = ({ Icon, items, title }: IExpertiseItemProps) => {
         <h3 className="text-base-blue font-bold text-xl">{title}</h3>
       </div>
       {items.map((item, i) => (
-        <p className={`text-base text-base-blue text-justify ${i !== 0 && 'mt-2'}`}>{item}</p>
+        <p key={item + i} className={`text-base text-base-blue text-justify ${i !== 0 && 'mt-2'}`}>{item}</p>
       ))}
     </div>
   )

@@ -37,7 +37,7 @@ const FieldsOfExpertise = (): React.JSX.Element => {
         <TitleSection title={'Áreas de Atuação'} backgroundVariation={'bg-base-pink'} className={'mb-5'} />
         <div className="flex flex-col gap-8">
           {fieldsOfExpertise.map((field) => (
-            <ExpertiseItem Icon={field.Icon} title={field.title} items={field.items} />
+            <ExpertiseItem key={field.title} Icon={field.Icon} title={field.title} items={field.items} />
           ))}
         </div>
       </div>
