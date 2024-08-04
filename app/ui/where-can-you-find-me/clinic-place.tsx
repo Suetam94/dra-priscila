@@ -1,5 +1,4 @@
 import React from 'react'
-import TitleSection from '@/app/ui/section/title-section'
 import ContactInfo, { IContactInfoProps } from '@/app/ui/where-can-you-find-me/contact-info'
 import OpenStreetMapComponent from '@/app/ui/where-can-you-find-me/map'
 
