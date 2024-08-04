@@ -1,9 +1,9 @@
 'use client'
 
 import React from 'react'
-import { Clock, MapPin, Phone, WhatsappLogo } from '@phosphor-icons/react'
 import { Playfair_Display } from 'next/font/google'
 import Copyright from '@/app/ui/general/copyright'
+import ContactForm from '@/app/ui/general/contact-form'
 
 const playfairDisplay = Playfair_Display({ subsets: ['latin'] })
 
@@ -12,26 +12,9 @@ const Footer = (): React.JSX.Element => {
     <footer className="w-full bg-base-blue text-base-gray pt-8 flex flex-col items-center justify-between">
       <div className="container mx-auto px-4 mb-3">
         <h2 className={`${playfairDisplay.className} text-3xl font-bold mb-6 text-center`}>
-          Nossas Informações
+          Entre em Contato
         </h2>
-        <ul className="space-y-4 lg:flex lg:justify-between lg:items-center">
-          <li className="flex items-center">
-            <MapPin size={32} className="mr-4 text-base-gray" />
-            <p className="capitalize">Rua Alferes Ângelo Sampaio, 777, sala 77</p>
-          </li>
-          <li className="flex items-center">
-            <Phone size={32} className="mr-4 text-base-gray" />
-            <p className="capitalize">(41) 3245-2020</p>
-          </li>
-          <li className="flex items-center">
-            <WhatsappLogo size={32} className="mr-4 text-base-gray" />
-            <p className="capitalize">(41) 99985-3285</p>
-          </li>
-          <li className="flex items-center">
-            <Clock size={32} className="mr-4 text-base-gray" />
-            <p className="capitalize">08h - 18h</p>
-          </li>
-        </ul>
+        <ContactForm />
       </div>
       <Copyright />
     </footer>
