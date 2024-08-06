@@ -2,11 +2,18 @@
 
 import React from 'react'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { InstagramLogo } from '@phosphor-icons/react'
 import Link from 'next/link'
 import MobileMenu from '@/app/ui/general/menu-mobile'
 
 const Header = (): React.JSX.Element => {
+  const pathname = usePathname()
+
+  if (pathname.includes('admin')) {
+    return <></>
+  }
+
   return (
     <header className="w-full relative bg-base-blue">
       <div className="max-w-7xl mx-auto flex justify-between items-center p-2 lg:px-8 lg:gap-10">

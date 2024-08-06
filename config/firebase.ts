@@ -1,4 +1,6 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app'
+import { getFirestore } from '@firebase/firestore'
+import { getStorage } from '@firebase/storage'
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_API_KEY,
@@ -8,8 +10,10 @@ const firebaseConfig = {
   messagingSenderId: process.env.NEXT_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_APP_ID,
   measurementId: process.env.NEXT_MEASUREMENT_ID
-};
+}
 
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig)
+const db = getFirestore(app)
+const storage = getStorage(app)
 
-export { app }
+export { db, storage }
