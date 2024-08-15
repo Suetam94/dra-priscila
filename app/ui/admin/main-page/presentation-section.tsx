@@ -18,7 +18,7 @@ const PresentationSection = (): React.JSX.Element => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getPresentationSection()
+      const { data } = await getPresentationSection()
       if (data) {
         setMainText(data.mainText || '')
         setSubText(data.subText || '')

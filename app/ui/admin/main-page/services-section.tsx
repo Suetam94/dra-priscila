@@ -14,7 +14,7 @@ import {
 } from '@/app/lib/ServicesSection'
 
 const ServicesSection = (): React.JSX.Element => {
-  const [services, setServices] = useState<IServiceDataWithId[]>([])
+  const [services, setServices] = useState<IServiceDataWithId[] | undefined>([])
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [imageUrl, setImageUrl] = useState<string | null>(null)
   const [title, setTitle] = useState('')
@@ -23,10 +23,10 @@ const ServicesSection = (): React.JSX.Element => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getServices()
+      const { data } = await getServices()
       setServices(data)
     }
-    (async () => await fetchData())()
+    ;(async () => await fetchData())()
   }, [])
 
   const handleFileChange = (file: File | null) => {
@@ -43,11 +43,11 @@ const ServicesSection = (): React.JSX.Element => {
 
       if (editingId) {
         await updateService(editingId, newService)
-        setServices(services.map(service => (service.id === editingId ? { ...service, ...newService } : service)))
+        setServices(services && services.map((service) => (service.id === editingId ? { ...service, ...newService } : service)))
         setEditingId(null)
       } else {
         const newServiceId = await addService(newService)
-        setServices([...services, { id: newServiceId, ...newService }])
+        setServices([...services!, { id: newServiceId.data!, ...newService }])
       }
 
       setTitle('')
@@ -71,7 +71,7 @@ const ServicesSection = (): React.JSX.Element => {
   const handleDeleteService = async (id: string) => {
     try {
       await deleteService(id)
-      setServices(services.filter(service => service.id !== id))
+      setServices(services && services.filter((service) => service.id !== id))
       alert('Serviço deletado com sucesso!')
     } catch (error) {
       alert('Erro ao deletar o serviço. Tente novamente mais tarde.')
@@ -111,9 +111,9 @@ const ServicesSection = (): React.JSX.Element => {
           {editingId ? 'Atualizar Serviço' : 'Adicionar Serviço'}
         </button>
       </div>
-      <div className={`${services.length === 0 ? 'hidden' : ''} mt-6`}>
+      <div className={`${services && services.length === 0 ? 'hidden' : ''} mt-6`}>
         <h4 className="text-xl font-bold text-base-blue mb-4">Serviços Adicionados:</h4>
-        {services.map((service) => (
+        {services && services.map((service) => (
           <div key={service.id} className="mb-4 p-4 border rounded-lg shadow-md">
             <img src={service.imageUrl} alt={service.title} className="rounded-lg shadow-md mb-2 max-w-xs" />
             <h5 className="text-lg font-bold text-base-blue">{service.title}</h5>

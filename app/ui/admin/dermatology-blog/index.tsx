@@ -14,14 +14,14 @@ import FileInput from '@/app/ui/general/file-input'
 import Accordion from '@/app/ui/general/accordion'
 
 const DermatologyBlog = (): React.JSX.Element => {
-  const [blogPosts, setBlogPosts] = useState<IBlogPostPropsWithId[]>([])
+  const [blogPosts, setBlogPosts] = useState<IBlogPostPropsWithId[] | undefined>([])
   const [selectedPost, setSelectedPost] = useState<IBlogPostPropsWithId | null>(null)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
   useEffect(() => {
     const fetchBlogPosts = async () => {
-      const posts = await getBlogPosts()
-      setBlogPosts(posts)
+      const { data } = await getBlogPosts()
+      setBlogPosts(data)
     }
     void fetchBlogPosts()
   }, [])
@@ -35,15 +35,15 @@ const DermatologyBlog = (): React.JSX.Element => {
   const handleSave = async () => {
     if (selectedPost) {
       if (selectedFile) {
-        selectedPost.imageUrl = await uploadImage(selectedFile)
+        selectedPost.imageUrl = (await uploadImage(selectedFile)).data!
       }
       if (selectedPost.id) {
         await updateBlogPost(selectedPost.id, selectedPost)
       } else {
         await addBlogPost(selectedPost)
       }
-      const posts = await getBlogPosts()
-      setBlogPosts(posts)
+      const { data } = await getBlogPosts()
+      setBlogPosts(data)
       setSelectedPost(null)
       setSelectedFile(null)
     }
@@ -51,8 +51,8 @@ const DermatologyBlog = (): React.JSX.Element => {
 
   const handleDelete = async (id: string) => {
     await deleteBlogPost(id)
-    const posts = await getBlogPosts()
-    setBlogPosts(posts)
+    const { data } = await getBlogPosts()
+    setBlogPosts(data)
   }
 
   return (
@@ -60,7 +60,7 @@ const DermatologyBlog = (): React.JSX.Element => {
       <h4 className="text-2xl font-bold text-base-blue mb-4">Gerenciar Blog</h4>
       <Accordion title="Configurações da página Mais Sobre a Dermatologia">
         <div className="space-y-4">
-          {blogPosts.map((post) => (
+          {blogPosts && blogPosts.map((post) => (
             <div
               key={post.id}
               className="border rounded p-4 flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0"

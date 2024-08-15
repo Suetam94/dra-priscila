@@ -19,7 +19,7 @@ const DoctorInfo = (): React.JSX.Element => {
 
   useEffect(() => {
     const fetchDoctorInfo = async () => {
-      const data = await getDoctorInfo()
+      const { data } = await getDoctorInfo()
       if (data) {
         setDoctorInfo(data)
       }

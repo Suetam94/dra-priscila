@@ -19,7 +19,7 @@ const WhoIAmSection = (): React.JSX.Element => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getWhoIAmSection()
+      const { data } = await getWhoIAmSection()
       if (data) {
         setData(data)
         setTitle(data.title)

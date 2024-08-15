@@ -12,13 +12,13 @@ import {
 import TextInput from '@/app/ui/general/text-input'
 
 const FieldsOfExpertise = (): React.JSX.Element => {
-  const [fieldsOfExpertise, setFieldsOfExpertise] = useState<IExpertiseItemPropsWithId[]>([])
+  const [fieldsOfExpertise, setFieldsOfExpertise] = useState<IExpertiseItemPropsWithId[] | undefined>([])
   const [selectedField, setSelectedField] = useState<IExpertiseItemPropsWithId | null>(null)
 
   useEffect(() => {
     const fetchFieldsOfExpertise = async () => {
       const fields = await getFieldsOfExpertise()
-      setFieldsOfExpertise(fields)
+      setFieldsOfExpertise(fields.data)
     }
     void fetchFieldsOfExpertise()
   }, [])
@@ -44,7 +44,7 @@ const FieldsOfExpertise = (): React.JSX.Element => {
         await addFieldOfExpertise(selectedField as IExpertiseItemPropsWithId)
       }
       const fields = await getFieldsOfExpertise()
-      setFieldsOfExpertise(fields)
+      setFieldsOfExpertise(fields.data)
       setSelectedField(null)
     }
   }
@@ -52,14 +52,14 @@ const FieldsOfExpertise = (): React.JSX.Element => {
   const handleDelete = async (id: string) => {
     await deleteFieldOfExpertise(id)
     const fields = await getFieldsOfExpertise()
-    setFieldsOfExpertise(fields)
+    setFieldsOfExpertise(fields.data)
   }
 
   return (
     <section className="p-4 bg-white rounded-lg shadow-md">
       <h4 className="text-2xl font-bold text-base-blue mb-4 text-center">Gerenciar Áreas de Expertise</h4>
       <div className="space-y-4">
-        {fieldsOfExpertise.map((field) => (
+        {fieldsOfExpertise && fieldsOfExpertise.map((field) => (
           <div key={field.id} className="border rounded p-4 flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0">
             <div>
               <h5 className="text-lg font-bold">{field.title}</h5>

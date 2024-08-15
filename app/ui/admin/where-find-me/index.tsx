@@ -10,13 +10,13 @@ import Accordion from '@/app/ui/general/accordion'
 const playfairDisplay = Playfair_Display({ subsets: ['latin'] })
 
 const WhereFindMeSection = (): React.JSX.Element => {
-  const [clinics, setClinics] = useState<IClinicWithId[]>([])
+  const [clinics, setClinics] = useState<IClinicWithId[] | undefined>([])
   const [selectedClinic, setSelectedClinic] = useState<IClinicWithId | null>(null)
 
   useEffect(() => {
     const fetchClinics = async () => {
       const clinics = await getClinics()
-      setClinics(clinics)
+      setClinics(clinics.data)
     }
     ;(async () => await fetchClinics())()
   }, [])
@@ -41,7 +41,7 @@ const WhereFindMeSection = (): React.JSX.Element => {
         await addClinic(selectedClinic as IClinic)
       }
       const clinics = await getClinics()
-      setClinics(clinics)
+      setClinics(clinics.data)
       setSelectedClinic(null)
     }
   }
@@ -49,7 +49,7 @@ const WhereFindMeSection = (): React.JSX.Element => {
   const handleDelete = async (id: string) => {
     await deleteClinic(id)
     const clinics = await getClinics()
-    setClinics(clinics)
+    setClinics(clinics.data)
   }
 
   return (
@@ -59,7 +59,7 @@ const WhereFindMeSection = (): React.JSX.Element => {
       </h3>
       <Accordion title="Configurações da página Onde Me Encontrar">
         <div className="flex flex-col space-y-4">
-          {clinics.map((clinic) => (
+          {clinics && clinics.map((clinic) => (
             <div key={clinic.id} className="border rounded p-4 flex justify-between items-center">
               <div>
                 <h5 className="text-lg font-bold">{clinic.name}</h5>

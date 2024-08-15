@@ -15,14 +15,14 @@ import FileInput from '@/app/ui/general/file-input'
 import Accordion from '@/app/ui/general/accordion'
 
 const BookYourAppointment = (): React.JSX.Element => {
-  const [clinics, setClinics] = useState<IClinicPropsWithId[]>([])
+  const [clinics, setClinics] = useState<IClinicPropsWithId[] | undefined>([])
   const [selectedClinic, setSelectedClinic] = useState<IClinicPropsWithId | null>(null)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
   useEffect(() => {
     const fetchClinics = async () => {
-      const clinicsList = await getClinics()
-      setClinics(clinicsList)
+      const { data } = await getClinics()
+      setClinics(data)
     }
     void fetchClinics()
   }, [])
@@ -36,15 +36,15 @@ const BookYourAppointment = (): React.JSX.Element => {
   const handleSave = async () => {
     if (selectedClinic) {
       if (selectedFile) {
-        selectedClinic.image.url = await uploadImage(selectedFile)
+        selectedClinic.image.url = (await uploadImage(selectedFile)).data!
       }
       if (selectedClinic.id) {
         await updateClinic(selectedClinic.id, selectedClinic)
       } else {
         await addClinic(selectedClinic)
       }
-      const clinicsList = await getClinics()
-      setClinics(clinicsList)
+      const { data } = await getClinics()
+      setClinics(data)
       setSelectedClinic(null)
       setSelectedFile(null)
     }
@@ -52,8 +52,8 @@ const BookYourAppointment = (): React.JSX.Element => {
 
   const handleDelete = async (id: string) => {
     await deleteClinic(id)
-    const clinicsList = await getClinics()
-    setClinics(clinicsList)
+    const { data } = await getClinics()
+    setClinics(data)
   }
 
   return (
@@ -61,7 +61,7 @@ const BookYourAppointment = (): React.JSX.Element => {
       <h4 className="text-2xl font-bold text-base-blue mb-4">Gerenciar Clínicas para Marcar Consulta</h4>
       <Accordion title="Configurações da página Marque Sua Consulta">
         <div className="flex flex-col space-y-4">
-          {clinics.map((clinic) => (
+          {clinics && clinics.map((clinic) => (
             <div key={clinic.id} className="border rounded p-4 flex justify-between items-center">
               <div>
                 <h5 className="text-lg font-bold">{clinic.name}</h5>
