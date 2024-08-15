@@ -4,8 +4,13 @@ import React from 'react'
 import Image from 'next/image'
 import { CheckCircle } from '@phosphor-icons/react'
 import TitleSection from '@/app/ui/section/title-section'
+import { IWhoIAmSectionDataWithId } from '@/app/lib/WhoIAm'
 
-const AboutMe = (): React.JSX.Element => {
+interface IAboutMe {
+  aboutMe: IWhoIAmSectionDataWithId
+}
+
+const AboutMe = ({ aboutMe }: IAboutMe): React.JSX.Element => {
   return (
     <section className="w-full bg-base-gray">
       <div className="max-w-7xl mx-auto px-4 py-8">

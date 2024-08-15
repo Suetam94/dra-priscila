@@ -1,7 +1,10 @@
+'use server'
+
 import React from 'react'
 import TitleSection from '@/app/ui/section/title-section'
 import { IContactInfoProps } from '@/app/ui/where-can-you-find-me/contact-info'
 import ClinicPlace from '@/app/ui/where-can-you-find-me/clinic-place'
+import { getClinics } from '@/app/lib/WhereFindMe'
 
 const clinics: IContactInfoProps[] = [
   {
@@ -52,12 +55,14 @@ const clinics: IContactInfoProps[] = [
   }
 ]
 
-const WhereToFindMe = () => {
+const WhereToFindMe = async (): Promise<React.JSX.Element> => {
+  const { data: clinics } = await getClinics()
+
   return (
     <section className="w-full px-4 pb-8 pt-3 bg-base-gray">
       <TitleSection title="Onde você pode me encontrar?" backgroundVariation={'bg-base-pink'} className="mb-3" />
       {
-        clinics.map(clinic => <ClinicPlace key={clinic.name} {...clinic} />)
+        clinics && clinics.map(clinic => <ClinicPlace key={clinic.name} {...clinic} />)
       }
     </section>
   )

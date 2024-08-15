@@ -1,8 +1,9 @@
-'use client'
+'use server'
 
 import React from 'react'
 import TitleSection from '@/app/ui/section/title-section'
 import Clinic, { IClinicProps } from '@/app/ui/book-your-appointment/clinic'
+import { getClinics } from '@/app/lib/BookYourAppointment'
 
 const clinics: IClinicProps[] = [
   {
@@ -34,12 +35,14 @@ const clinics: IClinicProps[] = [
   }
 ]
 
-const BookAppointment = (): React.JSX.Element => {
+const BookAppointment = async (): Promise<React.JSX.Element> => {
+  const { data: clinics } = await getClinics()
+
   return (
     <section className="w-full bg-base-gray">
       <div className="max-w-7xl mx-auto">
         <TitleSection title={'Marque sua consulta'} backgroundVariation={'bg-base-pink'} className={'mb-3'} />
-        {clinics.map((clinic) => (
+        {clinics && clinics.map((clinic) => (
           <Clinic
             key={clinic.name}
             name={clinic.name}

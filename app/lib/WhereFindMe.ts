@@ -35,7 +35,7 @@ export interface IBusinessHour {
   }
 }
 
-const bussinessHourSchema = z.object({
+const businessHourSchema = z.object({
   week: z.object({
     start: z.string(),
     end: z.string()
@@ -60,7 +60,7 @@ const clinicSchema = z.object({
   name: z.string(),
   address: z.string(),
   phones: z.array(phoneSchema),
-  businessHour: bussinessHourSchema,
+  businessHour: businessHourSchema,
   healthPlan: z.array(z.string())
 })
 

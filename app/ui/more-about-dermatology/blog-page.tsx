@@ -1,6 +1,9 @@
+'use server'
+
 import React from 'react'
 import TitleSection from '@/app/ui/section/title-section'
 import BlogPost, { IBlogPostProps } from '@/app/ui/more-about-dermatology/blog-post'
+import { getBlogPosts } from '@/app/lib/Blog'
 
 const blogPosts: IBlogPostProps[] = [
   {
@@ -24,12 +27,14 @@ const blogPosts: IBlogPostProps[] = [
   }
 ]
 
-const BlogPage = (): React.JSX.Element => {
+const BlogPage = async (): Promise<React.JSX.Element> => {
+  const { data: blogPosts } = await getBlogPosts()
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <TitleSection title="Saiba Mais Sobre a Dermatologia" backgroundVariation="bg-base-pink" className="mb-3" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {blogPosts.map((post) => (
+        {blogPosts && blogPosts.map((post) => (
           <BlogPost
             key={post.title}
             title={post.title}
