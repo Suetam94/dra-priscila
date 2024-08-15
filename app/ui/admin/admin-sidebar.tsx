@@ -40,12 +40,12 @@ const menu: IAdminSidebarMenuProps[] = [
   {
     title: 'Marque sua consulta',
     Icon: CalendarPlus,
-    link: '/admin/appointment'
+    link: '/admin/book-your-appointment'
   },
   {
     title: 'Dados do médico',
     Icon: Database,
-    link: '/admin/doctor'
+    link: '/admin/my-info'
   }
 ]
 

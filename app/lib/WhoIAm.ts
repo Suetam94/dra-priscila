@@ -1,19 +1,38 @@
 import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, query, limit } from 'firebase/firestore'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { db, storage } from '@/config/firebase'
+import { z } from 'zod'
 
-export interface WhoIAmSectionData {
+export interface IWhoIAmSectionData {
   title: string
   summary: string[]
   mainImageUrl: string
   fullText: string
 }
 
-export interface WhoIAmSectionDataWithId extends WhoIAmSectionData {
+const whoIAmSchema = z.object({
+  title: z.string(),
+  summary: z.array(z.string()),
+  mainImageUrl: z.string(),
+  fullText: z.string()
+})
+
+export interface IWhoIAmSectionDataWithId extends IWhoIAmSectionData {
   id: string
 }
 
-const collectionName = 'whoIAmSection'
+const whoIAmSchemaWithIdSchema = whoIAmSchema.partial().extend({ id: z.string() })
+
+interface IReturn {
+  error: boolean,
+  message?: string
+}
+
+interface IReturnOne extends IReturn {
+  data?: IWhoIAmSectionDataWithId
+}
+
+const collectionName = 'whoIAmData'
 
 export const uploadImage = async (file: File): Promise<string> => {
   const storageRef = ref(storage, `images/${file.name}`)
@@ -21,57 +40,131 @@ export const uploadImage = async (file: File): Promise<string> => {
   return await getDownloadURL(storageRef)
 }
 
-export const addWhoIAmSection = async (data: WhoIAmSectionData): Promise<string> => {
+export const addWhoIAmSection = async (data: IWhoIAmSectionData): Promise<IReturn> => {
   try {
-    const docRef = await addDoc(collection(db, collectionName), data)
-    return docRef.id
-  } catch (error) {
-    throw new Error(`Error adding document: ${error}`)
+    const parsedWhoIam = whoIAmSchema.safeParse(data)
+
+    if (!parsedWhoIam.success) {
+      return {
+        error: true,
+        message: parsedWhoIam.error.message
+      }
+    }
+
+    await addDoc(collection(db, collectionName), data)
+
+    return {
+      error: false
+    }
+  } catch (e) {
+    return {
+      error: true,
+      message: (e as Error).message
+    }
   }
 }
 
-export const getWhoIAmSection = async (): Promise<WhoIAmSectionDataWithId | null> => {
+export const getWhoIAmSection = async (): Promise<IReturnOne> => {
   try {
     const q = query(collection(db, collectionName), limit(1))
     const querySnapshot = await getDocs(q)
     if (!querySnapshot.empty) {
       const docSnap = querySnapshot.docs[0]
-      return { id: docSnap.id, ...docSnap.data() } as WhoIAmSectionDataWithId
+      const data = { id: docSnap.id, ...docSnap.data() } as IWhoIAmSectionDataWithId
+
+      return {
+        error: false,
+        data
+      }
     } else {
-      return null
+      return {
+        error: false
+      }
     }
-  } catch (error) {
-    throw new Error(`Error getting document: ${error}`)
+  } catch (e) {
+    return {
+      error: true,
+      message: (e as Error).message
+    }
   }
 }
 
-export const updateWhoIAmSection = async (id: string, data: Partial<WhoIAmSectionData>): Promise<void> => {
+export const updateWhoIAmSection = async (id: string, data: Partial<IWhoIAmSectionData>): Promise<IReturn> => {
   try {
+    const parsedWhoIAm = whoIAmSchemaWithIdSchema.safeParse({ id, ...data })
+
+    if (!parsedWhoIAm.success) {
+      return {
+        error: true,
+        message: parsedWhoIAm.error.message
+      }
+    }
+
     const docRef = doc(db, collectionName, id)
     await updateDoc(docRef, data)
-  } catch (error) {
-    throw new Error(`Error updating document: ${error}`)
+
+    return {
+      error: false
+    }
+  } catch (e) {
+    return {
+      error: true,
+      message: (e as Error).message
+    }
   }
 }
 
-export const deleteWhoIAmSection = async (id: string): Promise<void> => {
+export const deleteWhoIAmSection = async (id: string): Promise<IReturn> => {
   try {
+    const parsedId = z.string().safeParse(id)
+    if (!parsedId.success) {
+      return {
+        error: true,
+        message: parsedId.error.message
+      }
+    }
     const docRef = doc(db, collectionName, id)
     await deleteDoc(docRef)
-  } catch (error) {
-    throw new Error(`Error deleting document: ${error}`)
+
+    return {
+      error: false
+    }
+  } catch (e) {
+    return {
+      error: true,
+      message: (e as Error).message
+    }
   }
 }
 
-export const saveWhoIAmSection = async (data: WhoIAmSectionData): Promise<void> => {
+export const saveWhoIAmSection = async (data: IWhoIAmSectionData): Promise<IReturn> => {
   try {
     const existingData = await getWhoIAmSection()
-    if (existingData && existingData.id) {
-      await updateWhoIAmSection(existingData.id, data)
+    if (existingData && existingData.data?.id) {
+      const { error, message } = await updateWhoIAmSection(existingData.data?.id, data)
+
+      if (!error && message) {
+        return {
+          error, message
+        }
+      }
     } else {
-      await addWhoIAmSection(data)
+      const { error, message } = await addWhoIAmSection(data)
+
+      if (!error && message) {
+        return {
+          error, message
+        }
+      }
     }
-  } catch (error) {
-    throw new Error(`Error saving document: ${error}`)
+
+    return {
+      error: false
+    }
+  } catch (e) {
+    return {
+      error: true,
+      message: (e as Error).message
+    }
   }
 }

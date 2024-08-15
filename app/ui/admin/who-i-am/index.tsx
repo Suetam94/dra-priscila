@@ -4,13 +4,13 @@ import React, { useState, useEffect } from 'react'
 import FileInput from '@/app/ui/general/file-input'
 import TextInput from '@/app/ui/general/text-input'
 import { Playfair_Display } from 'next/font/google'
-import { getWhoIAmSection, saveWhoIAmSection, uploadImage, WhoIAmSectionData } from '@/app/lib/WhoIAm'
+import { getWhoIAmSection, saveWhoIAmSection, uploadImage, IWhoIAmSectionData } from '@/app/lib/WhoIAm'
 import Accordion from '@/app/ui/general/accordion'
 
 const playfairDisplay = Playfair_Display({ subsets: ['latin'] })
 
 const WhoIAmSection = (): React.JSX.Element => {
-  const [data, setData] = useState<WhoIAmSectionData | null>(null)
+  const [data, setData] = useState<IWhoIAmSectionData | null>(null)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [imageUrl, setImageUrl] = useState<string | null>(null)
   const [title, setTitle] = useState('')
@@ -41,7 +41,7 @@ const WhoIAmSection = (): React.JSX.Element => {
       if (selectedFile) {
         uploadedImageUrl = await uploadImage(selectedFile)
       }
-      const newData: WhoIAmSectionData = { title, summary, fullText, mainImageUrl: uploadedImageUrl! }
+      const newData: IWhoIAmSectionData = { title, summary, fullText, mainImageUrl: uploadedImageUrl! }
 
       await saveWhoIAmSection(newData)
       alert('Dados salvos com sucesso!')
@@ -54,7 +54,7 @@ const WhoIAmSection = (): React.JSX.Element => {
   return (
     <section className="p-6 bg-white rounded-lg shadow-md">
       <h3 className={`${playfairDisplay.className} text-2xl font-bold text-base-blue mb-4`}>
-        Gerenciando a página inicial
+        Gerenciando a página Quem Sou
       </h3>
       <Accordion title="Configurações da seção quem sou eu">
         <div className="mb-4">

@@ -8,13 +8,13 @@ import {
   uploadImage,
   getServices,
   deleteService,
-  ServiceData,
+  IServiceData,
   updateService,
-  ServiceDataWithId
+  IServiceDataWithId
 } from '@/app/lib/ServicesSection'
 
 const ServicesSection = (): React.JSX.Element => {
-  const [services, setServices] = useState<ServiceDataWithId[]>([])
+  const [services, setServices] = useState<IServiceDataWithId[]>([])
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [imageUrl, setImageUrl] = useState<string | null>(null)
   const [title, setTitle] = useState('')
@@ -39,7 +39,7 @@ const ServicesSection = (): React.JSX.Element => {
       if (selectedFile) {
         uploadedImageUrl = await uploadImage(selectedFile)
       }
-      const newService: ServiceData = { imageUrl: uploadedImageUrl!, title, content }
+      const newService: IServiceData = { imageUrl: uploadedImageUrl!, title, content }
 
       if (editingId) {
         await updateService(editingId, newService)
@@ -61,7 +61,7 @@ const ServicesSection = (): React.JSX.Element => {
     }
   }
 
-  const handleEditService = (service: ServiceDataWithId) => {
+  const handleEditService = (service: IServiceDataWithId) => {
     setTitle(service.title)
     setContent(service.content)
     setImageUrl(service.imageUrl)
