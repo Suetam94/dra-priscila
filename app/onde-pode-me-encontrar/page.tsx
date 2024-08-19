@@ -6,7 +6,7 @@ import { IContactInfoProps } from '@/app/ui/where-can-you-find-me/contact-info'
 import ClinicPlace from '@/app/ui/where-can-you-find-me/clinic-place'
 import { getClinics } from '@/app/lib/WhereFindMe'
 
-const clinics: IContactInfoProps[] = [
+const clinicsData: IContactInfoProps[] = [
   {
     image: {
       url: 'https://clinprosaude.com.br/wp-content/uploads/2019/08/Recep%C3%A7%C3%A3o-Vacina%C3%A7%C3%A3o-.jpg',
@@ -56,7 +56,9 @@ const clinics: IContactInfoProps[] = [
 ]
 
 const WhereToFindMe = async (): Promise<React.JSX.Element> => {
-  const { data: clinics } = await getClinics()
+  const { data } = await getClinics()
+
+  const clinics = data && data.length > 0 ? data : clinicsData
 
   return (
     <section className="w-full px-4 pb-8 pt-3 bg-base-gray">

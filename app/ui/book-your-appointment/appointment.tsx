@@ -5,7 +5,7 @@ import TitleSection from '@/app/ui/section/title-section'
 import Clinic, { IClinicProps } from '@/app/ui/book-your-appointment/clinic'
 import { getClinics } from '@/app/lib/BookYourAppointment'
 
-const clinics: IClinicProps[] = [
+const clinicsData: IClinicProps[] = [
   {
     name: 'Clínica Pró-saúde',
     address: 'Rua São Vicente, 55 Juvevê',
@@ -36,7 +36,9 @@ const clinics: IClinicProps[] = [
 ]
 
 const BookAppointment = async (): Promise<React.JSX.Element> => {
-  const { data: clinics } = await getClinics()
+  const { data } = await getClinics()
+
+  const clinics = data && data.length > 0 ? data : clinicsData
 
   return (
     <section className="w-full bg-base-gray">

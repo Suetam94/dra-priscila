@@ -20,13 +20,16 @@ const ServicesSection = (): React.JSX.Element => {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [editingId, setEditingId] = useState<string | null>(null)
+  const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await getServices()
       setServices(data)
     }
+    setLoading(true)
     ;(async () => await fetchData())()
+    setLoading(false)
   }, [])
 
   const handleFileChange = (file: File | null) => {
@@ -42,11 +45,15 @@ const ServicesSection = (): React.JSX.Element => {
       const newService: IServiceData = { imageUrl: uploadedImageUrl!, title, content }
 
       if (editingId) {
+        setLoading(true)
         await updateService(editingId, newService)
+        setLoading(false)
         setServices(services && services.map((service) => (service.id === editingId ? { ...service, ...newService } : service)))
         setEditingId(null)
       } else {
+        setLoading(true)
         const newServiceId = await addService(newService)
+        setLoading(false)
         setServices([...services!, { id: newServiceId.data!, ...newService }])
       }
 
@@ -70,7 +77,9 @@ const ServicesSection = (): React.JSX.Element => {
 
   const handleDeleteService = async (id: string) => {
     try {
+      setLoading(true)
       await deleteService(id)
+      setLoading(false)
       setServices(services && services.filter((service) => service.id !== id))
       alert('Serviço deletado com sucesso!')
     } catch (error) {
@@ -84,7 +93,7 @@ const ServicesSection = (): React.JSX.Element => {
       <h4 className="text-2xl font-bold text-base-blue mb-4">Nossos Serviços:</h4>
       <div className="mb-4">
         <p className="text-base-blue mb-2">Imagem do Serviço:</p>
-        <FileInput onChange={handleFileChange} />
+        <FileInput disabled={loading} onChange={handleFileChange} />
         {imageUrl && <img src={imageUrl} alt="Service" className="mt-4 rounded-lg shadow-lg max-w-xs" />}
       </div>
       <div className="mb-4">
@@ -93,6 +102,7 @@ const ServicesSection = (): React.JSX.Element => {
           value={title}
           onChange={setTitle}
           placeholder="Digite o título do serviço"
+          disabled={loading}
         />
       </div>
       <div className="mb-4">
@@ -101,12 +111,14 @@ const ServicesSection = (): React.JSX.Element => {
           value={content}
           onChange={setContent}
           placeholder="Digite a descrição do serviço"
+          disabled={loading}
         />
       </div>
       <div className="flex space-x-4">
         <button
           onClick={handleAddService}
           className="bg-base-blue text-base-gray py-2 px-4 rounded-md hover:bg-base-pink transition duration-300"
+          disabled={loading}
         >
           {editingId ? 'Atualizar Serviço' : 'Adicionar Serviço'}
         </button>

@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import Image from 'next/image'
 import { Phone, WhatsappLogo, MapPin } from '@phosphor-icons/react'

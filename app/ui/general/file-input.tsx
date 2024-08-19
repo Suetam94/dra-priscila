@@ -5,9 +5,10 @@ import { GooglePhotosLogo } from '@phosphor-icons/react'
 
 interface FileInputProps {
   onChange: (file: File | null) => void
+  disabled?: boolean
 }
 
-const FileInput = ({ onChange }: FileInputProps): React.JSX.Element => {
+const FileInput = ({ onChange, disabled = false }: FileInputProps): React.JSX.Element => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [preview, setPreview] = useState<string | null>(null)
 
@@ -32,7 +33,7 @@ const FileInput = ({ onChange }: FileInputProps): React.JSX.Element => {
       <label className="w-full flex flex-col items-center px-4 py-6 bg-base-gray text-base-blue rounded-lg shadow-lg tracking-wide uppercase border border-base-gray cursor-pointer hover:bg-base-pink hover:text-white transition duration-300 ease-in-out">
         <GooglePhotosLogo className="w-10 h-10 mb-2" />
         <span className="text-base leading-normal">Selecione uma imagem</span>
-        <input type="file" className="hidden" accept="image/*" onChange={handleFileChange} />
+        <input type="file" className="hidden" accept="image/*" onChange={handleFileChange} disabled={disabled} />
       </label>
       {preview && (
         <div className="mt-4">

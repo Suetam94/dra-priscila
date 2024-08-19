@@ -21,7 +21,6 @@ export const metadata: Metadata = {
   },
   robots: 'index, follow',
   authors: [{ name: 'Mateus Vinícius da Silva', url: 'https://www.linkedin.com/in/mateus-vin%C3%ADcius-da-silva-8156301a5/' }]
-
 }
 export default function RootLayout ({
   children

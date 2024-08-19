@@ -7,7 +7,7 @@ const Page = async (): Promise<React.JSX.Element> => {
 
   return (
     <section className="w-full px-4 pb-8 pt-3 bg-base-gray">
-      {aboutMe && <AboutMe aboutMe={aboutMe} />}
+      <AboutMe aboutMe={aboutMe} />
     </section>
   )
 }

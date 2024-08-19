@@ -6,10 +6,11 @@ interface TextInputProps {
   label: string
   placeholder?: string
   value?: string
+  disabled?: boolean
   onChange: (value: string) => void
 }
 
-const TextInput = ({ label, placeholder = '', value = '', onChange }: TextInputProps): React.JSX.Element => {
+const TextInput = ({ label, placeholder = '', value = '', disabled = false, onChange }: TextInputProps): React.JSX.Element => {
   const [inputValue, setInputValue] = useState(value)
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,6 +28,7 @@ const TextInput = ({ label, placeholder = '', value = '', onChange }: TextInputP
         onChange={handleInputChange}
         placeholder={placeholder}
         className="w-full px-3 py-2 border border-base-gray rounded-md text-base-gray focus:outline-none focus:ring focus:border-base-blue"
+        disabled={disabled}
       />
     </div>
   )

@@ -4,8 +4,9 @@ import React from 'react'
 import { ClipboardText, ShieldCheck, Scissors } from '@phosphor-icons/react'
 import ExpertiseItem, { IExpertiseItemProps } from '@/app/ui/fields-of-expertise/expertise-item'
 import TitleSection from '@/app/ui/section/title-section'
+import { getFieldsOfExpertise } from '@/app/lib/FieldsOfExpertise'
 
-const fieldsOfExpertise: IExpertiseItemProps[] = [
+const fieldsOfExpertiseData: IExpertiseItemProps[] = [
   {
     title: 'Dermatologia Clínica',
     Icon: ClipboardText,
@@ -30,7 +31,11 @@ const fieldsOfExpertise: IExpertiseItemProps[] = [
   }
 ]
 
-const FieldsOfExpertise = (): React.JSX.Element => {
+const FieldsOfExpertise = async (): Promise<React.JSX.Element> => {
+  const { data } = await getFieldsOfExpertise()
+
+  const fieldsOfExpertise = data && data.length > 0 ? data : fieldsOfExpertiseData
+
   return (
     <section className="w-full px-4 pb-8 pt-3 bg-base-gray">
       <div className="max-w-7xl mx-auto">

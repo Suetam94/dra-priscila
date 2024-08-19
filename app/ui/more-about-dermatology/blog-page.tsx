@@ -5,7 +5,7 @@ import TitleSection from '@/app/ui/section/title-section'
 import BlogPost, { IBlogPostProps } from '@/app/ui/more-about-dermatology/blog-post'
 import { getBlogPosts } from '@/app/lib/Blog'
 
-const blogPosts: IBlogPostProps[] = [
+const blogPostsData: IBlogPostProps[] = [
   {
     title: 'O que é Dermatologia?',
     description:
@@ -28,7 +28,9 @@ const blogPosts: IBlogPostProps[] = [
 ]
 
 const BlogPage = async (): Promise<React.JSX.Element> => {
-  const { data: blogPosts } = await getBlogPosts()
+  const { data } = await getBlogPosts()
+
+  const blogPosts = data && data.length > 0 ? data : blogPostsData
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
