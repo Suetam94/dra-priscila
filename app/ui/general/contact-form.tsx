@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import { sendEmail } from '@/utils/email'
 
 const ContactForm = (): React.JSX.Element => {
   const [formData, setFormData] = useState({
@@ -28,6 +29,10 @@ const ContactForm = (): React.JSX.Element => {
     setSuccess(null)
 
     try {
+      const { error } = await sendEmail(formData)
+
+      if (error) throw error
+
       setSuccess('Mensagem enviada com sucesso!')
       setFormData({ name: '', phone: '', email: '', message: '' })
     } catch (error) {
