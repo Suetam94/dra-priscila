@@ -6,6 +6,7 @@ import TextInput from '@/app/ui/general/text-input'
 import { Playfair_Display } from 'next/font/google'
 import { getWhoIAmSection, saveWhoIAmSection, uploadImage, IWhoIAmSectionData } from '@/app/lib/WhoIAm'
 import Accordion from '@/app/ui/general/accordion'
+import LoadingSpinner from '@/app/ui/general/loading-spinner'
 
 const playfairDisplay = Playfair_Display({ subsets: ['latin'] })
 
@@ -16,9 +17,11 @@ const WhoIAmSection = (): React.JSX.Element => {
   const [title, setTitle] = useState('')
   const [summary, setSummary] = useState<string[]>([])
   const [fullText, setFullText] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true)
       const { data } = await getWhoIAmSection()
       if (data) {
         setData(data)
@@ -28,7 +31,8 @@ const WhoIAmSection = (): React.JSX.Element => {
         setImageUrl(data.mainImageUrl)
       }
     }
-    ;(async () => await fetchData())()
+    (async () => await fetchData())()
+    setIsLoading(false)
   }, [])
 
   const handleFileChange = (file: File | null) => {
@@ -37,18 +41,30 @@ const WhoIAmSection = (): React.JSX.Element => {
 
   const handleSave = async () => {
     try {
+      setIsLoading(true)
       let uploadedImageUrl = imageUrl
       if (selectedFile) {
-        uploadedImageUrl = await uploadImage(selectedFile)
+        const formData = new FormData()
+        formData.append('file', selectedFile)
+        uploadedImageUrl = await uploadImage(formData)
       }
       const newData: IWhoIAmSectionData = { title, summary, fullText, mainImageUrl: uploadedImageUrl! }
 
-      await saveWhoIAmSection(newData)
-      alert('Dados salvos com sucesso!')
+      const { error, message } = await saveWhoIAmSection(newData)
+
+      if (error) {
+        throw new Error(message)
+      }
+
+      setIsLoading(false)
     } catch (error) {
-      alert('Erro ao salvar os dados. Tente novamente mais tarde.')
       console.error(error)
+      setIsLoading(false)
     }
+  }
+
+  if (isLoading) {
+    return <LoadingSpinner />
   }
 
   return (
@@ -68,9 +84,9 @@ const WhoIAmSection = (): React.JSX.Element => {
         <div className="mb-4">
           <TextInput
             label="Resumo"
-            value={summary.join('\n')}
-            onChange={(value) => setSummary(value.split('\n'))}
-            placeholder="Digite cada item do resumo em uma nova linha"
+            value={summary.join(';')}
+            onChange={(value) => setSummary(value.split(';'))}
+            placeholder="Digite cada item do resumo separado por ponto e vírgula"
           />
         </div>
         <div className="mb-4">

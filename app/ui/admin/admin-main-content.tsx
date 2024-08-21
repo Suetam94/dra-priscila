@@ -35,7 +35,7 @@ const cards = [
   {
     title: 'Dados do médico',
     description: 'Configure e administre seus dados, como telefone, email, etc.',
-    link: '/admin/doctor'
+    link: '/admin/my-info'
   }
 ]
 

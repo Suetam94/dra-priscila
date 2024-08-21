@@ -1,3 +1,5 @@
+'use server'
+
 import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, query, limit } from 'firebase/firestore'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { db, storage } from '@/config/firebase'
@@ -34,10 +36,17 @@ interface IReturnOne extends IReturn {
 
 const collectionName = 'whoIAmData'
 
-export const uploadImage = async (file: File): Promise<string> => {
-  const storageRef = ref(storage, `images/${file.name}`)
-  await uploadBytes(storageRef, file)
-  return await getDownloadURL(storageRef)
+export const uploadImage = async (formData: FormData): Promise<string> => {
+  try {
+    const file = formData.get('file') as File
+
+    const storageRef = ref(storage, `images/${file.name}`)
+    await uploadBytes(storageRef, file)
+    return await getDownloadURL(storageRef)
+  } catch (e) {
+    console.log(e)
+    return (e as Error).message
+  }
 }
 
 export const addWhoIAmSection = async (data: IWhoIAmSectionData): Promise<IReturn> => {

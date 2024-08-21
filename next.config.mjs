@@ -7,6 +7,9 @@ const nextConfig = {
       },
       {
         hostname: '4cpatiobatel.crmall.com'
+      },
+      {
+        hostname: 'firebasestorage.googleapis.com'
       }
     ]
   }

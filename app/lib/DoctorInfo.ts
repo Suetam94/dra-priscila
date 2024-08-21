@@ -1,3 +1,5 @@
+'use server'
+
 import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, limit } from 'firebase/firestore'
 import { db } from '@/config/firebase'
 import { z } from 'zod'

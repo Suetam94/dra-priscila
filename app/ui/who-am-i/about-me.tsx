@@ -37,7 +37,7 @@ const AboutMe = ({ aboutMe }: IAboutMe): React.JSX.Element => {
     <section className="w-full bg-base-gray">
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Seção 1: Foto e Resumo */}
-        <div className="flex flex-col md:flex-row items-start mb-16">
+        <div className="flex flex-col md:flex-row items-end mb-16">
           <div className="w-full md:w-1/2 p-4 flex justify-center">
             <div className="relative w-64 h-96">
               <Image

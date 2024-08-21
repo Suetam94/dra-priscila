@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { getDoctorInfo, saveDoctorInfo, IDoctorInfo } from '@/app/lib/DoctorInfo'
 import TextInput from '@/app/ui/general/text-input'
 import Accordion from '@/app/ui/general/accordion'
+import LoadingSpinner from '@/app/ui/general/loading-spinner'
 
 const DoctorInfo = (): React.JSX.Element => {
   const [doctorInfo, setDoctorInfo] = useState<IDoctorInfo>({
@@ -25,7 +26,7 @@ const DoctorInfo = (): React.JSX.Element => {
       }
       setIsLoading(false)
     }
-    (() => fetchDoctorInfo())()
+    (async () => await fetchDoctorInfo())()
   }, [])
 
   const handleChange = (field: keyof IDoctorInfo, value: string) => {
@@ -33,12 +34,13 @@ const DoctorInfo = (): React.JSX.Element => {
   }
 
   const handleSave = async () => {
+    setIsLoading(true)
     await saveDoctorInfo(doctorInfo)
-    alert('Dados salvos com sucesso!')
+    setIsLoading(false)
   }
 
   if (isLoading) {
-    return <p>Carregando...</p>
+    return <LoadingSpinner />
   }
 
   return (
