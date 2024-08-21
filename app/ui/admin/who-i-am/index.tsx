@@ -7,6 +7,7 @@ import { Playfair_Display } from 'next/font/google'
 import { getWhoIAmSection, saveWhoIAmSection, uploadImage, IWhoIAmSectionData } from '@/app/lib/WhoIAm'
 import Accordion from '@/app/ui/general/accordion'
 import LoadingSpinner from '@/app/ui/general/loading-spinner'
+import Modal from '@/app/ui/general/modal'
 
 const playfairDisplay = Playfair_Display({ subsets: ['latin'] })
 
@@ -18,6 +19,13 @@ const WhoIAmSection = (): React.JSX.Element => {
   const [summary, setSummary] = useState<string[]>([])
   const [fullText, setFullText] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const [modalType, setModalType] = useState<'success' | 'error'>('success')
+  const [modalMessage, setModalMessage] = useState('')
+
+  const handleCloseModal = () => {
+    setIsOpen(false)
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,8 +65,13 @@ const WhoIAmSection = (): React.JSX.Element => {
       }
 
       setIsLoading(false)
-    } catch (error) {
-      console.error(error)
+    } catch (e) {
+      console.error(e)
+      setIsLoading(false)
+      setIsOpen(true)
+      setModalType('error')
+      setModalMessage((e as Error).message ?? 'Oops! Aconteceu um erro, tente novamente!')
+
       setIsLoading(false)
     }
   }
@@ -106,6 +119,7 @@ const WhoIAmSection = (): React.JSX.Element => {
           </button>
         </div>
       </Accordion>
+      <Modal isOpen={isOpen} onClose={handleCloseModal} type={modalType} message={modalMessage} />
     </section>
   )
 }

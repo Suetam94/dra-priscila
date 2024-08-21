@@ -36,7 +36,6 @@ const AboutMe = ({ aboutMe }: IAboutMe): React.JSX.Element => {
   return (
     <section className="w-full bg-base-gray">
       <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Seção 1: Foto e Resumo */}
         <div className="flex flex-col md:flex-row items-end mb-16">
           <div className="w-full md:w-1/2 p-4 flex justify-center">
             <div className="relative w-64 h-96">
@@ -63,8 +62,6 @@ const AboutMe = ({ aboutMe }: IAboutMe): React.JSX.Element => {
             </ul>
           </div>
         </div>
-
-        {/* Seção 2: Texto Completo */}
         <div className="bg-white p-5 rounded-lg shadow-lg">
           <TitleSection title={'Quem sou'} backgroundVariation={'bg-base-pink'} className={'mb-3'} />
           {

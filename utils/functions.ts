@@ -44,3 +44,41 @@ export const generalUploadImage = async (file: File): Promise<IReturnString> => 
     }
   }
 }
+
+export const formDataToObject = <T extends Record<string, any>>(formData: FormData): T => {
+  const obj: Partial<T> = {}
+
+  formData.forEach((value, key) => {
+    if (value instanceof Blob) {
+      if (obj[key as keyof T]) {
+        if (Array.isArray(obj[key as keyof T])) {
+          (obj[key as keyof T] as File[]).push(value)
+        } else {
+          obj[key as keyof T] = [obj[key as keyof T], value] as any
+        }
+      } else {
+        obj[key as keyof T] = value as any
+      }
+    } else {
+      if (obj[key as keyof T]) {
+        if (Array.isArray(value)) {
+          (obj[key as keyof T] as string[]).push(value as string)
+        } else {
+          obj[key as keyof T] = [obj[key as keyof T], value] as any
+        }
+      } else {
+        obj[key as keyof T] = value as any
+      }
+    }
+  })
+
+  return obj as T
+}
+
+const validJSON = (value: string) => {
+  try {
+    return JSON.parse(value)
+  } catch (e) {
+    return false
+  }
+}

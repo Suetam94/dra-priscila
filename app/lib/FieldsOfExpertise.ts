@@ -1,12 +1,15 @@
+'use server'
+
 import React from 'react'
 import { IconProps } from '@phosphor-icons/react'
 import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc, query } from 'firebase/firestore'
 import { db } from '@/config/firebase'
 import { z } from 'zod'
+import { formDataToObject } from '@/utils/functions'
 
 export interface IExpertiseItemProps {
   title: string
-  Icon: React.ComponentType<IconProps>
+  Icon: string
   items: string[]
 }
 
@@ -37,8 +40,10 @@ const fieldsOfExpertiseSchemaWithId = fieldsOfExpertiseSchema.partial().extend({
 
 const collectionName = 'fieldsOfExpertiseData'
 
-export const addFieldOfExpertise = async (field: IExpertiseItemProps): Promise<IReturnString> => {
+export const addFieldOfExpertise = async (formData: FormData): Promise<IReturnString> => {
   try {
+    const field = formDataToObject<IExpertiseItemProps>(formData)
+    field.items = JSON.parse(field.items as unknown as string)
     const parsedFieldOfExpertise = fieldsOfExpertiseSchema.safeParse(field)
 
     if (!parsedFieldOfExpertise.success) {
@@ -80,9 +85,11 @@ export const getFieldsOfExpertise = async (): Promise<IReturnArray> => {
   }
 }
 
-export const updateFieldOfExpertise = async (id: string, field: Partial<IExpertiseItemProps>): Promise<IReturn> => {
+export const updateFieldOfExpertise = async (formData: FormData): Promise<IReturn> => {
   try {
-    const parsedFieldOfExpertise = fieldsOfExpertiseSchemaWithId.safeParse({ id, ...field })
+    const field = formDataToObject<IExpertiseItemPropsWithId>(formData)
+
+    const parsedFieldOfExpertise = fieldsOfExpertiseSchemaWithId.safeParse(field)
 
     if (!parsedFieldOfExpertise.success) {
       return {
@@ -91,8 +98,11 @@ export const updateFieldOfExpertise = async (id: string, field: Partial<IExperti
       }
     }
 
-    const docRef = doc(db, collectionName, id)
-    await updateDoc(docRef, field)
+    const { id, ...updatedData } = field
+
+    const docRef = doc(db, collectionName, id!)
+
+    await updateDoc(docRef, updatedData)
 
     return {
       error: true
