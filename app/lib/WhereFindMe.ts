@@ -1,3 +1,5 @@
+'use server'
+
 import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc, query } from 'firebase/firestore'
 import { db } from '@/config/firebase'
 import { z } from 'zod'
@@ -65,7 +67,7 @@ const clinicSchema = z.object({
 })
 
 export interface IClinicWithId extends IClinic {
-  id?: string
+  id: string
 }
 
 const clinicSchemaWithId = clinicSchema.partial().extend({ id: z.string() })
@@ -87,6 +89,7 @@ const collectionName = 'whereToFindMeData'
 
 export const addClinic = async (clinic: IClinic): Promise<IReturnString> => {
   try {
+    console.log(clinic)
     const parsedClinic = clinicSchema.safeParse(clinic)
 
     if (!parsedClinic.success) {
@@ -110,7 +113,17 @@ export const getClinics = async (): Promise<IReturnArray> => {
   try {
     const q = query(collection(db, collectionName))
     const querySnapshot = await getDocs(q)
-    const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as IClinicWithId))
+
+    const data = querySnapshot.docs.map((doc) => {
+      const docData = doc.data() as Omit<IClinicWithId, 'id'>
+
+      const clinicData: IClinicWithId = {
+        id: doc.id,
+        ...docData
+      }
+
+      return clinicData
+    })
 
     return {
       error: false,

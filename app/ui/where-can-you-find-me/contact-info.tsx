@@ -64,7 +64,12 @@ const ContactInfo = ({
           <div key={phone.number} className="flex items-center mb-2">
             {phone.isWhatsapp
               ? (
-              <a href={getWhatsappLink(phone.ddd, phone.number)} target="_blank" rel="noopener noreferrer" className="flex items-center">
+              <a
+                href={getWhatsappLink(phone.ddd, phone.number)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center"
+              >
                 <WhatsappLogo className="w-6 h-6 text-base-gray mr-2" />
                 <p className="text-base-gray">{formatPhoneNumber(phone.ddd, phone.number)}</p>
               </a>
@@ -84,10 +89,12 @@ const ContactInfo = ({
           {businessHour.week.start}-{businessHour.week.end}: {businessHour.hour.start}h - {businessHour.hour.end}h
         </p>
       </div>
-      <div className="flex items-center">
-        <Wallet className="text-base-gray w-6 h-6 mr-2" />
-        <p className="text-base-gray">Atendimento: {healthPlan.join(', ')}</p>
-      </div>
+      {healthPlan.length > 0 && (
+        <div className="flex items-center">
+          <Wallet className="text-base-gray w-6 h-6 mr-2" />
+          <p className="text-base-gray">Atendimento: {healthPlan.join(', ')}</p>
+        </div>
+      )}
     </div>
   )
 }

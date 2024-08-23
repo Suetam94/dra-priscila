@@ -1,45 +1,72 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { addClinic, getClinics, updateClinic, deleteClinic, IClinicWithId, IClinic } from '@/app/lib/WhereFindMe'
-import FileInput from '@/app/ui/general/file-input'
+import { addClinic, getClinics, deleteClinic, IClinicWithId, IClinic } from '@/app/lib/WhereFindMe'
 import TextInput from '@/app/ui/general/text-input'
 import { Playfair_Display } from 'next/font/google'
 import Accordion from '@/app/ui/general/accordion'
+import PhoneInput from '@/app/ui/admin/where-find-me/phone-component'
+import TextArea from '@/app/ui/general/text-area'
+import Modal from '@/app/ui/general/modal'
+import Spinner from '@/app/ui/general/spinner'
 
 const playfairDisplay = Playfair_Display({ subsets: ['latin'] })
 
 const WhereFindMeSection = (): React.JSX.Element => {
   const [clinics, setClinics] = useState<IClinicWithId[] | undefined>([])
-  const [selectedClinic, setSelectedClinic] = useState<IClinicWithId | null>(null)
+  const [selectedClinic, setSelectedClinic] = useState<IClinic | null>(null)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [modalType, setModalType] = useState<'success' | 'error'>('success')
+  const [modalMessage, setModalMessage] = useState<string>('')
+  const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
     const fetchClinics = async () => {
+      setLoading(true)
       const clinics = await getClinics()
+      setLoading(false)
       setClinics(clinics.data)
     }
     ;(async () => await fetchClinics())()
   }, [])
 
-  const handleFileChange = (file: File | null) => {
-    if (selectedClinic) {
-      setSelectedClinic({ ...selectedClinic, image: { ...selectedClinic.image, url: URL.createObjectURL(file!) } })
-    }
+  const handleModalClose = () => {
+    setIsOpen(false)
   }
 
-  const handleChange = (field: string, value: string) => {
-    if (selectedClinic) {
-      setSelectedClinic({ ...selectedClinic, [field]: value })
-    }
+  const handleChange = (field: string, value: any) => {
+    setSelectedClinic((prevState) => {
+      if (prevState) {
+        return { ...prevState, [field]: value }
+      }
+
+      return {
+        image: { url: '', alt: '' },
+        name: '',
+        address: '',
+        phones: [],
+        businessHour: { week: { start: '', end: '' }, hour: { start: '', end: '' } },
+        healthPlan: [],
+        [field]: value
+      }
+    })
   }
 
   const handleSave = async () => {
     if (selectedClinic) {
-      if (selectedClinic.id) {
-        await updateClinic(selectedClinic.id, selectedClinic)
+      setLoading(true)
+      const { error, message } = await addClinic(selectedClinic as IClinic)
+      setLoading(false)
+
+      if (error) {
+        setModalMessage(message ?? 'Oops! Aconteceu um erro ao tentar adicionar uma nova clínica.')
+        setModalType('error')
       } else {
-        await addClinic(selectedClinic as IClinic)
+        setModalMessage(`A clínica: ${selectedClinic.name} foi adicionada com sucesso!`)
+        setModalType('success')
       }
+
+      setIsOpen(true)
       const clinics = await getClinics()
       setClinics(clinics.data)
       setSelectedClinic(null)
@@ -47,7 +74,20 @@ const WhereFindMeSection = (): React.JSX.Element => {
   }
 
   const handleDelete = async (id: string) => {
-    await deleteClinic(id)
+    setLoading(true)
+    const { error, message } = await deleteClinic(id)
+    setLoading(false)
+
+    if (error) {
+      setModalMessage(message ?? 'Oops! Aconteceu um erro ao tentar deletar a clínica.')
+      setModalType('error')
+    } else {
+      setModalMessage('A clínica foi deletada com sucesso!')
+      setModalType('success')
+    }
+
+    setIsOpen(true)
+
     const clinics = await getClinics()
     setClinics(clinics.data)
   }
@@ -58,33 +98,8 @@ const WhereFindMeSection = (): React.JSX.Element => {
         Gerenciando a página Onde Me Encontrar
       </h3>
       <Accordion title="Configurações da página Onde Me Encontrar">
-        <div className="flex flex-col space-y-4">
-          {clinics && clinics.map((clinic) => (
-            <div key={clinic.id} className="border rounded p-4 flex justify-between items-center">
-              <div>
-                <h5 className="text-lg font-bold">{clinic.name}</h5>
-                <p>{clinic.address}</p>
-              </div>
-              <div className="flex space-x-2">
-                <button
-                  onClick={() => setSelectedClinic(clinic)}
-                  className="bg-base-pink text-base-gray py-2 px-4 rounded-md hover:bg-base-blue transition duration-300"
-                >
-                  Editar
-                </button>
-                <button
-                  onClick={() => handleDelete(clinic.id!)}
-                  className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 transition duration-300"
-                >
-                  Deletar
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-
         <div className="mt-6">
-          <h5 className="text-lg font-bold mb-2">{selectedClinic ? 'Editar Clínica' : 'Adicionar Clínica'}</h5>
+          <h5 className="text-lg font-bold mb-2">Adicionar Clínica</h5>
           <div className="mb-4">
             <TextInput
               label="Nome"
@@ -102,23 +117,88 @@ const WhereFindMeSection = (): React.JSX.Element => {
             />
           </div>
           <div className="mb-4">
-            <FileInput onChange={handleFileChange} />
-            {selectedClinic?.image.url && (
-              <img
-                src={selectedClinic.image.url}
-                alt={selectedClinic.image.alt}
-                className="mt-4 rounded-lg shadow-lg max-w-xs"
-              />
-            )}
+            <TextInput
+              label="URL da imagem"
+              value={selectedClinic?.image?.url || ''}
+              onChange={(value) =>
+                handleChange('image', {
+                  url: value,
+                  alt: selectedClinic?.name ?? 'Foto da Clínica'
+                })
+              }
+            />
+          </div>
+          <div className="mb-4">
+            <PhoneInput phones={selectedClinic?.phones || []} onChange={(phones) => handleChange('phones', phones)} />
+          </div>
+          <div className="mb-4">
+            <TextInput
+              label="Horário de Atendimento (Semana)"
+              value={`${selectedClinic?.businessHour?.week?.start || ''}${selectedClinic?.businessHour?.week?.end || ''}`}
+              onChange={(value) =>
+                handleChange('businessHour', {
+                  week: {
+                    start: value.split(' - ')[0],
+                    end: value.split(' - ')[1]
+                  },
+                  hour: selectedClinic?.businessHour?.hour || { start: '', end: '' }
+                })
+              }
+              placeholder="Ex: Segunda-feira - Sexta-feira"
+            />
+          </div>
+          <div className="mb-4">
+            <TextInput
+              label="Horário de Atendimento (Horas)"
+              value={`${selectedClinic?.businessHour?.hour?.start || ''}${selectedClinic?.businessHour?.hour?.end || ''}`}
+              onChange={(value) =>
+                handleChange('businessHour', {
+                  week: selectedClinic?.businessHour?.week || { start: '', end: '' },
+                  hour: {
+                    start: value.split(' - ')[0],
+                    end: value.split(' - ')[1]
+                  }
+                })
+              }
+              placeholder="Ex: 08:00 - 18:00"
+            />
+          </div>
+          <div className="mb-4">
+            <TextArea
+              label="Planos de Saúde"
+              value={selectedClinic?.healthPlan?.join('\n') || ''}
+              onChange={(value) => handleChange('healthPlan', value.split('\n'))}
+              placeholder="Planos de Saúde separados por linha"
+            />
           </div>
           <button
             onClick={handleSave}
-            className="bg-base-blue text-base-gray py-2 px-4 rounded-md hover:bg-base-pink transition duration-300"
+            className="w-full bg-base-blue text-base-gray py-2 px-4 rounded-md hover:bg-base-pink transition duration-300"
           >
-            {selectedClinic?.id ? 'Atualizar Clínica' : 'Salvar Clínica'}
+            {loading ? <Spinner /> : 'Salvar Clínica'}
           </button>
         </div>
+        <div className="flex flex-col space-y-4 mt-10">
+          {clinics &&
+            clinics.map((clinic) => (
+              <div key={clinic.id} className="border rounded p-4 flex justify-between items-center">
+                <div>
+                  <h5 className="text-lg font-bold">{clinic.name}</h5>
+                  <p>{clinic.address}</p>
+                </div>
+                <div className="flex space-x-2">
+                  <button
+                    onClick={() => handleDelete(clinic.id!)}
+                    className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 transition duration-300"
+                  >
+                    {loading ? <Spinner /> : 'Deletar'}
+                  </button>
+                </div>
+              </div>
+            ))}
+        </div>
       </Accordion>
+      <Modal isOpen={isOpen} onClose={handleModalClose} type={modalType} message={modalMessage} />
     </section>
   )
 }
