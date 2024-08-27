@@ -77,10 +77,10 @@ export const formDataToObject = <T extends Record<string, any>>(formData: FormDa
   return obj as T
 }
 
-const validJSON = (value: string) => {
-  try {
-    return JSON.parse(value)
-  } catch (e) {
-    return false
-  }
-}
+// const validJSON = (value: string) => {
+//   try {
+//     return JSON.parse(value)
+//   } catch (e) {
+//     return false
+//   }
+// }

@@ -6,7 +6,6 @@ import {
   deleteBlogPost,
   getBlogPosts, IBlogPostProps,
   IBlogPostPropsWithId,
-  updateBlogPost,
   uploadImage
 } from '@/app/lib/Blog'
 import TextInput from '@/app/ui/general/text-input'
@@ -34,7 +33,7 @@ const DermatologyBlog = (): React.JSX.Element => {
       setLoading(false)
       setBlogPosts(data)
     }
-    void fetchBlogPosts()
+    fetchBlogPosts()
   }, [])
 
   const handleChange = (field: string, value: string) => {

@@ -43,7 +43,7 @@ const OpenStreetMapComponent: React.FC<OpenStreetMapComponentProps> = ({ address
       }
     }
 
-    void fetchCoordinates()
+    fetchCoordinates()
   }, [address])
 
   return (
