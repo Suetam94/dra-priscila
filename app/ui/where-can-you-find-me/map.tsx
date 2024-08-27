@@ -5,6 +5,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import axios from 'axios'
+import LoadingSpinner from '@/app/ui/general/loading-spinner'
 
 interface OpenStreetMapComponentProps {
   address: string
@@ -19,7 +20,7 @@ const icon = new L.Icon({
 })
 
 const OpenStreetMapComponent: React.FC<OpenStreetMapComponentProps> = ({ address }) => {
-  const [coordinates, setCoordinates] = useState<{ lat: number, lon: number } | null>(null)
+  const [coordinates, setCoordinates] = useState<{ lat: number; lon: number } | null>(null)
 
   useEffect(() => {
     const fetchCoordinates = async () => {
@@ -60,7 +61,7 @@ const OpenStreetMapComponent: React.FC<OpenStreetMapComponentProps> = ({ address
         </MapContainer>
           )
         : (
-        <p>Loading map...</p>
+        <LoadingSpinner />
           )}
     </div>
   )

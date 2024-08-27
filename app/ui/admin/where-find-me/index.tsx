@@ -14,7 +14,7 @@ const playfairDisplay = Playfair_Display({ subsets: ['latin'] })
 
 const WhereFindMeSection = (): React.JSX.Element => {
   const [clinics, setClinics] = useState<IClinicWithId[] | undefined>([])
-  const [selectedClinic, setSelectedClinic] = useState<IClinic | null>(null)
+  const [selectedClinic, setSelectedClinic] = useState<IClinic | undefined>()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [modalType, setModalType] = useState<'success' | 'error'>('success')
   const [modalMessage, setModalMessage] = useState<string>('')
@@ -69,7 +69,11 @@ const WhereFindMeSection = (): React.JSX.Element => {
       setIsOpen(true)
       const clinics = await getClinics()
       setClinics(clinics.data)
-      setSelectedClinic(null)
+      setSelectedClinic(undefined)
+    } else {
+      setModalMessage('Preencha os campos antes de tentar salvar!')
+      setModalType('error')
+      setIsOpen(true)
     }
   }
 

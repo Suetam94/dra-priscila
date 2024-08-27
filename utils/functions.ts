@@ -13,8 +13,10 @@ interface IReturnString extends IReturn {
 
 const fileSchema = z.instanceof(Blob, { message: 'O tipo de imagem é inválida.' })
 
-export const generalUploadImage = async (file: File): Promise<IReturnString> => {
+export const generalUploadImage = async (formData: FormData): Promise<IReturnString> => {
   try {
+    const file = formData.get('file') as File
+
     const supportedFiles = ['jpg', 'jpeg', 'png', 'svg']
     const filteredName = supportedFiles.filter((extension) => file.name.endsWith(extension))
 
