@@ -81,7 +81,16 @@ const DermatologyBlog = (): React.JSX.Element => {
 
   const handleDelete = async (id: string) => {
     setLoading(true)
-    await deleteBlogPost(id)
+    const { error, message } = await deleteBlogPost(id)
+
+    if (error) {
+      setMessage(message ?? 'Oops, houve um erro ao tentar deletar o post!')
+      setModalType('error')
+    } else {
+      setModalType('success')
+      setMessage('O post foi deletado com sucesso')
+    }
+
     setLoading(false)
     const { data } = await getBlogPosts()
     setBlogPosts(data)

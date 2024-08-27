@@ -1,7 +1,8 @@
 import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc } from 'firebase/firestore'
-import { db } from '@/config/firebase'
+import { db, storage } from '@/config/firebase'
 import { z } from 'zod'
 import { generalUploadImage } from '@/utils/functions'
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 
 export interface IPhoneProps {
   ddd: string
@@ -70,7 +71,41 @@ const clinicSchemaWithId = clinicSchema.partial().extend({ id: z.string() })
 
 const collectionName = 'bookYourAppointmentData'
 
-export const uploadImage = generalUploadImage
+const fileSchema = z.instanceof(Blob, { message: 'O tipo de imagem é inválida.' })
+
+export const uploadImage = async (formData: FormData): Promise<IReturnString> => {
+  try {
+    const file = formData.get('file') as File
+
+    const supportedFiles = ['jpg', 'jpeg', 'png', 'svg']
+    const filteredName = supportedFiles.filter((extension) => file.name.endsWith(extension))
+
+    if (filteredName.length === 0) {
+      throw new Error(`O formato da imagem é inválida, os formatos aceitos são: ${supportedFiles.join(',')}`)
+    }
+
+    const parsedFile = fileSchema.safeParse(file)
+
+    if (!parsedFile.success) {
+      const message = parsedFile.error.message
+      throw new Error(message)
+    }
+
+    const storageRef = ref(storage, `images/${file.name}`)
+    await uploadBytes(storageRef, file)
+    const downloadUrl = await getDownloadURL(storageRef)
+
+    return {
+      error: false,
+      data: downloadUrl
+    }
+  } catch (e) {
+    return {
+      error: true,
+      message: (e as Error).message
+    }
+  }
+}
 
 export const addClinic = async (data: IClinicProps): Promise<IReturnString> => {
   try {

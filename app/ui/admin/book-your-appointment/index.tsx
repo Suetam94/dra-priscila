@@ -7,22 +7,31 @@ import {
   getClinics,
   IClinicPropsWithId,
   IPhoneProps,
-  updateClinic,
   uploadImage
 } from '@/app/lib/BookYourAppointment'
 import TextInput from '@/app/ui/general/text-input'
 import FileInput from '@/app/ui/general/file-input'
 import Accordion from '@/app/ui/general/accordion'
+import Spinner from '@/app/ui/general/spinner'
+import Modal from '@/app/ui/general/modal'
 
 const BookYourAppointment = (): React.JSX.Element => {
   const [clinics, setClinics] = useState<IClinicPropsWithId[] | undefined>([])
   const [selectedClinic, setSelectedClinic] = useState<IClinicPropsWithId | null>(null)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [modalType, setModalType] = useState<'success' | 'error'>('success')
+  const [message, setMessage] = useState<string>('')
+  const [loading, setLoading] = useState<boolean>(false)
+
+  const handleClose = () => setIsOpen(false)
 
   useEffect(() => {
     const fetchClinics = async () => {
+      setLoading(true)
       const { data } = await getClinics()
       setClinics(data)
+      setLoading(false)
     }
     void fetchClinics()
   }, [])
@@ -35,76 +44,51 @@ const BookYourAppointment = (): React.JSX.Element => {
 
   const handleSave = async () => {
     if (selectedClinic) {
+      setLoading(true)
       if (selectedFile) {
-        selectedClinic.image.url = (await uploadImage(selectedFile)).data!
+        const formData = new FormData()
+        formData.append('file', selectedFile)
+        selectedClinic.image.url = (await uploadImage(formData)).data!
       }
-      if (selectedClinic.id) {
-        await updateClinic(selectedClinic.id, selectedClinic)
+      const { error, message } = await addClinic(selectedClinic)
+
+      if (error) {
+        setMessage(message ?? 'Oops, houve um erro ao tentar salvar o post!')
+        setModalType('error')
       } else {
-        await addClinic(selectedClinic)
+        setModalType('success')
+        setMessage('O novo post foi salvo com sucesso')
       }
+
       const { data } = await getClinics()
       setClinics(data)
+      setLoading(false)
       setSelectedClinic(null)
       setSelectedFile(null)
     }
   }
 
   const handleDelete = async (id: string) => {
-    await deleteClinic(id)
+    setLoading(true)
+    const { error, message } = await deleteClinic(id)
+
+    if (error) {
+      setMessage(message ?? 'Oops, houve um erro ao tentar deletar a clínica!')
+      setModalType('error')
+    } else {
+      setModalType('success')
+      setMessage('A nova clínica foi deletada com sucesso')
+    }
+
     const { data } = await getClinics()
     setClinics(data)
+    setLoading(false)
   }
 
   return (
     <section className="p-6 bg-white rounded-lg shadow-md">
       <h4 className="text-2xl font-bold text-base-blue mb-4">Gerenciar Clínicas para Marcar Consulta</h4>
       <Accordion title="Configurações da página Marque Sua Consulta">
-        <div className="flex flex-col space-y-4">
-          {clinics && clinics.map((clinic) => (
-            <div key={clinic.id} className="border rounded p-4 flex justify-between items-center">
-              <div>
-                <h5 className="text-lg font-bold">{clinic.name}</h5>
-                <p>{clinic.address}</p>
-                <ul>
-                  {clinic.contact.phones.map((phone, index) => (
-                    <li key={index}>
-                      {phone.isWhatsapp ? 'WhatsApp: ' : 'Telefone: '}
-                      {phone.ddd} {phone.number}
-                    </li>
-                  ))}
-                </ul>
-                {clinic.contact.bookingUrl && (
-                  <p>
-                    <a
-                      href={clinic.contact.bookingUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-500 underline"
-                    >
-                      Marcar Consulta
-                    </a>
-                  </p>
-                )}
-              </div>
-              <div className="flex space-x-2">
-                <button
-                  onClick={() => setSelectedClinic(clinic)}
-                  className="bg-base-pink text-base-gray py-2 px-4 rounded-md hover:bg-base-blue transition duration-300"
-                >
-                  Editar
-                </button>
-                <button
-                  onClick={() => handleDelete(clinic.id!)}
-                  className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 transition duration-300"
-                >
-                  Deletar
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-
         <div className="mt-6">
           <h5 className="text-lg font-bold mb-2">{selectedClinic ? 'Editar Clínica' : 'Adicionar Clínica'}</h5>
           <div className="mb-4">
@@ -154,10 +138,49 @@ const BookYourAppointment = (): React.JSX.Element => {
             onClick={handleSave}
             className="bg-base-blue w-full text-base-gray py-2 px-4 rounded-md hover:bg-base-pink transition duration-300"
           >
-            {selectedClinic?.id ? 'Atualizar Clínica' : 'Salvar Clínica'}
+            {loading ? <Spinner /> : 'Salvar'}
           </button>
         </div>
+        <div className="flex flex-col space-y-4">
+          {clinics && clinics.map((clinic) => (
+            <div key={clinic.id} className="border rounded p-4 flex justify-between items-center">
+              <div>
+                <h5 className="text-lg font-bold">{clinic.name}</h5>
+                <p>{clinic.address}</p>
+                <ul>
+                  {clinic.contact.phones.map((phone, index) => (
+                    <li key={index}>
+                      {phone.isWhatsapp ? 'WhatsApp: ' : 'Telefone: '}
+                      {phone.ddd} {phone.number}
+                    </li>
+                  ))}
+                </ul>
+                {clinic.contact.bookingUrl && (
+                  <p>
+                    <a
+                      href={clinic.contact.bookingUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 underline"
+                    >
+                      Marcar Consulta
+                    </a>
+                  </p>
+                )}
+              </div>
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => handleDelete(clinic.id!)}
+                  className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 transition duration-300"
+                >
+                  Deletar
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
       </Accordion>
+      <Modal isOpen={isOpen} onClose={handleClose} type={modalType} message={message} />
     </section>
   )
 }
