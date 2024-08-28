@@ -30,15 +30,14 @@ export const sendEmail = async ({ name, email, phone, message }: IEmail) => {
 
   const mailOptions: Mail.Options = {
     from: '"Dra. Priscila Francisco - Contato Website" <mateus_vinicius_da_silva@rocketmail.com>',
-    to: process.env.NEXT_YAHOO_DOCTOR_EMAIL,
+    to: process.env.NEXT_DOCTOR_EMAIL,
     cc: email,
     subject: 'Novo e-mail de contato/dúvida via website',
     html: htmlTemplate
   }
 
   try {
-    const info = await transporter.sendMail(mailOptions)
-    console.log('Email enviado:', info.messageId)
+    await transporter.sendMail(mailOptions)
 
     return {
       error: false
