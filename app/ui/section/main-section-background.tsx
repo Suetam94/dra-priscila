@@ -6,7 +6,7 @@ const playfairDisplay = Playfair_Display({ subsets: ['latin'], weight: ['400', '
 const MainSectionBackground = (): React.JSX.Element => {
   return (
     <section className="min-w-full min-h-full">
-      <div className="relative min-h-[500px] bg-cover bg-right-top" style={{ backgroundImage: "url('/main-section-background.png')", backgroundPosition: '70% center' }}>
+      <div className="relative min-h-[500px] bg-cover bg-right-top" style={{ backgroundImage: "url('/my-image.jpeg')", backgroundPosition: '70% top' }}>
         <div className="absolute inset-0 bg-[#121927] opacity-75"></div>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center space-y-6">
           <h1 className={`${playfairDisplay.className} text-white text-4xl font-bold`}>
