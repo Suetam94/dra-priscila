@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
 
 const CookieConsent = (): React.JSX.Element => {
   const [isVisible, setIsVisible] = useState(true)
@@ -33,9 +34,9 @@ const CookieConsent = (): React.JSX.Element => {
         <p className="text-center md:text-left mb-4 md:mb-0">
           Utilizamos cookies para melhorar sua experiência em nosso site. Ao continuar navegando, você concorda com a
           nossa{' '}
-          <a href="/privacy-policy" className="text-base-pink underline">
+          <Link href="/politica-de-privacidade" className="text-base-pink underline">
             Política de Privacidade
-          </a>
+          </Link>
           .
         </p>
         <div className="flex space-x-4">
