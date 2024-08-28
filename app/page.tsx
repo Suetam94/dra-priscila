@@ -3,6 +3,7 @@ import MainSectionBackground from '@/app/ui/section/main-section-background'
 import TitleSection from '@/app/ui/section/title-section'
 import servicesData from './lib/standard-info/services.json'
 import MainInfoSection from '@/app/ui/section/main-info-section'
+import CookieConsent from '@/app/ui/general/cookie-consent'
 
 export default function Home (): React.JSX.Element {
   return (
@@ -25,6 +26,7 @@ export default function Home (): React.JSX.Element {
           />
         ))}
       </div>
+      <CookieConsent />
     </main>
   )
 }
