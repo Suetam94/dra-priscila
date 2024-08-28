@@ -1,10 +1,10 @@
-'use client'
+'use server'
 
 import { z } from 'zod'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import { auth } from '@/config/firebase'
 
-export const UserSchema = z.object({
+const UserSchema = z.object({
   email: z.string({ required_error: 'Email is required' }).email({ message: 'Email inválido' }),
   password: z.string({ required_error: 'A senha é obrigatória' })
 })
@@ -30,16 +30,28 @@ export const loginUser = async ({ email, password }: ILogin): Promise<IReturn> =
       }
     }
 
-    const userCredential = await signInWithEmailAndPassword(auth, email, password)
-    const user = userCredential.user
-
-    localStorage.setItem('user', JSON.stringify(user))
+    await signInWithEmailAndPassword(auth, email, password)
 
     return { error: false, message: 'Login bem-sucedido' }
   } catch (e) {
     return {
       error: true,
       message: (e as Error).message
+    }
+  }
+}
+
+export const logOutUser = async (): Promise<{ error: boolean }> => {
+  try {
+    await signOut(auth)
+
+    return {
+      error: false
+    }
+  } catch (e) {
+    console.error(e)
+    return {
+      error: true
     }
   }
 }
