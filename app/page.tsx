@@ -1,7 +1,7 @@
 import React from 'react'
 import MainSectionBackground from '@/app/ui/section/main-section-background'
 import TitleSection from '@/app/ui/section/title-section'
-import { services } from './lib/standard-info/services.json'
+import servicesData from './lib/standard-info/services.json'
 import MainInfoSection from '@/app/ui/section/main-info-section'
 
 export default function Home (): React.JSX.Element {
@@ -10,7 +10,7 @@ export default function Home (): React.JSX.Element {
       <MainSectionBackground />
       <TitleSection className="px-4 py-8 md:px-8 md:py-16" title="Nossos serviços" backgroundVariation="bg-base-gray" />
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 py-8">
-        {services.map((service) => (
+        {servicesData.services.map((service) => (
           <MainInfoSection
             hasCard={true}
             key={service.title}

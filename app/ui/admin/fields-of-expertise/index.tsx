@@ -44,7 +44,7 @@ const FieldsOfExpertise = (): React.JSX.Element => {
       setFieldsOfExpertise(fields.data)
       setLoading(false)
     }
-    void fetchFieldsOfExpertise()
+    (async () => await fetchFieldsOfExpertise())()
     setLoading(false)
   }, [])
 

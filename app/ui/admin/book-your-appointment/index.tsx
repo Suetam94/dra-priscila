@@ -36,7 +36,7 @@ const BookYourAppointment = (): React.JSX.Element => {
       setClinics(data)
       setLoading(false)
     }
-    void fetchClinics()
+    (async () => await fetchClinics())()
   }, [])
 
   const handleChange = (field: string, value: any) => {

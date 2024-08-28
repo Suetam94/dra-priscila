@@ -1,7 +1,5 @@
 'use server'
 
-import React from 'react'
-import { IconProps } from '@phosphor-icons/react'
 import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc, query } from 'firebase/firestore'
 import { db } from '@/config/firebase'
 import { z } from 'zod'
