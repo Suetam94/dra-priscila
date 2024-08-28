@@ -62,6 +62,7 @@ const PhoneInput = ({ phones, onChange }: PhoneInputProps): React.JSX.Element =>
         <button
           onClick={handleAddPhone}
           className="bg-base-blue text-base-gray py-2 px-4 rounded-md hover:bg-base-pink transition duration-300"
+          type="button"
         >
           Adicionar Telefone
         </button>

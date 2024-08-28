@@ -1,9 +1,10 @@
 import { initializeApp } from 'firebase/app'
 import { getFirestore } from '@firebase/firestore'
 import { getStorage } from '@firebase/storage'
+import { getAuth, setPersistence, browserLocalPersistence } from 'firebase/auth'
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_API_KEY,
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
   authDomain: process.env.NEXT_AUTH_DOMAIN,
   projectId: process.env.NEXT_PROJECT_ID,
   storageBucket: process.env.NEXT_STORAGE_BUCKET,
@@ -15,5 +16,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
 const storage = getStorage(app)
+const auth = getAuth(app)
 
-export { db, storage }
+void setPersistence(auth, browserLocalPersistence)
+
+export { db, storage, auth }

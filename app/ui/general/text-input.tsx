@@ -6,6 +6,7 @@ interface TextInputProps {
   label: string
   placeholder?: string
   value?: string
+  type?: 'text' | 'password' | 'email'
   disabled?: boolean
   onChange: (value: string) => void
   required?: boolean
@@ -19,7 +20,8 @@ const TextInput = ({
   disabled = false,
   onChange,
   required,
-  invalidMessage
+  invalidMessage,
+  type = 'text'
 }: TextInputProps): React.JSX.Element => {
   const [inputValue, setInputValue] = useState(value)
 
@@ -41,7 +43,7 @@ const TextInput = ({
     <div className="w-full mb-4">
       <label className="block text-base-blue mb-2">{label}</label>
       <input
-        type="text"
+        type={type}
         value={inputValue}
         onChange={handleInputChange}
         placeholder={placeholder}

@@ -1,7 +1,8 @@
+'use server'
+
 import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc } from 'firebase/firestore'
 import { db, storage } from '@/config/firebase'
 import { z } from 'zod'
-import { generalUploadImage } from '@/utils/functions'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 
 export interface IPhoneProps {
@@ -94,6 +95,8 @@ export const uploadImage = async (formData: FormData): Promise<IReturnString> =>
     const storageRef = ref(storage, `images/${file.name}`)
     await uploadBytes(storageRef, file)
     const downloadUrl = await getDownloadURL(storageRef)
+
+    console.log(downloadUrl)
 
     return {
       error: false,

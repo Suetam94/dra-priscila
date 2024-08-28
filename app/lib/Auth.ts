@@ -1,0 +1,45 @@
+'use client'
+
+import { z } from 'zod'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '@/config/firebase'
+
+export const UserSchema = z.object({
+  email: z.string({ required_error: 'Email is required' }).email({ message: 'Email inválido' }),
+  password: z.string({ required_error: 'A senha é obrigatória' })
+})
+
+export interface ILogin {
+  email: string
+  password: string
+}
+
+export interface IReturn {
+  error: boolean
+  message?: string
+}
+
+export const loginUser = async ({ email, password }: ILogin): Promise<IReturn> => {
+  try {
+    const validate = UserSchema.safeParse({ email, password })
+
+    if (!validate.success) {
+      return {
+        error: true,
+        message: validate.error.message
+      }
+    }
+
+    const userCredential = await signInWithEmailAndPassword(auth, email, password)
+    const user = userCredential.user
+
+    localStorage.setItem('user', JSON.stringify(user))
+
+    return { error: false, message: 'Login bem-sucedido' }
+  } catch (e) {
+    return {
+      error: true,
+      message: (e as Error).message
+    }
+  }
+}

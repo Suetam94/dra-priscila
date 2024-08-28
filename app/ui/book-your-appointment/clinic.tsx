@@ -74,7 +74,7 @@ const Clinic = ({ name, image, contact, address }: IClinicProps) => {
         ))}
         {contact.bookingUrl && (
           <p className="text-base-blue text-lg mt-2">
-            Marcação de consulta: <a href={contact.bookingUrl} className="text-base-pink underline">Clique aqui</a>
+            Marcar consulta: <a href={contact.bookingUrl} className="text-base-pink underline">Clique aqui</a>
           </p>
         )}
       </div>

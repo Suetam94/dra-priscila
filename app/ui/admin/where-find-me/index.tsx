@@ -26,6 +26,7 @@ const WhereFindMeSection = (): React.JSX.Element => {
       const clinics = await getClinics()
       setLoading(false)
       setClinics(clinics.data)
+      setLoading(true)
     }
     ;(async () => await fetchClinics())()
   }, [])
