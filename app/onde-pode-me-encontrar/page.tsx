@@ -1,6 +1,6 @@
-'use server'
+'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import TitleSection from '@/app/ui/section/title-section'
 import { IContactInfoProps } from '@/app/ui/where-can-you-find-me/contact-info'
 import ClinicPlace from '@/app/ui/where-can-you-find-me/clinic-place'
@@ -55,17 +55,27 @@ const clinicsData: IContactInfoProps[] = [
   }
 ]
 
-const WhereToFindMe = async (): Promise<React.JSX.Element> => {
-  const { data } = await getClinics()
+const WhereToFindMe = (): React.JSX.Element => {
+  const [clinics, setClinics] = useState<IContactInfoProps[]>(clinicsData)
 
-  const clinics = data && data.length > 0 ? data : clinicsData
+  useEffect(() => {
+    const getClinicsData = async () => {
+      const { error, data } = await getClinics()
+
+      if (!error) {
+        setClinics(data ?? clinicsData)
+      }
+    }
+
+    (async () => await getClinicsData())()
+  }, [])
 
   return (
     <section className="w-full px-4 pb-8 pt-3 bg-base-gray">
       <TitleSection title="Onde você pode me encontrar?" backgroundVariation={'bg-base-pink'} className="mb-3" />
-      {
+       {
         clinics && clinics.map(clinic => <ClinicPlace key={clinic.name} {...clinic} />)
-      }
+       }
     </section>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import ContactInfo, { IContactInfoProps } from '@/app/ui/where-can-you-find-me/contact-info'
-import OpenStreetMapComponent from '@/app/ui/where-can-you-find-me/map'
+import MapComponent from '@/app/ui/where-can-you-find-me/map'
 
 const ClinicPlace = ({ businessHour, image, address, name, phones, healthPlan }: IContactInfoProps): React.JSX.Element => {
   return (
@@ -17,7 +17,7 @@ const ClinicPlace = ({ businessHour, image, address, name, phones, healthPlan }:
           />
         </div>
         <div className="flex flex-col flex-1 order-2 lg:order-1 min-h-full">
-          <OpenStreetMapComponent address={address} />
+           <MapComponent address={address} />
         </div>
       </div>
     </div>
