@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getDoctorInfo, IDoctorInfo, IDoctorInfoWithId } from '@/app/lib/DoctorInfo'
+import { getDoctorInfo, IDoctorInfoWithId } from '@/app/lib/DoctorInfo'
 
 const MyInfo = (): React.JSX.Element => {
   const [myInfo, setMyInfo] = useState<Partial<IDoctorInfoWithId> | undefined>()
