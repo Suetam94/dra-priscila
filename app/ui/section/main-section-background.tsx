@@ -1,5 +1,6 @@
 import React from 'react'
 import { Playfair_Display } from 'next/font/google'
+import Link from 'next/link'
 
 const playfairDisplay = Playfair_Display({ subsets: ['latin'], weight: ['400', '700'] })
 
@@ -15,9 +16,9 @@ const MainSectionBackground = (): React.JSX.Element => {
           <h2 className={`${playfairDisplay.className} text-white text-2xl`}>
             Dermatologista
           </h2>
-          <button className="bg-[#f2a497] text-white text-lg py-2 px-6 rounded-full hover:bg-[#e88e80] transition-colors duration-300">
+          <Link href="/marque-sua-consulta" className="bg-[#f2a497] text-white text-lg py-2 px-6 rounded-full hover:bg-[#e88e80] transition-colors duration-300">
             Agende sua consulta
-          </button>
+          </Link>
         </div>
       </div>
     </section>

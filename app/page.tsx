@@ -21,7 +21,8 @@ export default function Home (): React.JSX.Element {
               imageUrl: service.imageUrl,
               contentColor: 'text-base-gray',
               cardBackground: 'bg-base-blue',
-              titleColor: 'text-base-gray'
+              titleColor: 'text-base-gray',
+              link: '/areas-de-atuacao'
             }}
           />
         ))}

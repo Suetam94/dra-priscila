@@ -13,7 +13,7 @@ const MyInfo = (): React.JSX.Element => {
   }, [])
 
   return (
-    <p className="text-sm md:text-base">{myInfo?.name} - Dermatologista - CRM: {myInfo?.CRM}, RQE: {myInfo?.RQE}</p>
+    <p className="text-sm md:text-base">{myInfo?.name} - Dermatologista - CRM-PR: {myInfo?.CRM}, RQE: {myInfo?.RQE}</p>
   )
 }
 
