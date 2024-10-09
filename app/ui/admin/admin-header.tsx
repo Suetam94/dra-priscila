@@ -19,6 +19,7 @@ const AdminHeader = (): React.JSX.Element => {
       setLoading(false)
       router.push('/')
     }
+    setLoading(false)
   }
 
   return (
