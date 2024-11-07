@@ -17,7 +17,7 @@ const BlogPost = ({ title, description, imageUrl, link }: IBlogPostProps) => {
       </div>
       <div className="p-6">
         <h3 className="text-2xl font-bold text-base-blue mb-2">{title}</h3>
-        <p className="text-base-gray mb-4">{description}</p>
+        <p className="text-base-gray mb-4 text-justify">{description}</p>
         <Link href={link} className="text-base-pink underline">Leia mais</Link>
       </div>
     </div>

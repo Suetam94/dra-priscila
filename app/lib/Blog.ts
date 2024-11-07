@@ -45,7 +45,7 @@ export const uploadImage = async (formData: FormData): Promise<IReturnString> =>
   try {
     const file = formData.get('file') as File
 
-    const supportedFiles = ['jpg', 'jpeg', 'png', 'svg']
+    const supportedFiles = ['jpg', 'jpeg', 'png', 'svg', 'webp']
     const filteredName = supportedFiles.filter((extension) => file.name.endsWith(extension))
 
     if (filteredName.length === 0) {
