@@ -1,0 +1,144 @@
+﻿backend:
+  name: github
+  repo: Suetam94/dra-priscila
+  branch: feat/landing-cms-migration
+  # For GitHub backend on Vercel, set up an OAuth app and a small auth provider.
+  # base_url: https://your-oauth-provider.example.com
+publish_mode: editorial_workflow
+media_folder: public/uploads
+public_folder: /uploads
+locale: pt
+collections:
+  - name: site
+    label: Site
+    files:
+      - name: hero
+        label: Hero
+        file: content/hero.json
+        fields:
+          - { name: title, label: Título, widget: string }
+          - { name: subtitle, label: Subtítulo, widget: string }
+          - { name: ctaLabel, label: Rótulo do CTA, widget: string }
+          - { name: ctaHref, label: Link do CTA, widget: string }
+          - { name: backgroundImage, label: Imagem de Fundo, widget: image }
+      - name: services
+        label: Serviços
+        file: content/services.json
+        fields:
+          - label: Serviços
+            name: services
+            widget: list
+            summary: '{{fields.title}}'
+            fields:
+              - { name: title, label: Título, widget: string }
+              - { name: content, label: Descrição, widget: text }
+              - { name: imageUrl, label: Imagem, widget: image }
+      - name: about
+        label: Quem Sou
+        file: content/about.json
+        fields:
+          - { name: title, label: Título, widget: string }
+          - { name: mainImageUrl, label: Foto Principal, widget: image }
+          - { name: summary, label: Resumo (itens), widget: list, field: { name: item, label: Item, widget: string } }
+          - { name: fullText, label: Texto Completo, widget: text }
+      - name: fields
+        label: Áreas de Atuação
+        file: content/fields-of-expertise.json
+        fields:
+          - label: Áreas
+            name: items
+            widget: list
+            summary: '{{fields.title}}'
+            fields:
+              - { name: title, label: Título, widget: string }
+              - name: Icon
+                label: Ícone
+                widget: select
+                options: [ClipboardText, ShieldCheck, Scissors]
+              - name: items
+                label: Itens
+                widget: list
+                field: { name: item, label: Item, widget: string }
+      - name: clinics
+        label: Onde Pode Me Encontrar
+        file: content/clinics.json
+        fields:
+          - label: Clínicas
+            name: clinics
+            widget: list
+            summary: '{{fields.name}}'
+            fields:
+              - { name: name, label: Nome, widget: string }
+              - { name: address, label: Endereço, widget: string }
+              - label: Imagem
+                name: image
+                widget: object
+                fields:
+                  - { name: url, label: URL, widget: image }
+                  - { name: alt, label: ALT, widget: string }
+              - label: Telefones
+                name: phones
+                widget: list
+                fields:
+                  - { name: ddd, label: DDD, widget: string }
+                  - { name: number, label: Número, widget: string }
+                  - { name: isWhatsapp, label: WhatsApp, widget: boolean }
+              - label: Horário de Atendimento
+                name: businessHour
+                widget: object
+                fields:
+                  - label: Semana
+                    name: week
+                    widget: object
+                    fields:
+                      - { name: start, label: Início, widget: string }
+                      - { name: end, label: Fim, widget: string }
+                  - label: Horas
+                    name: hour
+                    widget: object
+                    fields:
+                      - { name: start, label: Início, widget: string }
+                      - { name: end, label: Fim, widget: string }
+              - { name: healthPlan, label: Planos de Saúde, widget: list, field: { name: plan, label: Plano, widget: string } }
+      - name: appointment
+        label: Marque Sua Consulta
+        file: content/appointment-clinics.json
+        fields:
+          - label: Clínicas
+            name: clinics
+            widget: list
+            summary: '{{fields.name}}'
+            fields:
+              - { name: name, label: Nome, widget: string }
+              - { name: address, label: Endereço, widget: string }
+              - label: Contato
+                name: contact
+                widget: object
+                fields:
+                  - label: Telefones
+                    name: phones
+                    widget: list
+                    fields:
+                      - { name: ddd, label: DDD, widget: string }
+                      - { name: number, label: Número, widget: string }
+                      - { name: isWhatsapp, label: WhatsApp, widget: boolean }
+                  - { name: bookingUrl, label: URL de Agendamento, widget: string, required: false }
+              - label: Imagem
+                name: image
+                widget: object
+                fields:
+                  - { name: url, label: URL, widget: image }
+                  - { name: alt, label: ALT, widget: string }
+      - name: blog
+        label: Blog
+        file: content/blog.json
+        fields:
+          - label: Postagens
+            name: posts
+            widget: list
+            summary: '{{fields.title}}'
+            fields:
+              - { name: title, label: Título, widget: string }
+              - { name: description, label: Descrição, widget: text }
+              - { name: link, label: Link, widget: string }
+              - { name: imageUrl, label: Imagem, widget: image }
