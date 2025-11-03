@@ -5,8 +5,8 @@ import { signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import { auth } from '@/config/firebase'
 
 const UserSchema = z.object({
-  email: z.string({ required_error: 'Email is required' }).email({ message: 'Email inválido' }),
-  password: z.string({ required_error: 'A senha é obrigatória' })
+  email: z.string({ required_error: 'Email is required' }).email({ message: 'Email invÃ¡lido' }),
+  password: z.string({ required_error: 'A senha Ã© obrigatÃ³ria' })
 })
 
 export interface ILogin {
@@ -30,6 +30,7 @@ export const loginUser = async ({ email, password }: ILogin): Promise<IReturn> =
       }
     }
 
+    if (!auth) { throw new Error('Auth indisponível') }
     await signInWithEmailAndPassword(auth, email, password)
 
     return { error: false, message: 'Login bem-sucedido' }
@@ -43,7 +44,7 @@ export const loginUser = async ({ email, password }: ILogin): Promise<IReturn> =
 
 export const logOutUser = async (): Promise<{ error: boolean }> => {
   try {
-    await signOut(auth)
+    if (!auth) return { error: true }; await signOut(auth)
 
     return {
       error: false
