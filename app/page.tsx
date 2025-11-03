@@ -1,4 +1,4 @@
-﻿import React from 'react'
+import React from 'react'
 import MainSectionBackground from '@/app/ui/section/main-section-background'
 import TitleSection from '@/app/ui/section/title-section'
 import servicesData from '@/content/services.json'
