@@ -1,0 +1,28 @@
+﻿{
+  "items": [
+    {
+      "title": "Dermatologia Clínica",
+      "Icon": "ClipboardText",
+      "items": [
+        "Tratamento de doenças de pele de uma forma geral, como acne, melasma e dermatites",
+        "Tratamento de doenças cutâneas imunomediadas como psoríase, dermatite atópica e urticária, desde fases iniciais até o uso de medicamentos sistêmicos como os imunobiológicos"
+      ]
+    },
+    {
+      "title": "Oncologia Cutânea",
+      "Icon": "ShieldCheck",
+      "items": [
+        "Diagnóstico e seguimento de pacientes com história de câncer de pele",
+        "Tratamento clínico de câncer de pele",
+        "Tratamento cirúrgico de câncer de pele (cirurgia convencional e cirurgia micrográfica de Mohs)"
+      ]
+    },
+    {
+      "title": "Cirurgia Dermatológica Geral",
+      "Icon": "Scissors",
+      "items": [
+        "Tratamento cirúrgico de lesões cutâneas diversas como por exemplo cistos, nevos e xantelasmas"
+      ]
+    }
+  ]
+}

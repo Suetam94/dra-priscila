@@ -1,0 +1,22 @@
+﻿{
+  "posts": [
+    {
+      "title": "O que é Dermatologia?",
+      "description": "A dermatologia é a especialidade médica responsável por diagnosticar e tratar doenças e condições da pele, cabelo e unhas.",
+      "imageUrl": "/o_que_e_dermatologia_realista.png",
+      "link": "/blog/o-que-e-dermatologia"
+    },
+    {
+      "title": "Cuidados Diários com a Pele",
+      "description": "Descubra dicas essenciais para manter sua pele saudável e radiante todos os dias.",
+      "imageUrl": "/cuidado_diario_pele.png",
+      "link": "/blog/cuidados-diarios-pele"
+    },
+    {
+      "title": "Tratamentos Dermatológicos Modernos",
+      "description": "Saiba mais sobre os tratamentos dermatológicos mais avançados disponíveis atualmente.",
+      "imageUrl": "/tratamentos_dermatologicos_modernos.png",
+      "link": "/blog/tratamentos-dermatologicos-modernos"
+    }
+  ]
+}
