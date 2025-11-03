@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+﻿import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET (req: NextRequest) {
   const url = new URL(req.url)
@@ -19,4 +19,3 @@ export async function GET (req: NextRequest) {
 
   return new NextResponse(html, { headers: { 'Content-Type': 'text/html; charset=utf-8' } })
 }
-

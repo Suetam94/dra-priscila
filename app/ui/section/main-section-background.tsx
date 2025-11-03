@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import { Playfair_Display } from 'next/font/google'
 import Link from 'next/link'
 import hero from '@/content/hero.json'
@@ -31,4 +31,3 @@ const MainSectionBackground = (): React.JSX.Element => {
 }
 
 export default MainSectionBackground
-
