@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import type { Metadata } from 'next'
 import { Lato } from 'next/font/google'
 import './globals.css'
@@ -10,20 +10,20 @@ const lato = Lato({ weight: '400', subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Dra. Priscila Francisco - Dermatologista',
   description:
-    'A dermatologista Dra. Priscila Francisco Ã© especializada em dermatologia clÃ­nica e cirÃºrgica. Oferecemos tratamentos avanÃ§ados para doenÃ§as de pele, cabelo e unhas, alÃ©m de procedimentos estÃ©ticos modernos. Marque sua consulta e cuide da sua saÃºde com excelÃªncia',
+    'A dermatologista Dra. Priscila Francisco ÃƒÂ© especializada em dermatologia clÃƒÂ­nica e cirÃƒÂºrgica. Oferecemos tratamentos avanÃƒÂ§ados para doenÃƒÂ§as de pele, cabelo e unhas, alÃƒÂ©m de procedimentos estÃƒÂ©ticos modernos. Marque sua consulta e cuide da sua saÃƒÂºde com excelÃƒÂªncia',
   keywords:
-    'dermatologista, Dra. Priscila Francisco, dermatologia clÃ­nica, dermatologia cirÃºrgica, tratamentos de pele, doenÃ§as de pele, cuidados com a pele, estÃ©tica, procedimentos estÃ©ticos, cabelo, unhas, acne, psorÃ­ase, eczema, melanoma, consulta dermatolÃ³gica, clÃ­nica dermatolÃ³gica, Curitiba, saÃºde da pele, rejuvenescimento, remoÃ§Ã£o de cicatrizes, tratamento de manchas, dermatologia estÃ©tica, cirurgia dermatolÃ³gica',
+    'dermatologista, Dra. Priscila Francisco, dermatologia clÃƒÂ­nica, dermatologia cirÃƒÂºrgica, tratamentos de pele, doenÃƒÂ§as de pele, cuidados com a pele, estÃƒÂ©tica, procedimentos estÃƒÂ©ticos, cabelo, unhas, acne, psorÃƒÂ­ase, eczema, melanoma, consulta dermatolÃƒÂ³gica, clÃƒÂ­nica dermatolÃƒÂ³gica, Curitiba, saÃƒÂºde da pele, rejuvenescimento, remoÃƒÂ§ÃƒÂ£o de cicatrizes, tratamento de manchas, dermatologia estÃƒÂ©tica, cirurgia dermatolÃƒÂ³gica',
   openGraph: {
     title: 'Dra. Priscila Francisco - Dermatologista',
     description:
-      'A dermatologista Dra. Priscila Francisco Ã© especializada em dermatologia clÃ­nica e cirÃºrgica. Oferecemos tratamentos avanÃ§ados para doenÃ§as de pele, cabelo e unhas, alÃ©m de procedimentos estÃ©ticos modernos. Marque sua consulta e cuide da sua saÃºde com excelÃªncia.',
+      'A dermatologista Dra. Priscila Francisco ÃƒÂ© especializada em dermatologia clÃƒÂ­nica e cirÃƒÂºrgica. Oferecemos tratamentos avanÃƒÂ§ados para doenÃƒÂ§as de pele, cabelo e unhas, alÃƒÂ©m de procedimentos estÃƒÂ©ticos modernos. Marque sua consulta e cuide da sua saÃƒÂºde com excelÃƒÂªncia.',
     type: 'website',
     url: 'https://drapriscilafrancisco.com.br/',
     locale: 'pt-BR'
   },
   robots: 'index, follow',
   authors: [
-    { name: 'Mateus VinÃ­cius da Silva', url: 'https://www.linkedin.com/in/mateus-vin%C3%ADcius-da-silva-8156301a5/' }
+    { name: 'Mateus VinÃƒÂ­cius da Silva', url: 'https://www.linkedin.com/in/mateus-vin%C3%ADcius-da-silva-8156301a5/' }
   ]
 }
 export default function RootLayout ({
@@ -32,12 +32,12 @@ export default function RootLayout ({
   children: React.ReactNode
 }>) {
   return (
+  return (
     <html className="bg-base-gray" lang="pt-BR">
-        <body className={lato.className}>
-          <Header />
-          {children}
-          <Footer />
-        </body>
-      </html>
-    )
+      <body className={lato.className}>
+        <Header />
+        {children}
+        <Footer />
+      </body>
+    </html>
 }
