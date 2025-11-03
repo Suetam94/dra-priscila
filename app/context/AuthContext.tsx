@@ -24,6 +24,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): React.JSX.E
       setUser(JSON.parse(storedUser))
       setLoading(false)
     } else {
+      if (!auth) { setLoading(false); return }
       const unsubscribe = onAuthStateChanged(auth, (user) => {
         setUser(user)
         setLoading(false)
