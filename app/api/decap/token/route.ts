@@ -1,6 +1,6 @@
-﻿import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
-export async function POST(req: NextRequest) {
+export async function POST (req: NextRequest) {
   try {
     const { code } = await req.json()
     const client_id = process.env.GITHUB_CLIENT_ID
@@ -29,3 +29,4 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: e?.message || 'Unexpected error' }, { status: 500 })
   }
 }
+

@@ -1,4 +1,4 @@
-﻿'use server'
+'use server'
 
 import React from 'react'
 import TitleSection from '@/app/ui/section/title-section'
@@ -27,3 +27,4 @@ const BlogPage = async (): Promise<React.JSX.Element> => {
 }
 
 export default BlogPage
+

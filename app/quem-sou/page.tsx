@@ -1,4 +1,4 @@
-﻿import React from 'react'
+import React from 'react'
 import AboutMe from '@/app/ui/who-am-i/about-me'
 import about from '@/content/about.json'
 
@@ -11,3 +11,4 @@ const Page = async (): Promise<React.JSX.Element> => {
 }
 
 export default Page
+

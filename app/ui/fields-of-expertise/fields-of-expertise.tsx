@@ -1,4 +1,4 @@
-﻿'use server'
+'use server'
 
 import React from 'react'
 import FieldsData from '@/content/fields-of-expertise.json'
@@ -17,3 +17,4 @@ const FieldsOfExpertise = async (): Promise<React.JSX.Element> => {
 }
 
 export default FieldsOfExpertise
+

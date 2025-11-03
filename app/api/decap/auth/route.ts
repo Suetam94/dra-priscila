@@ -1,6 +1,6 @@
-﻿import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
-export async function GET(req: NextRequest) {
+export async function GET (req: NextRequest) {
   const url = new URL(req.url)
   const origin = `${url.protocol}//${url.host}`
 
@@ -22,3 +22,4 @@ export async function GET(req: NextRequest) {
 
   return NextResponse.redirect(authorizeUrl.toString())
 }
+

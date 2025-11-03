@@ -1,4 +1,4 @@
-﻿import React from 'react'
+import React from 'react'
 import TitleSection from '@/app/ui/section/title-section'
 import { IContactInfoProps } from '@/app/ui/where-can-you-find-me/contact-info'
 import ClinicPlace from '@/app/ui/where-can-you-find-me/clinic-place'
@@ -16,3 +16,4 @@ const WhereToFindMe = (): React.JSX.Element => {
 }
 
 export default WhereToFindMe
+
