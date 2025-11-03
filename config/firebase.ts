@@ -1,7 +1,7 @@
-import { initializeApp } from 'firebase/app'
-import { getFirestore } from '@firebase/firestore'
-import { getStorage } from '@firebase/storage'
-import { getAuth, setPersistence, browserLocalPersistence } from 'firebase/auth'
+﻿import { initializeApp, type FirebaseApp } from 'firebase/app'
+import { getFirestore, type Firestore } from '@firebase/firestore'
+import { getStorage, type FirebaseStorage } from '@firebase/storage'
+import { getAuth, setPersistence, browserLocalPersistence, type Auth } from 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_API_KEY,
@@ -13,11 +13,29 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_MEASUREMENT_ID
 }
 
-const app = initializeApp(firebaseConfig)
-const db = getFirestore(app)
-const storage = getStorage(app)
-const auth = getAuth(app)
+let app: FirebaseApp | undefined
+let db: Firestore | undefined
+let storage: FirebaseStorage | undefined
+let auth: Auth | undefined
 
-void setPersistence(auth, browserLocalPersistence)
+try {
+  const hasEnv = Boolean(
+    firebaseConfig.apiKey &&
+    firebaseConfig.authDomain &&
+    firebaseConfig.projectId &&
+    firebaseConfig.appId
+  )
+  if (hasEnv) {
+    app = initializeApp(firebaseConfig)
+    db = getFirestore(app)
+    storage = getStorage(app)
+    auth = getAuth(app)
+    if (typeof window !== 'undefined' && auth) {
+      void setPersistence(auth, browserLocalPersistence)
+    }
+  }
+} catch {
+  // noop: allow build to continue without Firebase
+}
 
 export { db, storage, auth }
