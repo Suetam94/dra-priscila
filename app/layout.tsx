@@ -1,4 +1,4 @@
-﻿import React from 'react'
+import React from 'react'
 import type { Metadata } from 'next'
 import { Lato } from 'next/font/google'
 import './globals.css'
@@ -32,7 +32,7 @@ export default function RootLayout ({
   children: React.ReactNode
 }>) {
   return (
-  return (
+
     <html className="bg-base-gray" lang="pt-BR">
       <body className={lato.className}>
         <Header />
