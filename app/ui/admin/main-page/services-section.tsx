@@ -3,18 +3,10 @@
 import React, { useState, useEffect } from 'react'
 import FileInput from '@/app/ui/general/file-input'
 import TextInput from '@/app/ui/general/text-input'
-import {
-  addService,
-  uploadImage,
-  getServices,
-  deleteService,
-  IServiceData,
-  updateService,
-  IServiceDataWithId
-} from '@/app/lib/ServicesSection'
+import { type ServiceData } from '@/app/lib/schemas/services'
 
 const ServicesSection = (): React.JSX.Element => {
-  const [services, setServices] = useState<IServiceDataWithId[] | undefined>([])
+  const [services, setServices] = useState<(ServiceData & { id: string })[] | undefined>([])
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [imageUrl, setImageUrl] = useState<string | null>(null)
   const [title, setTitle] = useState('')
@@ -24,8 +16,9 @@ const ServicesSection = (): React.JSX.Element => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await getServices()
-      setServices(data)
+      const res = await fetch('/api/services', { cache: 'no-store' })
+      const json = await res.json()
+      setServices(json.data)
     }
     setLoading(true)
     ;(async () => await fetchData())()
@@ -40,19 +33,34 @@ const ServicesSection = (): React.JSX.Element => {
     try {
       let uploadedImageUrl = imageUrl
       if (selectedFile) {
-        uploadedImageUrl = await uploadImage(selectedFile)
+        const form = new FormData()
+        form.append('file', selectedFile)
+        form.append('folder', 'services')
+        const resUpload = await fetch('/api/uploads', { method: 'POST', body: form })
+        const j = await resUpload.json()
+        if (!j.ok) throw new Error(j.error || 'Falha no upload')
+        uploadedImageUrl = j.url as string
       }
-      const newService: IServiceData = { imageUrl: uploadedImageUrl!, title, content }
+      const newService: ServiceData = { imageUrl: uploadedImageUrl!, title, content }
 
       if (editingId) {
         setLoading(true)
-        await updateService(editingId, newService)
+        await fetch(`/api/services/${editingId}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newService)
+        })
         setLoading(false)
         setServices(services && services.map((service) => (service.id === editingId ? { ...service, ...newService } : service)))
         setEditingId(null)
       } else {
         setLoading(true)
-        const newServiceId = await addService(newService)
+        const res = await fetch('/api/services', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newService)
+        })
+        const newServiceId = await res.json()
         setLoading(false)
         setServices([...services!, { id: newServiceId.data!, ...newService }])
       }
@@ -78,7 +86,7 @@ const ServicesSection = (): React.JSX.Element => {
   const handleDeleteService = async (id: string) => {
     try {
       setLoading(true)
-      await deleteService(id)
+      await fetch(`/api/services/${id}`, { method: 'DELETE' })
       setLoading(false)
       setServices(services && services.filter((service) => service.id !== id))
       alert('Serviço deletado com sucesso!')

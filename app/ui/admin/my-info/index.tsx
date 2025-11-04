@@ -21,12 +21,10 @@ const DoctorInfo = (): React.JSX.Element => {
   useEffect(() => {
     const fetchDoctorInfo = async () => {
       const { data } = await getDoctorInfo()
-      if (data) {
-        setDoctorInfo(data)
-      }
+      if (data) setDoctorInfo(data)
       setIsLoading(false)
     }
-    (async () => await fetchDoctorInfo())()
+    void fetchDoctorInfo()
   }, [])
 
   const handleChange = (field: keyof IDoctorInfo, value: string) => {
@@ -39,66 +37,31 @@ const DoctorInfo = (): React.JSX.Element => {
     setIsLoading(false)
   }
 
-  if (isLoading) {
-    return <LoadingSpinner />
-  }
+  if (isLoading) return <LoadingSpinner />
 
   return (
     <section className="p-6 bg-white rounded-lg shadow-md">
       <h4 className="text-2xl font-bold text-base-blue mb-4">Gerenciar Informações do Médico</h4>
       <Accordion title="Configurações dos seus dados">
         <div className="mb-4">
-          <TextInput
-            label="Nome"
-            value={doctorInfo.name}
-            onChange={(value) => handleChange('name', value)}
-            placeholder="Nome do médico"
-          />
+          <TextInput label="Nome" value={doctorInfo.name} onChange={(v) => handleChange('name', v)} placeholder="Nome do médico" />
         </div>
         <div className="mb-4">
-          <TextInput
-            label="RQE"
-            value={doctorInfo.RQE}
-            onChange={(value) => handleChange('RQE', value)}
-            placeholder="RQE do médico"
-          />
+          <TextInput label="RQE" value={doctorInfo.RQE} onChange={(v) => handleChange('RQE', v)} placeholder="RQE do médico" />
         </div>
         <div className="mb-4">
-          <TextInput
-            label="CRM"
-            value={doctorInfo.CRM}
-            onChange={(value) => handleChange('CRM', value)}
-            placeholder="CRM do médico"
-          />
+          <TextInput label="CRM" value={doctorInfo.CRM} onChange={(v) => handleChange('CRM', v)} placeholder="CRM do médico" />
         </div>
         <div className="mb-4">
-          <TextInput
-            label="Endereço"
-            value={doctorInfo.address}
-            onChange={(value) => handleChange('address', value)}
-            placeholder="Endereço do médico"
-          />
+          <TextInput label="Endereço" value={doctorInfo.address} onChange={(v) => handleChange('address', v)} placeholder="Endereço do médico" />
         </div>
         <div className="mb-4">
-          <TextInput
-            label="E-mail"
-            value={doctorInfo.email}
-            onChange={(value) => handleChange('email', value)}
-            placeholder="E-mail do médico"
-          />
+          <TextInput label="E-mail" value={doctorInfo.email} onChange={(v) => handleChange('email', v)} placeholder="E-mail do médico" />
         </div>
         <div className="mb-4">
-          <TextInput
-            label="Telefone"
-            value={doctorInfo.phone}
-            onChange={(value) => handleChange('phone', value)}
-            placeholder="Telefone do médico"
-          />
+          <TextInput label="Telefone" value={doctorInfo.phone} onChange={(v) => handleChange('phone', v)} placeholder="Telefone do médico" />
         </div>
-        <button
-          onClick={handleSave}
-          className="bg-base-blue text-base-gray py-2 px-4 rounded-md hover:bg-base-pink transition duration-300"
-        >
+        <button onClick={handleSave} className="bg-base-blue text-base-gray py-2 px-4 rounded-md hover:bg-base-pink transition duration-300">
           Salvar Informações
         </button>
       </Accordion>
@@ -107,3 +70,4 @@ const DoctorInfo = (): React.JSX.Element => {
 }
 
 export default DoctorInfo
+

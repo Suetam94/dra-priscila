@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { addClinic, getClinics, deleteClinic, IClinicWithId, IClinic } from '@/app/lib/WhereFindMe'
+import { addClinic, getClinics, deleteClinic } from '@/app/lib/WhereFindMe'
 import TextInput from '@/app/ui/general/text-input'
 import { Playfair_Display } from 'next/font/google'
 import Accordion from '@/app/ui/general/accordion'
@@ -10,37 +10,45 @@ import TextArea from '@/app/ui/general/text-area'
 import Modal from '@/app/ui/general/modal'
 import Spinner from '@/app/ui/general/spinner'
 
+interface IBusinessHour {
+  week: { start: string; end: string }
+  hour: { start: string; end: string }
+}
+
+interface IClinic {
+  image: { url: string; alt: string }
+  name: string
+  address: string
+  phones: Array<{ ddd: string; number: string; isWhatsapp: boolean }>
+  businessHour: IBusinessHour
+  healthPlan: string[]
+}
+
 const playfairDisplay = Playfair_Display({ subsets: ['latin'] })
 
 const WhereFindMeSection = (): React.JSX.Element => {
-  const [clinics, setClinics] = useState<IClinicWithId[] | undefined>([])
+  const [clinics, setClinics] = useState<any[]>([])
   const [selectedClinic, setSelectedClinic] = useState<IClinic | undefined>()
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState(false)
   const [modalType, setModalType] = useState<'success' | 'error'>('success')
-  const [modalMessage, setModalMessage] = useState<string>('')
-  const [loading, setLoading] = useState<boolean>(false)
+  const [modalMessage, setModalMessage] = useState('')
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const fetchClinics = async () => {
       setLoading(true)
-      const clinics = await getClinics()
+      const res = await getClinics()
       setLoading(false)
-      setClinics(clinics.data)
-      setLoading(true)
+      setClinics(res.data || [])
     }
-    ;(async () => await fetchClinics())()
+    void fetchClinics()
   }, [])
 
-  const handleModalClose = () => {
-    setIsOpen(false)
-  }
+  const handleModalClose = () => setIsOpen(false)
 
   const handleChange = (field: string, value: any) => {
-    setSelectedClinic((prevState) => {
-      if (prevState) {
-        return { ...prevState, [field]: value }
-      }
-
+    setSelectedClinic((prev) => {
+      if (prev) return { ...prev, [field]: value }
       return {
         image: { url: '', alt: '' },
         name: '',
@@ -54,35 +62,32 @@ const WhereFindMeSection = (): React.JSX.Element => {
   }
 
   const handleSave = async () => {
-    if (selectedClinic) {
-      setLoading(true)
-      const { error, message } = await addClinic(selectedClinic as IClinic)
-      setLoading(false)
-
-      if (error) {
-        setModalMessage(message ?? 'Oops! Aconteceu um erro ao tentar adicionar uma nova clínica.')
-        setModalType('error')
-      } else {
-        setModalMessage(`A clínica: ${selectedClinic.name} foi adicionada com sucesso!`)
-        setModalType('success')
-      }
-
-      setIsOpen(true)
-      const clinics = await getClinics()
-      setClinics(clinics.data)
-      setSelectedClinic(undefined)
-    } else {
+    if (!selectedClinic) {
       setModalMessage('Preencha os campos antes de tentar salvar!')
       setModalType('error')
       setIsOpen(true)
+      return
     }
+    setLoading(true)
+    const { error, message } = await addClinic(selectedClinic as any)
+    setLoading(false)
+    if (error) {
+      setModalMessage(message ?? 'Oops! Aconteceu um erro ao tentar adicionar uma nova clínica.')
+      setModalType('error')
+    } else {
+      setModalMessage(`A clínica: ${selectedClinic.name} foi adicionada com sucesso!`)
+      setModalType('success')
+    }
+    setIsOpen(true)
+    const res = await getClinics()
+    setClinics(res.data || [])
+    setSelectedClinic(undefined)
   }
 
   const handleDelete = async (id: string) => {
     setLoading(true)
     const { error, message } = await deleteClinic(id)
     setLoading(false)
-
     if (error) {
       setModalMessage(message ?? 'Oops! Aconteceu um erro ao tentar deletar a clínica.')
       setModalType('error')
@@ -90,11 +95,9 @@ const WhereFindMeSection = (): React.JSX.Element => {
       setModalMessage('A clínica foi deletada com sucesso!')
       setModalType('success')
     }
-
     setIsOpen(true)
-
-    const clinics = await getClinics()
-    setClinics(clinics.data)
+    const res = await getClinics()
+    setClinics(res.data || [])
   }
 
   return (
@@ -106,31 +109,16 @@ const WhereFindMeSection = (): React.JSX.Element => {
         <div className="mt-6">
           <h5 className="text-lg font-bold mb-2">Adicionar Clínica</h5>
           <div className="mb-4">
-            <TextInput
-              label="Nome"
-              value={selectedClinic?.name || ''}
-              onChange={(value) => handleChange('name', value)}
-              placeholder="Nome da clínica"
-            />
+            <TextInput label="Nome" value={selectedClinic?.name || ''} onChange={(v) => handleChange('name', v)} placeholder="Nome da clínica" />
           </div>
           <div className="mb-4">
-            <TextInput
-              label="Endereço"
-              value={selectedClinic?.address || ''}
-              onChange={(value) => handleChange('address', value)}
-              placeholder="Endereço da clínica"
-            />
+            <TextInput label="Endereço" value={selectedClinic?.address || ''} onChange={(v) => handleChange('address', v)} placeholder="Endereço da clínica" />
           </div>
           <div className="mb-4">
             <TextInput
               label="URL da imagem"
               value={selectedClinic?.image?.url || ''}
-              onChange={(value) =>
-                handleChange('image', {
-                  url: value,
-                  alt: selectedClinic?.name ?? 'Foto da Clínica'
-                })
-              }
+              onChange={(v) => handleChange('image', { url: v, alt: selectedClinic?.name ?? 'Foto da Clínica' })}
             />
           </div>
           <div className="mb-4">
@@ -140,12 +128,9 @@ const WhereFindMeSection = (): React.JSX.Element => {
             <TextInput
               label="Horário de Atendimento (Semana)"
               value={`${selectedClinic?.businessHour?.week?.start || ''}${selectedClinic?.businessHour?.week?.end || ''}`}
-              onChange={(value) =>
+              onChange={(v) =>
                 handleChange('businessHour', {
-                  week: {
-                    start: value.split(' - ')[0],
-                    end: value.split(' - ')[1]
-                  },
+                  week: { start: v.split(' - ')[0], end: v.split(' - ')[1] },
                   hour: selectedClinic?.businessHour?.hour || { start: '', end: '' }
                 })
               }
@@ -156,13 +141,10 @@ const WhereFindMeSection = (): React.JSX.Element => {
             <TextInput
               label="Horário de Atendimento (Horas)"
               value={`${selectedClinic?.businessHour?.hour?.start || ''}${selectedClinic?.businessHour?.hour?.end || ''}`}
-              onChange={(value) =>
+              onChange={(v) =>
                 handleChange('businessHour', {
                   week: selectedClinic?.businessHour?.week || { start: '', end: '' },
-                  hour: {
-                    start: value.split(' - ')[0],
-                    end: value.split(' - ')[1]
-                  }
+                  hour: { start: v.split(' - ')[0], end: v.split(' - ')[1] }
                 })
               }
               placeholder="Ex: 08:00 - 18:00"
@@ -172,14 +154,11 @@ const WhereFindMeSection = (): React.JSX.Element => {
             <TextArea
               label="Planos de Saúde"
               value={selectedClinic?.healthPlan?.join('\n') || ''}
-              onChange={(value) => handleChange('healthPlan', value.split('\n'))}
+              onChange={(v) => handleChange('healthPlan', v.split('\n'))}
               placeholder="Planos de Saúde separados por linha"
             />
           </div>
-          <button
-            onClick={handleSave}
-            className="w-full bg-base-blue text-base-gray py-2 px-4 rounded-md hover:bg-base-pink transition duration-300"
-          >
+          <button onClick={handleSave} className="w-full bg-base-blue text-base-gray py-2 px-4 rounded-md hover:bg-base-pink transition duration-300">
             {loading ? <Spinner /> : 'Salvar Clínica'}
           </button>
         </div>
@@ -192,10 +171,7 @@ const WhereFindMeSection = (): React.JSX.Element => {
                   <p>{clinic.address}</p>
                 </div>
                 <div className="flex space-x-2">
-                  <button
-                    onClick={() => handleDelete(clinic.id!)}
-                    className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 transition duration-300"
-                  >
+                  <button onClick={() => handleDelete(clinic.id!)} className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 transition duration-300">
                     {loading ? <Spinner /> : 'Deletar'}
                   </button>
                 </div>
@@ -209,3 +185,4 @@ const WhereFindMeSection = (): React.JSX.Element => {
 }
 
 export default WhereFindMeSection
+

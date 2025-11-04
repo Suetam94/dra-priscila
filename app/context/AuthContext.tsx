@@ -18,17 +18,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }): React.JSX.E
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user')
-    if (storedUser != null) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      setUser(JSON.parse(storedUser))
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user)
       setLoading(false)
-    } else {
-      const unsubscribe = onAuthStateChanged(auth, (user) => {
-        setUser(user)
-        setLoading(false)
-      })
-      return () => { unsubscribe() }
+    })
+    return () => {
+      unsubscribe()
     }
   }, [])
 

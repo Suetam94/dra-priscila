@@ -1,7 +1,5 @@
-'use server'
+'use client'
 
-import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, limit } from 'firebase/firestore'
-import { db } from '@/config/firebase'
 import { z } from 'zod'
 
 export interface IDoctorInfo {
@@ -35,128 +33,75 @@ const doctorInfoSchema = z.object({
   RQE: z.string({ required_error: 'O RQE do médico é obrigatório.' }),
   CRM: z.string({ required_error: 'O CRM do médico é obrigatório.' }),
   address: z.string({ required_error: 'O endereço do médico é obrigatório.' }),
-  email: z.string({ required_error: 'O email do médico é obrigatório.' }),
+  email: z.string({ required_error: 'O e-mail do médico é obrigatório.' }),
   phone: z.string({ required_error: 'O telefone do médico é obrigatório.' })
 })
 
 const doctorInfoSchemaWithId = doctorInfoSchema.partial().extend({ id: z.string() })
 
-const collectionName = 'doctorInfoData'
-
 export const addDoctorInfo = async (data: IDoctorInfo): Promise<IReturnString> => {
   try {
-    const parsedDoctorInfo = doctorInfoSchema.safeParse(data)
-
-    if (!parsedDoctorInfo.success) {
-      return {
-        error: true,
-        message: parsedDoctorInfo.error.message
-      }
-    }
-
-    const docRef = await addDoc(collection(db, collectionName), data)
-
-    return {
-      error: false,
-      data: docRef.id
-    }
+    const parsed = doctorInfoSchema.safeParse(data)
+    if (!parsed.success) return { error: true, message: parsed.error.message }
+    const res = await fetch('/api/doctor-info', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    if (!res.ok) return { error: true }
+    const j = await res.json()
+    return { error: false, data: j.id as string }
   } catch (e) {
-    return {
-      error: true,
-      message: (e as Error).message
-    }
+    return { error: true, message: (e as Error).message }
   }
 }
 
 export const getDoctorInfo = async (): Promise<IReturnOne> => {
   try {
-    const q = query(collection(db, collectionName), limit(1))
-    const querySnapshot = await getDocs(q)
-    if (!querySnapshot.empty) {
-      const docSnap = querySnapshot.docs[0]
-      const data = { id: docSnap.id, ...docSnap.data() } as IDoctorInfoWithId
-
-      return {
-        error: false,
-        data
-      }
-    } else {
-      return { error: false }
-    }
+    const res = await fetch('/api/doctor-info', { cache: 'no-store' })
+    if (res.status === 204) return { error: false }
+    const { data } = await res.json()
+    return { error: false, data: data as IDoctorInfoWithId }
   } catch (e) {
-    return {
-      error: true,
-      message: (e as Error).message
-    }
+    return { error: true, message: (e as Error).message }
   }
 }
 
-export const updateDoctorInfo = async (id: string, data: Partial<IDoctorInfo>): Promise<IReturn> => {
+export const updateDoctorInfo = async (_id: string, data: Partial<IDoctorInfo>): Promise<IReturn> => {
   try {
-    const parsedDoctorInfo = doctorInfoSchemaWithId.safeParse({ id, ...data })
-
-    if (!parsedDoctorInfo.success) {
-      return {
-        error: true,
-        message: parsedDoctorInfo.error.message
-      }
-    }
-
-    const docRef = doc(db, collectionName, id)
-    await updateDoc(docRef, data)
-
-    return {
-      error: false
-    }
+    const parsed = doctorInfoSchemaWithId.safeParse({ id: 'placeholder', ...data })
+    if (!parsed.success) return { error: true, message: parsed.error.message }
+    const res = await fetch('/api/doctor-info', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    if (!res.ok) return { error: true }
+    return { error: false }
   } catch (e) {
-    return {
-      error: true,
-      message: (e as Error).message
-    }
+    return { error: true, message: (e as Error).message }
   }
 }
 
-export const deleteDoctorInfo = async (id: string): Promise<IReturn> => {
+export const deleteDoctorInfo = async (_id: string): Promise<IReturn> => {
   try {
-    const parsedId = z.string({ required_error: 'O ID do doutor é obrigatório.' }).safeParse(id)
-
-    if (!parsedId.success) {
-      return {
-        error: true,
-        message: parsedId.error.message
-      }
-    }
-
-    const docRef = doc(db, collectionName, id)
-    await deleteDoc(docRef)
-
-    return {
-      error: false
-    }
+    return { error: true, message: 'Not implemented' }
   } catch (e) {
-    return {
-      error: true,
-      message: (e as Error).message
-    }
+    return { error: true, message: (e as Error).message }
   }
 }
 
 export const saveDoctorInfo = async (data: IDoctorInfo): Promise<IReturn> => {
   try {
-    const existingData = await getDoctorInfo()
-    if (existingData && existingData.data && existingData.data.id) {
-      await updateDoctorInfo(existingData.data.id, data)
-    } else {
-      await addDoctorInfo(data)
-    }
-
-    return {
-      error: false
-    }
+    const res = await fetch('/api/doctor-info', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    if (!res.ok) return { error: true }
+    return { error: false }
   } catch (e) {
-    return {
-      error: true,
-      message: (e as Error).message
-    }
+    return { error: true, message: (e as Error).message }
   }
 }
+

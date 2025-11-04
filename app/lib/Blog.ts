@@ -1,9 +1,6 @@
-'use server'
+'use client'
 
 import { z } from 'zod'
-import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc } from 'firebase/firestore'
-import { db, storage } from '@/config/firebase'
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 
 export interface IBlogPostProps {
   title: string
@@ -37,130 +34,70 @@ const postSchema = z.object({
 })
 const postSchemaWithId = postSchema.partial().extend({ id: z.string() })
 
-const collectionName = 'moreAboutDermatologyData'
-
-const fileSchema = z.instanceof(Blob, { message: 'O tipo de imagem é inválida.' })
+const fileSchema = z.instanceof(Blob, { message: 'O tipo de imagem é inválido.' })
 
 export const uploadImage = async (formData: FormData): Promise<IReturnString> => {
   try {
     const file = formData.get('file') as File
-
     const supportedFiles = ['jpg', 'jpeg', 'png', 'svg', 'webp']
     const filteredName = supportedFiles.filter((extension) => file.name.endsWith(extension))
-
     if (filteredName.length === 0) {
-      throw new Error(`O formato da imagem é inválida, os formatos aceitos são: ${supportedFiles.join(',')}`)
+      throw new Error(`O formato da imagem é inválido, os formatos aceitos são: ${supportedFiles.join(',')}`)
     }
-
     const parsedFile = fileSchema.safeParse(file)
-
-    if (!parsedFile.success) {
-      const message = parsedFile.error.message
-      throw new Error(message)
-    }
-
-    const storageRef = ref(storage, `images/${file.name}`)
-    await uploadBytes(storageRef, file)
-    const downloadUrl = await getDownloadURL(storageRef)
-
-    return {
-      error: false,
-      data: downloadUrl
-    }
+    if (!parsedFile.success) throw new Error(parsedFile.error.message)
+    formData.append('folder', 'blog')
+    const res = await fetch('/api/uploads', { method: 'POST', body: formData })
+    const j = await res.json()
+    if (!j.ok) return { error: true, message: j.error }
+    return { error: false, data: j.url as string }
   } catch (e) {
-    return {
-      error: true,
-      message: (e as Error).message
-    }
+    return { error: true, message: (e as Error).message }
   }
 }
 
 export const addBlogPost = async (data: IBlogPostProps): Promise<IReturnString> => {
   try {
     const parsedPost = postSchema.safeParse(data)
-
-    if (!parsedPost.success) {
-      const message = parsedPost.error.message
-      throw new Error(message)
-    }
-
-    const docRef = await addDoc(collection(db, collectionName), data)
-
-    return {
-      error: false,
-      data: docRef.id
-    }
+    if (!parsedPost.success) throw new Error(parsedPost.error.message)
+    const res = await fetch('/api/blog', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+    if (!res.ok) return { error: true }
+    const j = await res.json()
+    return { error: false, data: j.id as string }
   } catch (e) {
-    return {
-      error: true,
-      message: (e as Error).message
-    }
+    return { error: true, message: (e as Error).message }
   }
 }
 
 export const getBlogPosts = async (): Promise<IReturnArray> => {
   try {
-    const q = query(collection(db, collectionName))
-    const querySnapshot = await getDocs(q)
-    const data = querySnapshot.docs.map((docSnap) => ({
-      id: docSnap.id,
-      ...docSnap.data()
-    })) as IBlogPostPropsWithId[]
-
-    return {
-      error: false,
-      data
-    }
+    const res = await fetch('/api/blog', { cache: 'no-store' })
+    const j = await res.json()
+    return { error: false, data: j.data as IBlogPostPropsWithId[] }
   } catch (e) {
-    return {
-      error: true,
-      message: (e as Error).message
-    }
+    return { error: true, message: (e as Error).message }
   }
 }
 
 export const updateBlogPost = async (id: string, data: Partial<IBlogPostProps>): Promise<IReturn> => {
   try {
     const parsedPost = postSchemaWithId.safeParse({ id, ...data })
-
-    if (!parsedPost.success) {
-      const message = parsedPost.error.message
-      throw new Error(message)
-    }
-
-    const docRef = doc(db, collectionName, id)
-    await updateDoc(docRef, data)
-
-    return {
-      error: false
-    }
+    if (!parsedPost.success) throw new Error(parsedPost.error.message)
+    const res = await fetch(`/api/blog/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+    if (!res.ok) return { error: true }
+    return { error: false }
   } catch (e) {
-    return {
-      error: true,
-      message: (e as Error).message
-    }
+    return { error: true, message: (e as Error).message }
   }
 }
 
 export const deleteBlogPost = async (id: string): Promise<IReturn> => {
   try {
-    const parsedId = z.string({ required_error: 'O id é obrigatório para exclusão de um post.' }).safeParse(id)
-
-    if (!parsedId.success) {
-      const message = parsedId.error.message
-      throw new Error(message)
-    }
-
-    const docRef = doc(db, collectionName, id)
-    await deleteDoc(docRef)
-
-    return {
-      error: false
-    }
+    const res = await fetch(`/api/blog/${id}`, { method: 'DELETE' })
+    if (!res.ok) return { error: true }
+    return { error: false }
   } catch (e) {
-    return {
-      error: true,
-      message: (e as Error).message
-    }
+    return { error: true, message: (e as Error).message }
   }
 }
+

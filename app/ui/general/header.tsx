@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import React from 'react'
 import Image from 'next/image'
@@ -26,7 +26,7 @@ const Header = (): React.JSX.Element => {
           <Link href="/onde-pode-me-encontrar" className="text-base-gray hover:text-white transition-colors duration-300">Onde Pode Me Encontrar</Link>
           <Link href="/mais-sobre-a-dermatologia" className="text-base-gray hover:text-white transition-colors duration-300">Saiba Mais Sobre a Dermatologia</Link>
           <Link href="/marque-sua-consulta" className="text-base-gray hover:text-white transition-colors duration-300">Marque a Sua Consulta</Link>
-          <InstagramLogo className="text-base-gray hover:text-white transition-colors duration-300" size="32" weight="light" />
+          <InstagramLogo className="text-base-gray hover:text-white transition-colors duration-300" size={32} weight="light" />
         </div>
         <MobileMenu />
       </div>
@@ -35,3 +35,4 @@ const Header = (): React.JSX.Element => {
 }
 
 export default Header
+

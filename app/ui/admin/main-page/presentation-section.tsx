@@ -3,12 +3,6 @@
 import React, { useState, useEffect } from 'react'
 import FileInput from '@/app/ui/general/file-input'
 import TextInput from '@/app/ui/general/text-input'
-import {
-  savePresentationSection,
-  uploadImage,
-  getPresentationSection,
-  deleteAllPresentationSection
-} from '@/app/lib/PresentationSection'
 
 const PresentationSection = (): React.JSX.Element => {
   const [mainText, setMainText] = useState('')
@@ -18,7 +12,9 @@ const PresentationSection = (): React.JSX.Element => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await getPresentationSection()
+      const res = await fetch('/api/presentation', { cache: 'no-store' })
+      if (res.status === 204) return
+      const { data } = await res.json()
       if (data) {
         setMainText(data.mainText || '')
         setSubText(data.subText || '')
@@ -36,10 +32,16 @@ const PresentationSection = (): React.JSX.Element => {
     try {
       let uploadedImageUrl = imageUrl
       if (selectedFile) {
-        uploadedImageUrl = await uploadImage(selectedFile)
+        const form = new FormData()
+        form.append('file', selectedFile)
+        form.append('folder', 'presentation')
+        const resUpload = await fetch('/api/uploads', { method: 'POST', body: form })
+        const j = await resUpload.json()
+        if (!j.ok) throw new Error(j.error || 'Falha no upload')
+        uploadedImageUrl = j.url as string
       }
-      const data = { mainText, subText, imageUrl: uploadedImageUrl }
-      await savePresentationSection(data)
+      const data = { mainText, subText, imageUrl: uploadedImageUrl, status: 'published' }
+      await fetch('/api/presentation', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
       alert('Dados salvos com sucesso!')
     } catch (error) {
       alert('Erro ao salvar os dados. Tente novamente mais tarde.')
@@ -49,7 +51,7 @@ const PresentationSection = (): React.JSX.Element => {
 
   const handleDelete = async () => {
     try {
-      await deleteAllPresentationSection()
+      await fetch('/api/presentation', { method: 'DELETE' })
       setMainText('')
       setSubText('')
       setImageUrl(null)

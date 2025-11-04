@@ -22,19 +22,40 @@ const LoginPage = (): React.JSX.Element => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    setLoading(true)
-    const { error, message } = await loginUser({ email, password })
-    setLoading(false)
+    try {
+      setLoading(true)
+      const { error, message, idToken } = await loginUser({ email, password })
 
-    if (error) {
-      setModalType('error')
-      setMessage(message!)
-      router.push('/login')
-    } else {
+      if (error || !idToken) {
+        setModalType('error')
+        setMessage(message ?? 'Falha no login')
+        setIsOpen(true)
+        setLoading(false)
+        return
+      }
+
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ idToken })
+      })
+
+      if (!res.ok) {
+        setModalType('error')
+        setMessage('Não foi possível iniciar a sessão')
+        setIsOpen(true)
+        setLoading(false)
+        return
+      }
+
       router.push('/admin/dashboard')
+    } catch (e) {
+      setModalType('error')
+      setMessage('Ocorreu um erro ao autenticar')
+      setIsOpen(true)
+    } finally {
+      setLoading(false)
     }
-
-    setIsOpen(true)
   }
 
   return (

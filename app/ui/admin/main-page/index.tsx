@@ -9,7 +9,9 @@ const playfairDisplay = Playfair_Display({ subsets: ['latin'] })
 const MainPage = (): React.JSX.Element => {
   return (
     <div className="p-6">
-      <h3 className={`${playfairDisplay.className} text-2xl font-bold text-base-blue mb-4`}>Gerenciando a página inicial</h3>
+      <h3 className={`${playfairDisplay.className} text-2xl font-bold text-base-blue mb-4`}>
+        Gerenciando a página inicial
+      </h3>
       <Accordion title="Configurações da Seção de Apresentação">
         <PresentationSection />
       </Accordion>

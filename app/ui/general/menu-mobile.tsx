@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import React, { useState } from 'react'
 import { List, X } from '@phosphor-icons/react'
@@ -8,13 +8,8 @@ import Link from 'next/link'
 const MobileMenu = (): React.JSX.Element => {
   const [isOpen, setIsOpen] = useState(false)
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen)
-  }
-
-  const closeMenu = () => {
-    setIsOpen(false)
-  }
+  const toggleMenu = () => setIsOpen(!isOpen)
+  const closeMenu = () => setIsOpen(false)
 
   return (
     <div className="lg:hidden">
@@ -24,10 +19,7 @@ const MobileMenu = (): React.JSX.Element => {
       <div
         className={clsx(
           'fixed top-0 left-0 w-full h-full bg-base-gray text-base-blue flex flex-col items-center justify-center transition-transform duration-300 z-10',
-          {
-            'transform translate-x-0': isOpen,
-            'transform -translate-x-full': !isOpen
-          }
+          { 'transform translate-x-0': isOpen, 'transform -translate-x-full': !isOpen }
         )}
       >
         <div className="flex items-center justify-between w-full px-4 py-4 bg-base-gray fixed top-0">
@@ -41,7 +33,7 @@ const MobileMenu = (): React.JSX.Element => {
           <Link href="/areas-de-atuacao" className="block text-xl px-4 py-2 rounded-md hover:bg-base-blue hover:text-white transition-colors duration-300" onClick={closeMenu}>Áreas de Atuação</Link>
           <Link href="/onde-pode-me-encontrar" className="block text-xl px-4 py-2 rounded-md hover:bg-base-blue hover:text-white transition-colors duration-300" onClick={closeMenu}>Onde Pode Me Encontrar</Link>
           <Link href="/mais-sobre-a-dermatologia" className="block text-xl px-4 py-2 rounded-md hover:bg-base-blue hover:text-white transition-colors duration-300" onClick={closeMenu}>Saiba Mais Sobre a Dermatologia</Link>
-          <Link href="/marque-sua-consulta" className="block text-xl px-4 py-2 rounded-md hover:bg-base-blue hover:text-white transition-colors duration-300" onClick={closeMenu}>Marque a Sua Consulta</Link>
+          <Link href="/marque-sua-consulta" className="block text-xl px-4 py-2 rounded-md hover:bg-base-blue hover:text-white transition-colors duração-300" onClick={closeMenu}>Marque a Sua Consulta</Link>
         </div>
       </div>
     </div>

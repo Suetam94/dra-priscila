@@ -2,12 +2,8 @@
 
 import React, { useEffect, useState } from 'react'
 import iconList from '@/utils/icon'
-import {
-  addFieldOfExpertise,
-  deleteFieldOfExpertise,
-  getFieldsOfExpertise,
-  IExpertiseItemPropsWithId
-} from '@/app/lib/FieldsOfExpertise'
+import { type IconProps } from '@phosphor-icons/react'
+import { type ExpertiseData } from '@/app/lib/schemas/fields-of-expertise'
 import TextInput from '@/app/ui/general/text-input'
 import Modal from '@/app/ui/general/modal'
 import LoadingSpinner from '@/app/ui/general/loading-spinner'
@@ -20,8 +16,8 @@ interface IFieldsOfExpertise {
 }
 
 const FieldsOfExpertise = (): React.JSX.Element => {
-  const [fieldsOfExpertise, setFieldsOfExpertise] = useState<IExpertiseItemPropsWithId[] | undefined>([])
-  const [selectedField, setSelectedField] = useState<Partial<IExpertiseItemPropsWithId>>({
+  const [fieldsOfExpertise, setFieldsOfExpertise] = useState<(ExpertiseData & { id: string })[] | undefined>([])
+  const [selectedField, setSelectedField] = useState<Partial<ExpertiseData & { id?: string }>>({
     id: '',
     title: '',
     items: [],
@@ -40,11 +36,12 @@ const FieldsOfExpertise = (): React.JSX.Element => {
   useEffect(() => {
     setLoading(true)
     const fetchFieldsOfExpertise = async () => {
-      const fields = await getFieldsOfExpertise()
-      setFieldsOfExpertise(fields.data)
+      const res = await fetch('/api/fields-of-expertise', { cache: 'no-store' })
+      const json = await res.json()
+      setFieldsOfExpertise(json.data)
       setLoading(false)
     }
-    (async () => await fetchFieldsOfExpertise())()
+    void fetchFieldsOfExpertise()
     setLoading(false)
   }, [])
 
@@ -83,19 +80,28 @@ const FieldsOfExpertise = (): React.JSX.Element => {
         }
       })
       setLoading(true)
-      const { error, message } = await addFieldOfExpertise(formData)
-
-      if (error) {
+      const payload: ExpertiseData = {
+        title: formData.get('title') as string,
+        Icon: formData.get('Icon') as string,
+        items: JSON.parse(formData.get('items') as string)
+      }
+      const res = await fetch('/api/fields-of-expertise', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      if (!res.ok) {
+        const j = await res.json().catch(() => ({}))
         setIsOpen(true)
         setModalType('error')
-        setModalMessage(message ?? 'Oops! Aconteceu um erro, tente novamente!')
-
+        setModalMessage(j.error ?? 'Oops! Aconteceu um erro, tente novamente!')
         setLoading(false)
         return
       }
 
-      const fields = await getFieldsOfExpertise()
-      setFieldsOfExpertise(fields.data)
+      const listRes = await fetch('/api/fields-of-expertise', { cache: 'no-store' })
+      const listJson = await listRes.json()
+      setFieldsOfExpertise(listJson.data)
       setSelectedField({
         id: '',
         title: '',
@@ -109,9 +115,10 @@ const FieldsOfExpertise = (): React.JSX.Element => {
 
   const handleDelete = async (id: string) => {
     setLoading(true)
-    await deleteFieldOfExpertise(id)
-    const fields = await getFieldsOfExpertise()
-    setFieldsOfExpertise(fields.data)
+    await fetch(`/api/fields-of-expertise/${id}`, { method: 'DELETE' })
+    const res = await fetch('/api/fields-of-expertise', { cache: 'no-store' })
+    const json = await res.json()
+    setFieldsOfExpertise(json.data)
     setLoading(false)
   }
 

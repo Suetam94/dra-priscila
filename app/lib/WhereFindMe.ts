@@ -1,7 +1,5 @@
-'use server'
+'use client'
 
-import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc, query } from 'firebase/firestore'
-import { db } from '@/config/firebase'
 import { z } from 'zod'
 
 export interface IImage {
@@ -57,20 +55,9 @@ export interface IClinic {
   healthPlan: string[]
 }
 
-const clinicSchema = z.object({
-  image: imageSchema,
-  name: z.string(),
-  address: z.string(),
-  phones: z.array(phoneSchema),
-  businessHour: businessHourSchema,
-  healthPlan: z.array(z.string())
-})
-
 export interface IClinicWithId extends IClinic {
   id: string
 }
-
-const clinicSchemaWithId = clinicSchema.partial().extend({ id: z.string() })
 
 interface IReturn {
   error: boolean
@@ -89,100 +76,44 @@ const collectionName = 'whereToFindMeData'
 
 export const addClinic = async (clinic: IClinic): Promise<IReturnString> => {
   try {
-    console.log(clinic)
-    const parsedClinic = clinicSchema.safeParse(clinic)
-
-    if (!parsedClinic.success) {
-      return {
-        error: false,
-        message: parsedClinic.error.message
-      }
+    const res = await fetch('/api/where-find-me', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(clinic) })
+    if (!res.ok) {
+      const j = await res.json().catch(() => ({}))
+      return { error: true, message: j.error || 'Falha ao salvar' }
     }
-
-    const docRef = await addDoc(collection(db, collectionName), clinic)
-    return { error: false, data: docRef.id }
+    const j = await res.json()
+    return { error: false, data: j.id as string }
   } catch (e) {
-    return {
-      error: true,
-      message: (e as Error).message
-    }
+    return { error: true, message: (e as Error).message }
   }
 }
 
 export const getClinics = async (): Promise<IReturnArray> => {
   try {
-    const q = query(collection(db, collectionName))
-    const querySnapshot = await getDocs(q)
-
-    const data = querySnapshot.docs.map((doc) => {
-      const docData = doc.data() as Omit<IClinicWithId, 'id'>
-
-      const clinicData: IClinicWithId = {
-        id: doc.id,
-        ...docData
-      }
-
-      return clinicData
-    })
-
-    return {
-      error: false,
-      data
-    }
+    const res = await fetch('/api/where-find-me', { cache: 'no-store' })
+    const j = await res.json()
+    return { error: false, data: j.data as IClinicWithId[] }
   } catch (e) {
-    return {
-      error: true,
-      message: (e as Error).message
-    }
+    return { error: true, message: (e as Error).message }
   }
 }
 
 export const updateClinic = async (id: string, clinic: Partial<IClinic>): Promise<IReturn> => {
   try {
-    const parsedClinic = clinicSchemaWithId.safeParse({ id, ...clinic })
-
-    if (!parsedClinic.success) {
-      return {
-        error: true,
-        message: parsedClinic.error.message
-      }
-    }
-
-    const docRef = doc(db, collectionName, id)
-    await updateDoc(docRef, clinic)
-
-    return {
-      error: false
-    }
+    const res = await fetch(`/api/where-find-me/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(clinic) })
+    if (!res.ok) return { error: true }
+    return { error: false }
   } catch (e) {
-    return {
-      error: true,
-      message: (e as Error).message
-    }
+    return { error: true, message: (e as Error).message }
   }
 }
 
 export const deleteClinic = async (id: string): Promise<IReturn> => {
   try {
-    const parsedId = z.string().safeParse(id)
-
-    if (!parsedId.success) {
-      return {
-        error: true,
-        message: parsedId.error.message
-      }
-    }
-
-    const docRef = doc(db, collectionName, id)
-    await deleteDoc(docRef)
-
-    return {
-      error: false
-    }
+    const res = await fetch(`/api/where-find-me/${id}`, { method: 'DELETE' })
+    if (!res.ok) return { error: true }
+    return { error: false }
   } catch (e) {
-    return {
-      error: true,
-      message: (e as Error).message
-    }
+    return { error: true, message: (e as Error).message }
   }
 }

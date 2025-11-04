@@ -19,7 +19,11 @@ export interface IReturn {
   message?: string
 }
 
-export const loginUser = async ({ email, password }: ILogin): Promise<IReturn> => {
+export interface ILoginSuccess extends IReturn {
+  idToken?: string
+}
+
+export const loginUser = async ({ email, password }: ILogin): Promise<ILoginSuccess> => {
   try {
     const validate = UserSchema.safeParse({ email, password })
 
@@ -30,9 +34,10 @@ export const loginUser = async ({ email, password }: ILogin): Promise<IReturn> =
       }
     }
 
-    await signInWithEmailAndPassword(auth, email, password)
+    const cred = await signInWithEmailAndPassword(auth, email, password)
+    const idToken = await cred.user.getIdToken(true)
 
-    return { error: false, message: 'Login bem-sucedido' }
+    return { error: false, message: 'Login bem-sucedido', idToken }
   } catch (e) {
     return {
       error: true,
