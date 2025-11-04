@@ -41,7 +41,7 @@ const WhereFindMeSection = (): React.JSX.Element => {
       setLoading(false)
       setClinics(res.data || [])
     }
-    void fetchClinics()
+    fetchClinics()
   }, [])
 
   const handleModalClose = () => setIsOpen(false)
@@ -185,4 +185,3 @@ const WhereFindMeSection = (): React.JSX.Element => {
 }
 
 export default WhereFindMeSection
-

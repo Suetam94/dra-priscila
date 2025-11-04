@@ -43,11 +43,7 @@ export const addDoctorInfo = async (data: IDoctorInfo): Promise<IReturnString> =
   try {
     const parsed = doctorInfoSchema.safeParse(data)
     if (!parsed.success) return { error: true, message: parsed.error.message }
-    const res = await fetch('/api/doctor-info', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    })
+    const res = await fetch('/api/doctor-info', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
     if (!res.ok) return { error: true }
     const j = await res.json()
     return { error: false, data: j.id as string }
@@ -71,11 +67,7 @@ export const updateDoctorInfo = async (_id: string, data: Partial<IDoctorInfo>):
   try {
     const parsed = doctorInfoSchemaWithId.safeParse({ id: 'placeholder', ...data })
     if (!parsed.success) return { error: true, message: parsed.error.message }
-    const res = await fetch('/api/doctor-info', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    })
+    const res = await fetch('/api/doctor-info', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
     if (!res.ok) return { error: true }
     return { error: false }
   } catch (e) {
@@ -84,24 +76,15 @@ export const updateDoctorInfo = async (_id: string, data: Partial<IDoctorInfo>):
 }
 
 export const deleteDoctorInfo = async (_id: string): Promise<IReturn> => {
-  try {
-    return { error: true, message: 'Not implemented' }
-  } catch (e) {
-    return { error: true, message: (e as Error).message }
-  }
+  return { error: true, message: 'Not implemented' }
 }
 
 export const saveDoctorInfo = async (data: IDoctorInfo): Promise<IReturn> => {
   try {
-    const res = await fetch('/api/doctor-info', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    })
+    const res = await fetch('/api/doctor-info', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
     if (!res.ok) return { error: true }
     return { error: false }
   } catch (e) {
     return { error: true, message: (e as Error).message }
   }
 }
-

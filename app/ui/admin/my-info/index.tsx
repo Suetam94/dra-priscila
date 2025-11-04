@@ -24,7 +24,7 @@ const DoctorInfo = (): React.JSX.Element => {
       if (data) setDoctorInfo(data)
       setIsLoading(false)
     }
-    void fetchDoctorInfo()
+    fetchDoctorInfo()
   }, [])
 
   const handleChange = (field: keyof IDoctorInfo, value: string) => {
@@ -70,4 +70,3 @@ const DoctorInfo = (): React.JSX.Element => {
 }
 
 export default DoctorInfo
-

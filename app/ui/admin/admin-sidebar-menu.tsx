@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import React from 'react'
 import { IconProps } from '@phosphor-icons/react'
@@ -29,4 +29,3 @@ const AdminSidebarMenu = ({ title, link, Icon }: IAdminSidebarMenuProps): React.
 }
 
 export default AdminSidebarMenu
-

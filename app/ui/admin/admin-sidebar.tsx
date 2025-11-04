@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import React from 'react'
 import { House, UserSquare, Stethoscope, MapPin, Textbox, CalendarPlus, Database } from '@phosphor-icons/react'
@@ -25,4 +25,3 @@ const AdminSidebar = (): React.JSX.Element => (
 )
 
 export default AdminSidebar
-

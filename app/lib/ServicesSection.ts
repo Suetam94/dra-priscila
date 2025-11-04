@@ -11,7 +11,7 @@ export interface IServiceDataWithId extends IServiceData {
 }
 
 interface IReturn {
-  error: boolean,
+  error: boolean
   message?: string
 }
 
@@ -30,8 +30,6 @@ const serviceDataSchema = z.object({
 })
 
 const serviceDataSchemaWithId = serviceDataSchema.partial().extend({ id: z.string() })
-
-const collectionName = 'servicesData'
 
 export const uploadImage = async (file: File): Promise<string> => {
   const form = new FormData()
@@ -87,3 +85,4 @@ export const deleteService = async (id: string): Promise<IReturn> => {
     return { error: true, message: (e as Error).message }
   }
 }
+

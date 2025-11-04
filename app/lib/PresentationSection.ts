@@ -26,12 +26,10 @@ interface IReturnOne extends IReturn {
 const presentationSectionSchema = z.object({
   mainText: z.string({ required_error: 'O texto principal deve ser uma sentença válida.' }).optional(),
   subText: z.string({ required_error: 'O subtexto deve ser uma sentença válida.' }).optional(),
-  imageUrl: z.string().url({ message: 'O subtexto deve ser uma url válida.' }).optional()
+  imageUrl: z.string().url({ message: 'A imagem deve ser uma URL válida.' }).optional()
 })
 
 const presentationSectionSchemaWithId = presentationSectionSchema.partial().extend({ id: z.string() })
-
-const collectionName = 'presentationData'
 
 export const uploadImage = async (file: File): Promise<string> => {
   const form = new FormData()
@@ -45,8 +43,8 @@ export const uploadImage = async (file: File): Promise<string> => {
 
 export const addPresentationSection = async (data: PresentationSectionData): Promise<IReturnString> => {
   try {
-    const parsedPresentationSection = presentationSectionSchema.safeParse(data)
-    if (!parsedPresentationSection.success) return { error: true, message: parsedPresentationSection.error.message }
+    const parsed = presentationSectionSchema.safeParse(data)
+    if (!parsed.success) return { error: true, message: parsed.error.message }
     const res = await fetch('/api/presentation', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
     if (!res.ok) return { error: true }
     const j = await res.json()
@@ -98,3 +96,4 @@ export const savePresentationSection = async (data: PresentationSectionData): Pr
     return { error: true, message: (e as Error).message }
   }
 }
+

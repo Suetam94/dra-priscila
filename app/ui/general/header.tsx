@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import React from 'react'
 import Image from 'next/image'
@@ -35,4 +35,3 @@ const Header = (): React.JSX.Element => {
 }
 
 export default Header
-

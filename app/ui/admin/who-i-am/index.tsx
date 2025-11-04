@@ -46,7 +46,7 @@ const WhoIAmSection = (): React.JSX.Element => {
         setIsLoading(false)
       }
     }
-    void fetchData()
+    fetchData()
   }, [])
 
   const handleFileChange = (file: File | null) => setSelectedFile(file)
