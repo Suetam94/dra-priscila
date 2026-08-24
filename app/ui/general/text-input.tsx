@@ -31,12 +31,12 @@ const TextInput = ({
     onChange(newValue)
   }
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.target.setCustomValidity('')
+  const handleInput = (e: React.FormEvent<HTMLInputElement>) => {
+    e.currentTarget.setCustomValidity('')
   }
 
   const handleInvalid = (e: React.InvalidEvent<HTMLInputElement>) => {
-    e.target.setCustomValidity(invalidMessage ?? 'Este campo é obrigatório')
+    e.currentTarget.setCustomValidity(invalidMessage ?? 'Este campo é obrigatório')
   }
 
   return (

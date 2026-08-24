@@ -31,12 +31,12 @@ const TextArea = ({
     onChange(newValue)
   }
 
-  const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    e.target.setCustomValidity('')
+  const handleInput = (e: React.FormEvent<HTMLTextAreaElement>) => {
+    e.currentTarget.setCustomValidity('')
   }
 
   const handleInvalid = (e: InvalidEvent<HTMLTextAreaElement>) => {
-    e.target.setCustomValidity(invalidMessage ?? 'Este campo é obrigatório')
+    e.currentTarget.setCustomValidity(invalidMessage ?? 'Este campo é obrigatório')
   }
 
   return (

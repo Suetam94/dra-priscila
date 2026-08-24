@@ -21,5 +21,10 @@
     ],
     "rules": {
         "camelcase": "off"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
     }
 }

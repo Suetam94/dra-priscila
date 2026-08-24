@@ -18,6 +18,6 @@ const db = getFirestore(app)
 const storage = getStorage(app)
 const auth = getAuth(app)
 
-void setPersistence(auth, browserLocalPersistence)
+setPersistence(auth, browserLocalPersistence).catch(console.error)
 
 export { db, storage, auth }
