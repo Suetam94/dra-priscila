@@ -56,7 +56,7 @@ const MobileMenu = (): React.JSX.Element => {
             </nav>
             <Link
               href="/marque-sua-consulta"
-              className="mb-6 mt-4 flex items-center justify-center border border-navy bg-navy px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-navy-soft"
+              className="mb-6 mt-4 flex items-center justify-center border border-stone bg-stone px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-navy transition-colors hover:border-white hover:bg-white"
             >
               Agendar consulta
             </Link>

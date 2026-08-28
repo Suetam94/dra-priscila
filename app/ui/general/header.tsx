@@ -48,7 +48,7 @@ const Header = (): React.JSX.Element => {
           <HeaderNav />
           <Link
             href="/marque-sua-consulta"
-            className="hidden border border-navy bg-navy px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-navy-soft lg:inline-flex"
+            className="hidden border border-stone bg-stone px-6 py-3 text-sm font-bold uppercase tracking-wider text-navy transition-colors hover:border-white hover:bg-white lg:inline-flex"
           >
             Agendar consulta
           </Link>

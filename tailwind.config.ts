@@ -19,20 +19,21 @@ const config: Config = {
         'base-gray': '#d5d6ce',
         'base-pink': '#f2a497',
 
+        // Tema único escuro, em tons de azul-marinho. As faixas do site variam
+        // entre page, page-alt e navy, que são próximos de propósito: a
+        // separação vem dos fios de 1px, não de contraste de fundo.
         navy: '#121927',
         'navy-soft': '#1e2739',
         stone: '#d5d6ce',
         coral: '#f2a497',
-        // coral-ink e ink-soft são versões escurecidas para texto pequeno.
-        // Os tons originais não alcançavam 4.5:1 sobre os fundos claros.
-        'coral-ink': '#a85535',
-        page: '#ffffff',
-        'page-alt': '#f7f5f0',
-        ink: '#1a1f2b',
-        'ink-mid': '#575d6b',
-        'ink-soft': '#6b7080',
-        rule: '#e2ded4',
-        'rule-strong': '#cec9bb',
+        'coral-ink': '#e79877',
+        page: '#10141c',
+        'page-alt': '#161b26',
+        ink: '#eceadf',
+        'ink-mid': '#a8adb9',
+        'ink-soft': '#838895',
+        rule: '#272e3c',
+        'rule-strong': '#333c4d',
         'on-navy': '#e9e6dd',
         'on-navy-mid': '#a9adb8'
       },

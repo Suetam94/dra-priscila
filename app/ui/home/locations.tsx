@@ -26,7 +26,7 @@ const Locations = (): React.JSX.Element => (
               href={whatsappUrl(phone)}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-auto inline-flex items-center justify-center gap-2 border border-navy bg-navy px-5 py-3 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-navy-soft"
+              className="mt-auto inline-flex items-center justify-center gap-2 border border-stone bg-stone px-5 py-3 text-sm font-bold uppercase tracking-wider text-navy transition-colors hover:border-white hover:bg-white"
             >
               <WhatsappIcon size={17} />
               {phoneLabel}

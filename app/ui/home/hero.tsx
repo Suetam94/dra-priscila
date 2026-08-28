@@ -19,7 +19,7 @@ const Hero = (): React.JSX.Element => (
         <div className="flex flex-wrap gap-4">
           <Link
             href="/marque-sua-consulta"
-            className="border border-navy bg-navy px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-navy-soft"
+            className="border border-stone bg-stone px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-navy transition-colors hover:border-white hover:bg-white"
           >
             Agendar consulta
           </Link>
@@ -32,18 +32,18 @@ const Hero = (): React.JSX.Element => (
         </div>
       </div>
 
-      {/* A foto é um recorte em fundo branco, com a médica deslocada para a
-          direita. height 135% + ancoragem no topo corta as pernas e mantém
-          rosto, tronco e mãos. */}
-      <div className="relative aspect-[4/5] overflow-hidden border border-rule bg-navy">
+      {/* retrato-priscila.webp é o recorte com fundo transparente, gerado a
+          partir de my-image.jpeg. A figura fica direto sobre o fundo escuro,
+          ancorada embaixo, sem moldura. */}
+      <div className="relative flex h-[26rem] items-end justify-center sm:h-[32rem] lg:h-[34rem]">
         <Image
-          src="/my-image.jpeg"
+          src="/retrato-priscila.webp"
           alt="Dra. Priscila Francisco, dermatologista em Curitiba"
-          width={2560}
-          height={1440}
+          width={803}
+          height={1429}
           priority
-          sizes="(min-width: 1024px) 45vw, 100vw"
-          className="absolute left-0 top-0 h-[135%] w-full max-w-none object-cover object-[100%_0]"
+          sizes="(min-width: 1024px) 40vw, 80vw"
+          className="h-full w-auto object-contain object-bottom"
         />
       </div>
     </div>

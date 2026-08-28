@@ -29,26 +29,26 @@ const CookieConsent = (): React.JSX.Element => {
   if (!isVisible) return <></>
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 p-4 bg-base-blue text-base-gray shadow-lg rounded-t-lg z-50">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
-        <p className="text-center md:text-left mb-4 md:mb-0">
+    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-rule bg-navy p-4">
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-1 md:flex-row">
+        <p className="text-center text-sm text-on-navy-mid md:text-left">
           Utilizamos cookies para melhorar sua experiência em nosso site. Ao continuar navegando, você concorda com a
           nossa{' '}
-          <Link href="/politica-de-privacidade" className="text-base-pink underline">
+          <Link href="/politica-de-privacidade" className="text-coral underline underline-offset-4">
             Política de Privacidade
           </Link>
           .
         </p>
-        <div className="flex space-x-4">
+        <div className="flex shrink-0 gap-3">
           <button
             onClick={handleAccept}
-            className="bg-base-gray text-base-blue py-2 px-4 rounded-md hover:bg-base-pink transition duration-300"
+            className="border border-stone bg-stone px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-navy transition-colors hover:border-white hover:bg-white"
           >
             Aceitar
           </button>
           <button
             onClick={handleDecline}
-            className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 transition duration-300"
+            className="border border-rule-strong px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-on-navy transition-colors hover:border-on-navy"
           >
             Recusar
           </button>
