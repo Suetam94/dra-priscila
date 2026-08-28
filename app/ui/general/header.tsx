@@ -1,36 +1,79 @@
 'use client'
 
+// @phosphor-icons/react usa React Context internamente (cor/tamanho padrão dos ícones),
+// então qualquer componente que os renderize precisa ser Client Component.
 import React from 'react'
-import Image from 'next/image'
-import { usePathname } from 'next/navigation'
-import { InstagramLogo } from '@phosphor-icons/react'
+import { InstagramLogo, MapPin, Phone } from '@phosphor-icons/react'
 import Link from 'next/link'
 import MobileMenu from '@/app/ui/general/menu-mobile'
+import BrandMark from '@/app/ui/general/brand-mark'
+
+interface NavLinks {
+  href: string
+  label: string
+}
+
+const navLinks: NavLinks[] = [
+  { href: '/quem-sou', label: 'Quem Sou' },
+  { href: '/areas-de-atuacao', label: 'Áreas de Atuação' },
+  { href: '/onde-pode-me-encontrar', label: 'Onde Me Encontrar' },
+  { href: '/mais-sobre-a-dermatologia', label: 'Sobre a Dermatologia' }
+]
 
 const Header = (): React.JSX.Element => {
-  const pathname = usePathname()
-
-  if (pathname.includes('admin')) {
-    return <></>
-  }
-
   return (
-    <header className="w-full relative bg-base-blue">
-      <div className="max-w-7xl mx-auto flex justify-between items-center p-2 lg:px-8 lg:gap-10">
-        <Link className="pl-2" href="/">
-          <Image src="/logo-header.png" alt="Dra. Priscila Dermatologista" width={190} height={70} />
-        </Link>
-        <div className="hidden lg:flex lg:justify-between lg:gap-7 items-center text-center font-bold">
-          <Link href="/quem-sou" className="text-base-gray hover:text-white transition-colors duration-300">Quem Sou</Link>
-          <Link href="/areas-de-atuacao" className="text-base-gray hover:text-white transition-colors duration-300">Áreas de Atuação</Link>
-          <Link href="/onde-pode-me-encontrar" className="text-base-gray hover:text-white transition-colors duration-300">Onde Pode Me Encontrar</Link>
-          <Link href="/mais-sobre-a-dermatologia" className="text-base-gray hover:text-white transition-colors duration-300">Saiba Mais Sobre a Dermatologia</Link>
-          <Link href="/marque-sua-consulta" className="text-base-gray hover:text-white transition-colors duration-300">Marque a Sua Consulta</Link>
-          <InstagramLogo className="text-base-gray hover:text-white transition-colors duration-300" size="32" weight="light" />
+    <>
+      <div className="bg-base-blue-soft text-base-gray text-xs">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 px-4 py-2 lg:px-8">
+          <div className="flex flex-wrap items-center gap-4">
+            <span className="inline-flex items-center gap-1.5 opacity-90">
+              <MapPin size={14} /> Curitiba, PR
+            </span>
+            <a href="tel:" className="inline-flex items-center gap-1.5 opacity-90 hover:opacity-100 transition-opacity">
+              <Phone size={14} /> (00) 00000-0000
+            </a>
+          </div>
+          <a href="#" className="inline-flex items-center gap-1.5 opacity-90 hover:opacity-100 transition-opacity">
+            <InstagramLogo size={14} /> Instagram
+          </a>
         </div>
-        <MobileMenu />
       </div>
-    </header>
+
+      <header className="w-full sticky top-0 z-40 bg-base-blue">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-6 px-4 py-3 lg:px-8">
+          <Link href="/" className="flex items-center gap-3">
+            <BrandMark size={36} />
+            <span className="font-serif font-semibold text-base-gray leading-tight">
+              Dra. Priscila Francisco
+              <span className="block font-sans font-medium text-[0.62rem] tracking-[0.16em] uppercase text-base-pink mt-0.5">
+                Dermatologista
+              </span>
+            </span>
+          </Link>
+
+          <nav className="hidden lg:flex items-center gap-7">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-base-gray/85 hover:text-white transition-colors duration-300"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          <Link
+            href="/marque-sua-consulta"
+            className="hidden lg:inline-flex items-center rounded-sm bg-base-pink px-6 py-2.5 text-sm font-semibold text-base-blue transition-colors hover:bg-base-pink-deep hover:text-white"
+          >
+            Marcar consulta
+          </Link>
+
+          <MobileMenu />
+        </div>
+      </header>
+    </>
   )
 }
 

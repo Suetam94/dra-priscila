@@ -43,54 +43,62 @@ const ContactForm = (): React.JSX.Element => {
   }
 
   return (
-    <form className="bg-base-gray rounded-lg shadow-md p-6 w-full max-w-lg mx-auto" onSubmit={handleSubmit}>
+    <form className="bg-paper border border-hairline rounded-sm p-6 w-full max-w-lg mx-auto" onSubmit={handleSubmit}>
       <div className="mb-4">
-        <label htmlFor="name" className="block text-base-blue mb-2">Nome</label>
+        <label htmlFor="name" className="block text-base-blue mb-2">
+          Nome
+        </label>
         <input
           type="text"
           id="name"
           name="name"
           value={formData.name}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-base-pink rounded-md text-base-blue focus:outline-none focus:ring focus:border-base-blue"
+          className="w-full px-3 py-2 border border-hairline rounded-sm text-ink focus:outline-none focus:ring focus:border-base-blue"
           placeholder="Nome"
           required
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="phone" className="block text-base-blue mb-2">Telefone</label>
+        <label htmlFor="phone" className="block text-base-blue mb-2">
+          Telefone
+        </label>
         <input
           type="tel"
           id="phone"
           name="phone"
           value={formData.phone}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-base-pink rounded-md text-base-blue focus:outline-none focus:ring focus:border-base-blue"
+          className="w-full px-3 py-2 border border-hairline rounded-sm text-ink focus:outline-none focus:ring focus:border-base-blue"
           placeholder="Telefone"
           required
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="email" className="block text-base-blue mb-2">E-mail</label>
+        <label htmlFor="email" className="block text-base-blue mb-2">
+          E-mail
+        </label>
         <input
           type="email"
           id="email"
           name="email"
           value={formData.email}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-base-pink rounded-md text-base-blue focus:outline-none focus:ring focus:border-base-blue"
+          className="w-full px-3 py-2 border border-hairline rounded-sm text-ink focus:outline-none focus:ring focus:border-base-blue"
           placeholder="E-mail"
           required
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="message" className="block text-base-blue mb-2">Mensagem</label>
+        <label htmlFor="message" className="block text-base-blue mb-2">
+          Mensagem
+        </label>
         <textarea
           id="message"
           name="message"
           value={formData.message}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-base-pink rounded-md text-base-blue focus:outline-none focus:ring focus:border-base-blue"
+          className="w-full px-3 py-2 border border-hairline rounded-sm text-ink focus:outline-none focus:ring focus:border-base-blue"
           placeholder="Mensagem"
           rows={4}
           required
@@ -98,7 +106,7 @@ const ContactForm = (): React.JSX.Element => {
       </div>
       <button
         type="submit"
-        className="w-full bg-base-pink text-white py-2 rounded-md hover:bg-base-blue focus:outline-none focus:ring focus:ring-base-pink focus:ring-opacity-50"
+        className="w-full bg-base-pink text-base-blue font-semibold py-2 rounded-sm hover:bg-base-pink-deep hover:text-white transition-colors focus:outline-none focus:ring focus:ring-base-pink focus:ring-opacity-50"
         disabled={isSubmitting}
       >
         {isSubmitting ? 'Enviando...' : 'Enviar'}

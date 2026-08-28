@@ -1,14 +1,27 @@
 import React from 'react'
 import type { Metadata } from 'next'
-import { Lato } from 'next/font/google'
 import './globals.css'
 import Header from '@/app/ui/general/header'
 import Footer from '@/app/ui/general/footer'
-import { AuthProvider } from '@/app/context/AuthContext'
+import { Fraunces, Public_Sans } from 'next/font/google'
 
-const lato = Lato({ weight: '400', subsets: ['latin'] })
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  weight: ['300', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-fraunces',
+  display: 'swap'
+})
+
+const publicSans = Public_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-public-sans',
+  display: 'swap'
+})
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://drapriscilafrancisco.com.br'),
   title: 'Dra. Priscila Francisco - Dermatologista',
   description:
     'A dermatologista Dra. Priscila Francisco é especializada em dermatologia clínica e cirúrgica. Oferecemos tratamentos avançados para doenças de pele, cabelo e unhas, além de procedimentos estéticos modernos. Marque sua consulta e cuide da sua saúde com excelência',
@@ -17,30 +30,25 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Dra. Priscila Francisco - Dermatologista',
     description:
-      'A dermatologista Dra. Priscila Francisco é especializada em dermatologia clínica e cirúrgica. Oferecemos tratamentos avançados para doenças de pele, cabelo e unhas, além de procedimentos estéticos modernos. Marque sua consulta e cuide da sua saúde com excelência.',
+        'A dermatologista Dra. Priscila Francisco é especializada em dermatologia clínica e cirúrgica. Oferecemos tratamentos avançados para doenças de pele, cabelo e unhas, além de procedimentos estéticos modernos. Marque sua consulta e cuide da sua saúde com excelência.',
     type: 'website',
-    url: 'https://drapriscilafrancisco.com.br/',
-    locale: 'pt-BR'
+    url: '/',
+    locale: 'pt_BR',
+    images: [{ url: '/my-image.jpeg', width: 1920, height: 1080, alt: 'Dra. Priscila Francisco' }]
   },
   robots: 'index, follow',
   authors: [
     { name: 'Mateus Vinícius da Silva', url: 'https://www.linkedin.com/in/mateus-vin%C3%ADcius-da-silva-8156301a5/' }
   ]
 }
-export default function RootLayout ({
-  children
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout ({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <AuthProvider>
-      <html className="bg-base-gray" lang="en">
-        <body className={lato.className}>
+      <html className={`${fraunces.variable} ${publicSans.variable} bg-paper`} lang="pt-BR">
+        <body>
           <Header />
           {children}
           <Footer />
         </body>
       </html>
-    </AuthProvider>
   )
 }
