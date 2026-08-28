@@ -37,12 +37,9 @@ const ServicesTeaser = (): React.JSX.Element => (
     <div className="mx-auto max-w-6xl px-5 sm:px-8">
       <div className="mx-auto mb-12 grid max-w-2xl justify-items-center gap-4 text-center lg:mb-14">
         <p className="text-xs font-bold uppercase tracking-[0.16em] text-coral-ink">Áreas de atuação</p>
-        <h2 className="font-serif text-3xl font-medium text-ink sm:text-4xl">
-          Três frentes que raramente andam separadas
-        </h2>
+        <h2 className="font-serif text-3xl font-medium text-ink sm:text-4xl">O que eu trato</h2>
         <p className="text-ink-mid">
-          Uma lesão que parece simples pode pedir cirurgia. Um câncer de pele tratado hoje pede
-          acompanhamento por anos. Por isso as três áreas convivem no mesmo consultório.
+          Dermatologia clínica, oncologia cutânea e cirurgia dermatológica, no mesmo consultório.
         </p>
       </div>
 

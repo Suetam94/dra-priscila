@@ -11,8 +11,7 @@ const Locations = (): React.JSX.Element => (
         <p className="text-xs font-bold uppercase tracking-[0.16em] text-coral-ink">Onde atendo</p>
         <h2 className="font-serif text-3xl font-medium text-ink sm:text-4xl">Três endereços em Curitiba</h2>
         <p className="text-ink-mid">
-          Escolha o endereço mais conveniente e fale direto pelo WhatsApp para verificar horários e
-          disponibilidade.
+          O agendamento é feito direto com cada unidade, por WhatsApp ou pela central de marcação.
         </p>
       </div>
 

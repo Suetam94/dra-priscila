@@ -19,7 +19,7 @@ const MohsFeature = (): React.JSX.Element => (
           Cirurgia micrográfica de Mohs
         </p>
         <h2 className="font-serif text-3xl font-medium text-white sm:text-4xl">
-          A cirurgia que examina o tumor antes de fechar
+          Como funciona a cirurgia de Mohs
         </h2>
         <hr className="h-0.5 w-12 border-0 bg-coral" />
         <p className="text-on-navy-mid">

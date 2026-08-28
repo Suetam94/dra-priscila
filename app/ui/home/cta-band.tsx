@@ -5,15 +5,15 @@ import { buttonClasses } from '@/app/ui/general/button'
 const CtaBand = (): React.JSX.Element => (
   <section className="bg-navy text-on-navy" id="agendar">
     <div className="mx-auto grid max-w-6xl justify-items-center gap-6 px-5 py-16 text-center sm:px-8 lg:py-20">
-      <p className="text-xs font-bold uppercase tracking-[0.16em] text-coral">Agendar</p>
       <h2 className="max-w-[22ch] font-serif text-3xl font-medium text-white sm:text-4xl lg:text-5xl">
-        Se tem uma mancha te preocupando, não espere ela crescer
+        Agende sua consulta
       </h2>
-      <p className="max-w-[42ch] text-on-navy-mid">
-        Marque uma avaliação. Quanto mais cedo se olha uma lesão, mais simples costuma ser o tratamento.
+      <p className="max-w-[46ch] text-on-navy-mid">
+        Para avaliar uma lesão, tirar uma dúvida sobre a pele ou dar seguimento a um tratamento já em
+        curso.
       </p>
       <Link href="/marque-sua-consulta" className={buttonClasses()}>
-        Marcar uma consulta
+        Marcar consulta
       </Link>
     </div>
   </section>

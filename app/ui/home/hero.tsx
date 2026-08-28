@@ -9,14 +9,14 @@ const Hero = (): React.JSX.Element => (
     <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-12 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:py-20">
       <div className="grid justify-items-start gap-6">
         <p className="text-xs font-bold uppercase tracking-[0.16em] text-coral-ink">
-          Dermatologia clínica, cirúrgica e oncológica
+          Dermatologia clínica, cirúrgica e oncologia cutânea
         </p>
         <h1 className="font-serif text-4xl font-medium leading-tight text-ink sm:text-5xl lg:text-[3.5rem]">
-          A mesma médica, do diagnóstico à alta.
+          Dra. Priscila Francisco
         </h1>
         <p className="max-w-xl text-lg leading-relaxed text-ink-mid">
-          Dermatologia clínica e cirúrgica em Curitiba. Doenças de pele, cabelo e unhas, câncer de pele e
-          cirurgia dermatológica, com a mesma médica acompanhando cada etapa do tratamento.
+          Atendo em Curitiba. Cuido de doenças de pele, cabelo e unhas, e trato câncer de pele do
+          diagnóstico à cirurgia, incluindo cirurgia micrográfica de Mohs.
         </p>
         <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
           <Link href="/marque-sua-consulta" className={buttonClasses()}>
