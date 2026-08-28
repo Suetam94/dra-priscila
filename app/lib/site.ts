@@ -1,0 +1,65 @@
+// Conteúdo estático do site. Substitui o que antes vinha do Firestore.
+// Os dados de contato foram extraídos do Linktree da médica e ainda precisam
+// de confirmação dela. Ver TODO-DADOS-REAIS.md.
+
+export interface NavLink {
+  href: string
+  label: string
+}
+
+export const navLinks: NavLink[] = [
+  { href: '/quem-sou', label: 'Sobre' },
+  { href: '/areas-de-atuacao', label: 'Áreas de atuação' },
+  { href: '/onde-pode-me-encontrar', label: 'Onde atendo' },
+  { href: '/mais-sobre-a-dermatologia', label: 'Dermatologia' }
+]
+
+export interface Clinic {
+  name: string
+  address: string
+  /** Somente dígitos, com DDD. O código do país é adicionado em whatsappUrl. */
+  phone: string
+  phoneLabel: string
+  note?: string
+}
+
+export const clinics: Clinic[] = [
+  {
+    name: 'Clínica Curantis',
+    address: 'Av. Sete de Setembro, 4698, sala 1305, Batel, Curitiba, PR',
+    phone: '41984552223',
+    phoneLabel: '(41) 98455-2223'
+  },
+  {
+    name: 'INC, Shopping Pátio Batel',
+    address: '[Endereço completo a confirmar], Curitiba, PR',
+    phone: '4130288545',
+    phoneLabel: '(41) 3028-8545'
+  },
+  {
+    name: 'Hospital Marcelino Champagnat',
+    address: '[Endereço completo a confirmar], Curitiba, PR',
+    phone: '41984442402',
+    phoneLabel: '(41) 98444-2402'
+  }
+]
+
+export const secretary = {
+  label: 'Secretária pessoal',
+  phone: '41991887594',
+  phoneLabel: '(41) 99188-7594'
+}
+
+export const site = {
+  doctor: 'Priscila Francisco',
+  city: 'Curitiba, PR',
+  url: 'https://drapriscilafrancisco.com.br',
+  // TODO: confirmar o perfil exato. O Linktree é o único link verificado.
+  instagram: 'https://linktr.ee/priscila.francisco',
+  crm: '[CRM-PR xxxxx]',
+  rqe: '[RQE xxxxx]'
+}
+
+/** Monta o link do WhatsApp com código do país e mensagem inicial. */
+export const whatsappUrl = (phone: string, message = 'Olá, gostaria de marcar uma consulta.'): string =>
+  `https://wa.me/55${phone}?text=${encodeURIComponent(message)}`

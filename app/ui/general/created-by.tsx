@@ -1,21 +1,17 @@
 import React from 'react'
-import { LinkedinLogo } from '@phosphor-icons/react'
 
-const CreatedBy = (): React.JSX.Element => {
-  return (
-    <div className="w-full border-t border-hairline mt-10 py-4 flex flex-col items-center gap-2">
-      <p className="text-xs text-ink-soft">Created by</p>
-      <a
-        href="https://www.linkedin.com/in/mateus-vin%C3%ADcius-da-silva-8156301a5/"
-        target="_blank"
-        rel="noreferrer"
-        className="inline-flex items-center gap-2 text-xs font-medium text-ink hover:text-base-pink-deep transition-colors"
-      >
-        <LinkedinLogo size={16} />
-        Mateus Vinícius da Silva
-      </a>
-    </div>
-  )
-}
+const CreatedBy = (): React.JSX.Element => (
+  <div className="mt-8 flex flex-col items-center gap-1 border-t border-rule pt-6">
+    <p className="text-[0.7rem] uppercase tracking-[0.16em] text-ink-soft">Desenvolvido por</p>
+    <a
+      href="https://www.linkedin.com/in/mateus-vin%C3%ADcius-da-silva-8156301a5/"
+      target="_blank"
+      rel="noreferrer"
+      className="text-xs font-bold text-ink transition-colors hover:text-coral-ink"
+    >
+      Mateus Vinícius da Silva
+    </a>
+  </div>
+)
 
 export default CreatedBy

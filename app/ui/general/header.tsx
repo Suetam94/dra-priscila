@@ -1,75 +1,57 @@
-'use client'
-
-// @phosphor-icons/react usa React Context internamente (cor/tamanho padrão dos ícones),
-// então qualquer componente que os renderize precisa ser Client Component.
 import React from 'react'
-import { InstagramLogo, MapPin, Phone } from '@phosphor-icons/react'
 import Link from 'next/link'
+import BrandLockup from '@/app/ui/general/brand-lockup'
+import HeaderNav from '@/app/ui/general/header-nav'
 import MobileMenu from '@/app/ui/general/menu-mobile'
-import BrandMark from '@/app/ui/general/brand-mark'
+import { InstagramIcon, MapPinIcon, PhoneIcon } from '@/app/ui/general/icons'
+import { clinics, site, whatsappUrl } from '@/app/lib/site'
 
-interface NavLinks {
-  href: string
-  label: string
-}
-
-const navLinks: NavLinks[] = [
-  { href: '/quem-sou', label: 'Quem Sou' },
-  { href: '/areas-de-atuacao', label: 'Áreas de Atuação' },
-  { href: '/onde-pode-me-encontrar', label: 'Onde Me Encontrar' },
-  { href: '/mais-sobre-a-dermatologia', label: 'Sobre a Dermatologia' }
-]
-
+// Server Component. O header tem fundo sólido e uma cor só: não depende de
+// JavaScript de scroll para ficar legível.
 const Header = (): React.JSX.Element => {
+  const main = clinics[0]
+
   return (
     <>
-      <div className="bg-base-blue-soft text-base-gray text-xs">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 px-4 py-2 lg:px-8">
-          <div className="flex flex-wrap items-center gap-4">
-            <span className="inline-flex items-center gap-1.5 opacity-90">
-              <MapPin size={14} /> Curitiba, PR
+      <div className="bg-navy text-sm text-on-navy-mid">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-7 gap-y-1 px-5 py-2 sm:px-8 md:justify-between">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
+            <span className="inline-flex items-center gap-2">
+              <MapPinIcon size={14} />
+              {site.city}
             </span>
-            <a href="tel:" className="inline-flex items-center gap-1.5 opacity-90 hover:opacity-100 transition-opacity">
-              <Phone size={14} /> (00) 00000-0000
+            <a
+              href={whatsappUrl(main.phone)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 transition-colors hover:text-on-navy"
+            >
+              <PhoneIcon size={14} />
+              {main.phoneLabel}
             </a>
           </div>
-          <a href="#" className="inline-flex items-center gap-1.5 opacity-90 hover:opacity-100 transition-opacity">
-            <InstagramLogo size={14} /> Instagram
+          <a
+            href={site.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 transition-colors hover:text-on-navy"
+          >
+            <InstagramIcon size={14} />
+            Instagram
           </a>
         </div>
       </div>
 
-      <header className="w-full sticky top-0 z-40 bg-base-blue">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-6 px-4 py-3 lg:px-8">
-          <Link href="/" className="flex items-center gap-3">
-            <BrandMark size={36} />
-            <span className="font-serif font-semibold text-base-gray leading-tight">
-              Dra. Priscila Francisco
-              <span className="block font-sans font-medium text-[0.62rem] tracking-[0.16em] uppercase text-base-pink mt-0.5">
-                Dermatologista
-              </span>
-            </span>
-          </Link>
-
-          <nav className="hidden lg:flex items-center gap-7">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-base-gray/85 hover:text-white transition-colors duration-300"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
+      <header className="sticky top-0 z-50 border-b border-rule bg-page">
+        <div className="relative mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-3 sm:px-8">
+          <BrandLockup height={44} />
+          <HeaderNav />
           <Link
             href="/marque-sua-consulta"
-            className="hidden lg:inline-flex items-center rounded-sm bg-base-pink px-6 py-2.5 text-sm font-semibold text-base-blue transition-colors hover:bg-base-pink-deep hover:text-white"
+            className="hidden border border-navy bg-navy px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-navy-soft lg:inline-flex"
           >
-            Marcar consulta
+            Agendar consulta
           </Link>
-
           <MobileMenu />
         </div>
       </header>

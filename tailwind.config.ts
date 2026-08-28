@@ -13,20 +13,32 @@ const config: Config = {
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
       },
       colors: {
+        // Paleta antiga. Ainda usada pelo admin e pelas páginas internas que
+        // não foram migradas. Sai quando essas páginas forem redesenhadas.
         'base-blue': '#121927',
-        'base-blue-soft': '#262f45',
         'base-gray': '#d5d6ce',
         'base-pink': '#f2a497',
-        'base-pink-deep': '#d97a5c',
-        paper: '#f7f5f0',
-        sunken: '#efece3',
-        ink: '#171c28',
-        'ink-soft': '#565c6e',
-        hairline: '#e3ded2'
+
+        navy: '#121927',
+        'navy-soft': '#1e2739',
+        stone: '#d5d6ce',
+        coral: '#f2a497',
+        // coral-ink e ink-soft são versões escurecidas para texto pequeno.
+        // Os tons originais não alcançavam 4.5:1 sobre os fundos claros.
+        'coral-ink': '#a85535',
+        page: '#ffffff',
+        'page-alt': '#f7f5f0',
+        ink: '#1a1f2b',
+        'ink-mid': '#575d6b',
+        'ink-soft': '#6b7080',
+        rule: '#e2ded4',
+        'rule-strong': '#cec9bb',
+        'on-navy': '#e9e6dd',
+        'on-navy-mid': '#a9adb8'
       },
       fontFamily: {
-        sans: ['var(--font-public-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        serif: ['var(--font-fraunces)', 'Georgia', 'serif']
+        sans: ['var(--font-lato)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-garamond)', 'Garamond', 'Times New Roman', 'serif']
       }
     }
   },

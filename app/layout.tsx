@@ -3,20 +3,20 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Header from '@/app/ui/general/header'
 import Footer from '@/app/ui/general/footer'
-import { Fraunces, Public_Sans } from 'next/font/google'
+import { EB_Garamond, Lato } from 'next/font/google'
 
-const fraunces = Fraunces({
+const garamond = EB_Garamond({
   subsets: ['latin'],
-  weight: ['300', '500', '600', '700'],
+  weight: ['400', '500', '600'],
   style: ['normal', 'italic'],
-  variable: '--font-fraunces',
+  variable: '--font-garamond',
   display: 'swap'
 })
 
-const publicSans = Public_Sans({
+const lato = Lato({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-public-sans',
+  weight: ['400', '700', '900'],
+  variable: '--font-lato',
   display: 'swap'
 })
 
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 }
 export default function RootLayout ({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-      <html className={`${fraunces.variable} ${publicSans.variable} bg-paper`} lang="pt-BR">
+      <html className={`${garamond.variable} ${lato.variable} bg-page`} lang="pt-BR">
         <body>
           <Header />
           {children}
