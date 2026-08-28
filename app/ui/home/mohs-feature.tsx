@@ -25,6 +25,10 @@ const MohsFeature = (): React.JSX.Element => (
           muda o resultado. No Brasil, exige formação específica reconhecida pela Sociedade Brasileira de
           Cirurgia Dermatológica.
         </p>
+        {/* Trecho literal da biografia dela no site antigo. */}
+        <p className="font-serif text-lg italic text-stone">
+          &ldquo;Cirurgia micrográfica de Mohs, hoje minha paixão.&rdquo;
+        </p>
         <ol className="mt-2 grid w-full">
           {steps.map(({ numeral, text }) => (
             <li

@@ -38,7 +38,8 @@ export interface Clinic {
   /** Somente dígitos, com DDD. O código do país é adicionado em whatsappUrl. */
   phone: string
   phoneLabel: string
-  note?: string
+  /** Central de marcação própria da unidade, quando existe. */
+  bookingUrl?: string
 }
 
 export const clinics: Clinic[] = [
@@ -49,10 +50,13 @@ export const clinics: Clinic[] = [
     phoneLabel: '(41) 98455-2223'
   },
   {
+    // Endereço e central de marcação vêm do site antigo, onde o INC já
+    // constava. É a única unidade que aparece nas duas fontes.
     name: 'INC, Shopping Pátio Batel',
-    address: '[Endereço completo a confirmar], Curitiba, PR',
+    address: 'Av. do Batel, 1868, Batel, Curitiba, PR, 80420-090',
     phone: '4130288545',
-    phoneLabel: '(41) 3028-8545'
+    phoneLabel: '(41) 3028-8545',
+    bookingUrl: 'https://inc.centraldemarcacao.com.br/'
   },
   {
     name: 'Hospital Marcelino Champagnat',

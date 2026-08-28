@@ -10,9 +10,16 @@ os telefones, porque foram lidos de página pública e não de fonte oficial.
 | Local | Endereço | WhatsApp |
 | --- | --- | --- |
 | Clínica Curantis | Av. Sete de Setembro, 4698, Sala 1305, Batel | (41) 98455-2223 |
-| INC | Shopping Pátio Batel | (41) 3028-8545 (confirmar DDD) |
+| INC, Shopping Pátio Batel | Av. do Batel, 1868, Batel, 80420-090 (do site antigo) | (41) 3028-8545 (confirmar DDD) |
 | Hospital Marcelino Champagnat | (endereço a confirmar) | (41) 98444-2402 |
-| Secretária pessoal | — | (41) 99188-7594 |
+| Secretária pessoal | (não se aplica) | (41) 99188-7594 |
+
+O site antigo listava também a **Clínica Pró-saúde** (Rua São Vicente, 55, Juvevê), que não
+aparece mais no Linktree. Provavelmente ela deixou de atender lá, então não foi incluída.
+Vale confirmar.
+
+O INC é a única unidade presente nas duas fontes, então o endereço e a central de marcação
+(`inc.centraldemarcacao.com.br`) foram reaproveitados do site antigo.
 
 - [ ] Confirmar os três endereços completos, com CEP e sala
 - [ ] Confirmar os telefones e qual deles é o canal preferido de agendamento

@@ -6,7 +6,7 @@ const CreatedBy = (): React.JSX.Element => (
     <a
       href="https://www.linkedin.com/in/mateus-vin%C3%ADcius-da-silva-8156301a5/"
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
       className="text-xs font-bold text-ink transition-colors hover:text-coral-ink"
     >
       Mateus Vinícius da Silva

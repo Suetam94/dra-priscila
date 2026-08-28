@@ -13,8 +13,8 @@ const Hero = (): React.JSX.Element => (
           A mesma médica, do diagnóstico à alta.
         </h1>
         <p className="max-w-xl text-lg leading-relaxed text-ink-mid">
-          Tratar bem uma doença de pele raramente cabe em uma consulta só. Aqui o diagnóstico, a cirurgia
-          quando ela é necessária e o acompanhamento depois ficam com a mesma pessoa, em Curitiba.
+          Dermatologia clínica e cirúrgica em Curitiba. Doenças de pele, cabelo e unhas, câncer de pele e
+          cirurgia dermatológica, com a mesma médica acompanhando cada etapa do tratamento.
         </p>
         <div className="flex flex-wrap gap-4">
           <Link

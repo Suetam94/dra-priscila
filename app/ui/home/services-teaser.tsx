@@ -2,25 +2,33 @@ import React from 'react'
 import Link from 'next/link'
 import { ArrowIcon } from '@/app/ui/general/icons'
 
+// Textos vindos do site antigo (fields-of-expertise-data.tsx), que descrevia
+// cada área com os itens detalhados abaixo.
 const services = [
   {
     numeral: 'i',
     title: 'Dermatologia clínica',
-    description:
-      'Acne, melasma e dermatites no dia a dia. E as doenças imunomediadas, como psoríase, dermatite atópica e urticária, acompanhadas do primeiro sinal até o tratamento com imunobiológicos quando o caso exige.'
+    items: [
+      'Tratamento de doenças de pele de uma forma geral, como acne, melasma e dermatites.',
+      'Doenças cutâneas imunomediadas, como psoríase, dermatite atópica e urticária, desde as fases iniciais até o uso de medicamentos sistêmicos como os imunobiológicos.'
+    ]
   },
   {
     numeral: 'ii',
     title: 'Oncologia cutânea',
-    description:
-      'Diagnóstico, tratamento e seguimento de câncer de pele, incluindo cirurgia convencional e cirurgia micrográfica de Mohs. Quem já teve um tumor precisa de vigilância continuada, e essa parte costuma ser a mais negligenciada.',
+    items: [
+      'Diagnóstico e seguimento de pacientes com história de câncer de pele.',
+      'Tratamento clínico do câncer de pele.',
+      'Tratamento cirúrgico, por cirurgia convencional e por cirurgia micrográfica de Mohs.'
+    ],
     link: { href: '#mohs', label: 'Entenda a cirurgia de Mohs' }
   },
   {
     numeral: 'iii',
-    title: 'Cirurgia dermatológica',
-    description:
-      'Remoção de cistos, nevos, xantelasmas e outras lesões cutâneas, com o planejamento da cicatriz fazendo parte da decisão cirúrgica desde o começo.'
+    title: 'Cirurgia dermatológica geral',
+    items: [
+      'Tratamento cirúrgico de lesões cutâneas diversas, como cistos, nevos e xantelasmas.'
+    ]
   }
 ]
 
@@ -39,18 +47,25 @@ const ServicesTeaser = (): React.JSX.Element => (
       </div>
 
       <div className="grid gap-6 md:grid-cols-3">
-        {services.map(({ numeral, title, description, link }) => (
+        {services.map(({ numeral, title, items, link }) => (
           <article
             key={title}
-            className="flex flex-col gap-3 border border-rule bg-page p-7 transition-colors hover:border-rule-strong sm:p-8"
+            className="flex flex-col gap-4 border border-rule bg-page p-7 transition-colors hover:border-rule-strong sm:p-8"
           >
             <p className="font-serif italic text-coral-ink">{numeral}</p>
             <h3 className="font-serif text-xl font-medium text-ink">{title}</h3>
-            <p className="text-[0.98rem] text-ink-mid">{description}</p>
+            <ul className="grid gap-3">
+              {items.map((item) => (
+                <li key={item} className="relative pl-4 text-[0.95rem] leading-relaxed text-ink-mid">
+                  <span className="absolute left-0 top-[0.7em] h-1 w-1 rounded-full bg-coral-ink" aria-hidden />
+                  {item}
+                </li>
+              ))}
+            </ul>
             {link && (
               <Link
                 href={link.href}
-                className="mt-auto inline-flex items-center gap-2 self-start border-b border-current pb-0.5 text-sm font-bold text-coral-ink transition-colors hover:text-ink"
+                className="mt-auto inline-flex items-center gap-2 self-start border-b border-current pb-0.5 pt-1 text-sm font-bold text-coral-ink transition-colors hover:text-ink"
               >
                 {link.label}
                 <ArrowIcon />

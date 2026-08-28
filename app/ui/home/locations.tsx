@@ -15,22 +15,34 @@ const Locations = (): React.JSX.Element => (
       </div>
 
       <div className="grid gap-6 md:grid-cols-3">
-        {clinics.map(({ name, address, phone, phoneLabel }) => (
+        {clinics.map(({ name, address, phone, phoneLabel, bookingUrl }) => (
           <article key={name} className="flex flex-col gap-4 border border-rule bg-page p-7">
             <h3 className="font-serif text-xl font-medium text-ink">{name}</h3>
             <p className="flex items-start gap-2 text-[0.95rem] text-ink-mid">
               <MapPinIcon size={17} className="mt-1 shrink-0 text-coral-ink" />
               {address}
             </p>
-            <a
-              href={whatsappUrl(phone)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-auto inline-flex items-center justify-center gap-2 border border-stone bg-stone px-5 py-3 text-sm font-bold uppercase tracking-wider text-navy transition-colors hover:border-white hover:bg-white"
-            >
-              <WhatsappIcon size={17} />
-              {phoneLabel}
-            </a>
+            <div className="mt-auto grid gap-3">
+              <a
+                href={whatsappUrl(phone)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 border border-stone bg-stone px-5 py-3 text-sm font-bold uppercase tracking-wider text-navy transition-colors hover:border-white hover:bg-white"
+              >
+                <WhatsappIcon size={17} />
+                {phoneLabel}
+              </a>
+              {bookingUrl && (
+                <a
+                  href={bookingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center border border-rule-strong px-5 py-3 text-sm font-bold uppercase tracking-wider text-ink transition-colors hover:border-ink"
+                >
+                  Central de marcação
+                </a>
+              )}
+            </div>
           </article>
         ))}
       </div>
