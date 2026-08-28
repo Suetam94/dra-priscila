@@ -1,5 +1,7 @@
 import React from 'react'
-import { MapPinIcon, WhatsappIcon } from '@/app/ui/general/icons'
+import clsx from 'clsx'
+import { buttonClasses, textLinkClasses } from '@/app/ui/general/button'
+import { ArrowIcon, MapPinIcon, WhatsappIcon } from '@/app/ui/general/icons'
 import { clinics, secretary, whatsappUrl } from '@/app/lib/site'
 
 const Locations = (): React.JSX.Element => (
@@ -22,24 +24,20 @@ const Locations = (): React.JSX.Element => (
               <MapPinIcon size={17} className="mt-1 shrink-0 text-coral-ink" />
               {address}
             </p>
-            <div className="mt-auto grid gap-3">
+            <div className="mt-auto grid justify-items-start gap-4">
               <a
                 href={whatsappUrl(phone)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 border border-stone bg-stone px-5 py-3 text-sm font-bold uppercase tracking-wider text-navy transition-colors hover:border-white hover:bg-white"
+                className={clsx(buttonClasses('sm'), 'w-full')}
               >
                 <WhatsappIcon size={17} />
                 {phoneLabel}
               </a>
               {bookingUrl && (
-                <a
-                  href={bookingUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center border border-rule-strong px-5 py-3 text-sm font-bold uppercase tracking-wider text-ink transition-colors hover:border-ink"
-                >
+                <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className={textLinkClasses()}>
                   Central de marcação
+                  <ArrowIcon className="transition-transform group-hover:translate-x-1" />
                 </a>
               )}
             </div>

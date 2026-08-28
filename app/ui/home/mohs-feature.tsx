@@ -1,6 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import clsx from 'clsx'
+import { buttonClasses } from '@/app/ui/general/button'
 
 const steps = [
   { numeral: 'i', text: 'O tumor visível é removido em camadas finas, uma de cada vez.' },
@@ -40,10 +42,7 @@ const MohsFeature = (): React.JSX.Element => (
             </li>
           ))}
         </ol>
-        <Link
-          href="/marque-sua-consulta"
-          className="mt-2 border border-stone bg-stone px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-navy transition-colors hover:border-white hover:bg-white"
-        >
+        <Link href="/marque-sua-consulta" className={clsx(buttonClasses(), 'mt-2')}>
           Avaliar uma lesão
         </Link>
       </div>

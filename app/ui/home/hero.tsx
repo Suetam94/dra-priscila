@@ -1,6 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { buttonClasses, textLinkClasses } from '@/app/ui/general/button'
+import { ArrowIcon } from '@/app/ui/general/icons'
 
 const Hero = (): React.JSX.Element => (
   <section className="border-b border-rule bg-page-alt">
@@ -16,18 +18,13 @@ const Hero = (): React.JSX.Element => (
           Dermatologia clínica e cirúrgica em Curitiba. Doenças de pele, cabelo e unhas, câncer de pele e
           cirurgia dermatológica, com a mesma médica acompanhando cada etapa do tratamento.
         </p>
-        <div className="flex flex-wrap gap-4">
-          <Link
-            href="/marque-sua-consulta"
-            className="border border-stone bg-stone px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-navy transition-colors hover:border-white hover:bg-white"
-          >
+        <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
+          <Link href="/marque-sua-consulta" className={buttonClasses()}>
             Agendar consulta
           </Link>
-          <Link
-            href="/areas-de-atuacao"
-            className="border border-rule-strong px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-ink transition-colors hover:border-ink"
-          >
+          <Link href="#atuacao" className={textLinkClasses()}>
             O que eu trato
+            <ArrowIcon className="transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
       </div>

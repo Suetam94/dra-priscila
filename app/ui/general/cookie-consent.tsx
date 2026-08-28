@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { buttonClasses, textLinkClasses } from '@/app/ui/general/button'
 
 const CookieConsent = (): React.JSX.Element => {
   const [isVisible, setIsVisible] = useState(true)
@@ -39,17 +40,11 @@ const CookieConsent = (): React.JSX.Element => {
           </Link>
           .
         </p>
-        <div className="flex shrink-0 gap-3">
-          <button
-            onClick={handleAccept}
-            className="border border-stone bg-stone px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-navy transition-colors hover:border-white hover:bg-white"
-          >
+        <div className="flex shrink-0 items-center gap-6">
+          <button onClick={handleAccept} className={buttonClasses('sm')}>
             Aceitar
           </button>
-          <button
-            onClick={handleDecline}
-            className="border border-rule-strong px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-on-navy transition-colors hover:border-on-navy"
-          >
+          <button onClick={handleDecline} className={textLinkClasses()}>
             Recusar
           </button>
         </div>

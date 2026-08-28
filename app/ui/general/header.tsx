@@ -1,5 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
+import clsx from 'clsx'
+import { buttonClasses } from '@/app/ui/general/button'
 import BrandLockup from '@/app/ui/general/brand-lockup'
 import HeaderNav from '@/app/ui/general/header-nav'
 import MobileMenu from '@/app/ui/general/menu-mobile'
@@ -46,10 +48,7 @@ const Header = (): React.JSX.Element => {
         <div className="relative mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-3 sm:px-8">
           <BrandLockup height={44} />
           <HeaderNav />
-          <Link
-            href="/marque-sua-consulta"
-            className="hidden border border-stone bg-stone px-6 py-3 text-sm font-bold uppercase tracking-wider text-navy transition-colors hover:border-white hover:bg-white lg:inline-flex"
-          >
+          <Link href="/marque-sua-consulta" className={clsx(buttonClasses('sm'), 'hidden lg:inline-flex')}>
             Agendar consulta
           </Link>
           <MobileMenu />

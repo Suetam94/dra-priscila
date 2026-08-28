@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import clsx from 'clsx'
+import { buttonClasses } from '@/app/ui/general/button'
 import { sectionLinks } from '@/app/lib/site'
 
 const MobileMenu = (): React.JSX.Element => {
@@ -57,10 +59,7 @@ const MobileMenu = (): React.JSX.Element => {
                 </Link>
               ))}
             </nav>
-            <Link
-              href="/marque-sua-consulta"
-              className="mb-6 mt-4 flex items-center justify-center border border-stone bg-stone px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-navy transition-colors hover:border-white hover:bg-white"
-            >
+            <Link href="/marque-sua-consulta" className={clsx(buttonClasses(), 'mb-6 mt-4 w-full')}>
               Agendar consulta
             </Link>
           </div>

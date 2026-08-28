@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import { buttonClasses } from '@/app/ui/general/button'
 
 const CtaBand = (): React.JSX.Element => (
   <section className="bg-navy text-on-navy" id="agendar">
@@ -11,10 +12,7 @@ const CtaBand = (): React.JSX.Element => (
       <p className="max-w-[42ch] text-on-navy-mid">
         Marque uma avaliação. Quanto mais cedo se olha uma lesão, mais simples costuma ser o tratamento.
       </p>
-      <Link
-        href="/marque-sua-consulta"
-        className="border border-stone bg-stone px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-navy transition-colors hover:border-white hover:bg-white"
-      >
+      <Link href="/marque-sua-consulta" className={buttonClasses()}>
         Marcar uma consulta
       </Link>
     </div>
