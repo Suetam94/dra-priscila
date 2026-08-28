@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { navLinks } from '@/app/lib/site'
+import { sectionLinks } from '@/app/lib/site'
 
 const MobileMenu = (): React.JSX.Element => {
   const [isOpen, setIsOpen] = useState(false)
@@ -42,9 +42,12 @@ const MobileMenu = (): React.JSX.Element => {
 
       {isOpen && (
         <div id="mobile-drawer" className="absolute inset-x-0 top-full border-t border-rule bg-page lg:hidden">
-          <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          {/* onClick além do efeito de rota: os links do header são âncoras da
+              própria home, então navegar entre seções não muda o pathname e a
+              gaveta ficaria aberta. */}
+          <div className="mx-auto max-w-6xl px-5 sm:px-8" onClick={() => { setIsOpen(false) }}>
             <nav className="flex flex-col py-2" aria-label="Navegação do menu">
-              {navLinks.map(({ href, label }) => (
+              {sectionLinks.map(({ href, label }) => (
                 <Link
                   key={href}
                   href={href}

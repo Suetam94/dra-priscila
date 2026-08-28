@@ -3,7 +3,7 @@ import Link from 'next/link'
 import BrandLockup from '@/app/ui/general/brand-lockup'
 import CreatedBy from '@/app/ui/general/created-by'
 import { InstagramIcon, MapPinIcon, PhoneIcon } from '@/app/ui/general/icons'
-import { clinics, navLinks, site, whatsappUrl } from '@/app/lib/site'
+import { clinics, pageLinks, site, whatsappUrl } from '@/app/lib/site'
 
 const Footer = (): React.JSX.Element => {
   const main = clinics[0]
@@ -25,7 +25,7 @@ const Footer = (): React.JSX.Element => {
             {/* py-2 nos links: sem isso a área de toque fica em 23px, abaixo do
                 mínimo confortável em telas pequenas. */}
             <nav className="grid">
-              {navLinks.map(({ href, label }) => (
+              {pageLinks.map(({ href, label }) => (
                 <Link
                   key={href}
                   href={href}

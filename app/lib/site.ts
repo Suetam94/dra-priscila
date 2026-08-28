@@ -7,11 +7,29 @@ export interface NavLink {
   label: string
 }
 
-export const navLinks: NavLink[] = [
-  { href: '/quem-sou', label: 'Sobre' },
+/**
+ * Navegação do header. Aponta para as seções da home, e o sublinhado acompanha
+ * a rolagem. O prefixo "/" faz o link funcionar também a partir das páginas
+ * internas, voltando para a home antes de rolar.
+ */
+export interface SectionLink extends NavLink {
+  /** id da seção correspondente na home, usado pelo destaque de rolagem */
+  sectionId: string
+}
+
+export const sectionLinks: SectionLink[] = [
+  { href: '/#atuacao', sectionId: 'atuacao', label: 'Áreas de atuação' },
+  { href: '/#mohs', sectionId: 'mohs', label: 'Cirurgia de Mohs' },
+  { href: '/#sobre', sectionId: 'sobre', label: 'Sobre' },
+  { href: '/#onde-atendo', sectionId: 'onde-atendo', label: 'Onde atendo' }
+]
+
+/** Páginas completas. Ficam no rodapé e nos links "ver mais" de cada seção. */
+export const pageLinks: NavLink[] = [
+  { href: '/quem-sou', label: 'Quem sou' },
   { href: '/areas-de-atuacao', label: 'Áreas de atuação' },
-  { href: '/onde-pode-me-encontrar', label: 'Onde atendo' },
-  { href: '/mais-sobre-a-dermatologia', label: 'Dermatologia' }
+  { href: '/onde-pode-me-encontrar', label: 'Onde me encontrar' },
+  { href: '/mais-sobre-a-dermatologia', label: 'Sobre a dermatologia' }
 ]
 
 export interface Clinic {

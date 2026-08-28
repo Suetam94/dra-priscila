@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Rolagem suave para as âncoras do header, desligada para quem pede menos
+   movimento. O scroll-margin evita que a seção pare escondida atrás do
+   header fixo. */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
 .accordion {
   margin-bottom: 1rem;
   border: 1px solid #e0e0e0;

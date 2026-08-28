@@ -32,18 +32,19 @@ const Hero = (): React.JSX.Element => (
         </div>
       </div>
 
-      {/* retrato-priscila.webp é o recorte com fundo transparente, gerado a
-          partir de my-image.jpeg. A figura fica direto sobre o fundo escuro,
-          ancorada embaixo, sem moldura. */}
-      <div className="relative flex h-[26rem] items-end justify-center sm:h-[32rem] lg:h-[34rem]">
+      {/* A foto é um recorte em fundo branco, com a médica deslocada para a
+          direita. O fundo claro é intencional: forma o único bloco luminoso da
+          página. height 135% + ancoragem no topo corta as pernas e mantém
+          rosto, tronco e mãos. */}
+      <div className="relative aspect-[4/5] overflow-hidden border border-rule bg-white">
         <Image
-          src="/retrato-priscila.webp"
+          src="/my-image.jpeg"
           alt="Dra. Priscila Francisco, dermatologista em Curitiba"
-          width={803}
-          height={1429}
+          width={2560}
+          height={1440}
           priority
-          sizes="(min-width: 1024px) 40vw, 80vw"
-          className="h-full w-auto object-contain object-bottom"
+          sizes="(min-width: 1024px) 45vw, 100vw"
+          className="absolute left-0 top-0 h-[135%] w-full max-w-none object-cover object-[100%_0]"
         />
       </div>
     </div>
