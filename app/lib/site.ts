@@ -17,9 +17,11 @@ export interface SectionLink extends NavLink {
   sectionId: string
 }
 
+// A ordem precisa acompanhar a ordem das seções na home, senão o sublinhado
+// que segue a rolagem pula de um lado para o outro do menu.
 export const sectionLinks: SectionLink[] = [
-  { href: '/#atuacao', sectionId: 'atuacao', label: 'Áreas de atuação' },
   { href: '/#mohs', sectionId: 'mohs', label: 'Cirurgia de Mohs' },
+  { href: '/#atuacao', sectionId: 'atuacao', label: 'Áreas de atuação' },
   { href: '/#sobre', sectionId: 'sobre', label: 'Sobre' },
   { href: '/#onde-atendo', sectionId: 'onde-atendo', label: 'Onde atendo' }
 ]

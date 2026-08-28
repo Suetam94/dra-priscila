@@ -13,8 +13,11 @@ export default function Home (): React.JSX.Element {
     <main className="w-full">
       <Hero />
       <CredentialsStrip />
-      <ServicesTeaser />
+      {/* Mohs antes das áreas de atuação: é a formação rara dela e o motivo
+          pelo qual alguém procura uma cirurgiã em vez de um dermatologista
+          geral. */}
       <MohsFeature />
+      <ServicesTeaser />
       <AboutTeaser />
       <Locations />
       <CtaBand />

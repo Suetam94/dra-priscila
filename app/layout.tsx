@@ -20,17 +20,20 @@ const lato = Lato({
   display: 'swap'
 })
 
+const title = 'Dra. Priscila Francisco | Cirurgia dermatológica e câncer de pele em Curitiba'
+const description =
+  'Dermatologista em Curitiba com foco em câncer de pele e cirurgia dermatológica, incluindo cirurgia micrográfica de Mohs. Diagnóstico, cirurgia e acompanhamento, além de atendimento em dermatologia clínica.'
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://drapriscilafrancisco.com.br'),
-  title: 'Dra. Priscila Francisco - Dermatologista',
-  description:
-    'A dermatologista Dra. Priscila Francisco é especializada em dermatologia clínica e cirúrgica. Oferecemos tratamentos avançados para doenças de pele, cabelo e unhas, além de procedimentos estéticos modernos. Marque sua consulta e cuide da sua saúde com excelência',
-  keywords:
-    'dermatologista, Dra. Priscila Francisco, dermatologia clínica, dermatologia cirúrgica, tratamentos de pele, doenças de pele, cuidados com a pele, estética, procedimentos estéticos, cabelo, unhas, acne, psoríase, eczema, melanoma, consulta dermatológica, clínica dermatológica, Curitiba, saúde da pele, rejuvenescimento, remoção de cicatrizes, tratamento de manchas, dermatologia estética, cirurgia dermatológica',
+  title,
+  description,
+  // A meta keywords foi removida: o Google a ignora desde 2009 e a lista antiga
+  // ainda prometia estética e rejuvenescimento, que não constam nas áreas de
+  // atuação que ela mesma definiu.
   openGraph: {
-    title: 'Dra. Priscila Francisco - Dermatologista',
-    description:
-        'A dermatologista Dra. Priscila Francisco é especializada em dermatologia clínica e cirúrgica. Oferecemos tratamentos avançados para doenças de pele, cabelo e unhas, além de procedimentos estéticos modernos. Marque sua consulta e cuide da sua saúde com excelência.',
+    title,
+    description,
     type: 'website',
     url: '/',
     locale: 'pt_BR',

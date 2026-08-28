@@ -15,8 +15,8 @@ const Footer = (): React.JSX.Element => {
           <div>
             <BrandLockup height={48} />
             <p className="mt-4 max-w-sm text-[0.94rem] text-ink-mid">
-              Dermatologia clínica, cirúrgica e oncologia cutânea em Curitiba. Diagnóstico, cirurgia e
-              acompanhamento com a mesma médica.
+              Cirurgia dermatológica e oncologia cutânea em Curitiba, incluindo cirurgia micrográfica de
+              Mohs. Também atendimento em dermatologia clínica.
             </p>
           </div>
 

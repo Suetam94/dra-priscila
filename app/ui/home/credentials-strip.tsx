@@ -1,10 +1,11 @@
 import React from 'react'
 
+// Mohs em primeiro: é a titulação que diferencia e exige formação específica.
 const credentials = [
-  { title: 'UFSC', detail: 'Formação médica' },
-  { title: 'Santa Casa', detail: 'Residência em Curitiba' },
-  { title: 'Cirurgia de Mohs', detail: 'Formação reconhecida' },
-  { title: 'SBD e SBCD', detail: 'Membro titular' }
+  { title: 'Cirurgiã de Mohs', detail: 'Reconhecida pela SBCD' },
+  { title: 'Oncologia cutânea', detail: 'Especialização na Santa Casa' },
+  { title: 'Dermatologia', detail: 'Residência na Santa Casa de Curitiba' },
+  { title: 'Preceptora', detail: 'Formação de dermatologistas' }
 ]
 
 const CredentialsStrip = (): React.JSX.Element => (

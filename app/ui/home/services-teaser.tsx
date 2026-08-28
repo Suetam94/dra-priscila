@@ -4,17 +4,10 @@ import { ArrowIcon } from '@/app/ui/general/icons'
 
 // Textos vindos do site antigo (fields-of-expertise-data.tsx), que descrevia
 // cada área com os itens detalhados abaixo.
+// Ordem por foco de atuação: oncologia e cirurgia primeiro, clínica depois.
 const services = [
   {
     numeral: 'i',
-    title: 'Dermatologia clínica',
-    items: [
-      'Tratamento de doenças de pele de uma forma geral, como acne, melasma e dermatites.',
-      'Doenças cutâneas imunomediadas, como psoríase, dermatite atópica e urticária, desde as fases iniciais até o uso de medicamentos sistêmicos como os imunobiológicos.'
-    ]
-  },
-  {
-    numeral: 'ii',
     title: 'Oncologia cutânea',
     items: [
       'Diagnóstico e seguimento de pacientes com história de câncer de pele.',
@@ -24,10 +17,19 @@ const services = [
     link: { href: '#mohs', label: 'Entenda a cirurgia de Mohs' }
   },
   {
-    numeral: 'iii',
+    numeral: 'ii',
     title: 'Cirurgia dermatológica geral',
     items: [
-      'Tratamento cirúrgico de lesões cutâneas diversas, como cistos, nevos e xantelasmas.'
+      'Tratamento cirúrgico de lesões cutâneas diversas, como cistos, nevos e xantelasmas.',
+      'Planejamento da cicatriz como parte da decisão cirúrgica.'
+    ]
+  },
+  {
+    numeral: 'iii',
+    title: 'Dermatologia clínica',
+    items: [
+      'Tratamento de doenças de pele de uma forma geral, como acne, melasma e dermatites.',
+      'Doenças cutâneas imunomediadas, como psoríase, dermatite atópica e urticária, desde as fases iniciais até o uso de medicamentos sistêmicos como os imunobiológicos.'
     ]
   }
 ]
@@ -39,7 +41,8 @@ const ServicesTeaser = (): React.JSX.Element => (
         <p className="text-xs font-bold uppercase tracking-[0.16em] text-coral-ink">Áreas de atuação</p>
         <h2 className="font-serif text-3xl font-medium text-ink sm:text-4xl">O que eu trato</h2>
         <p className="text-ink-mid">
-          Dermatologia clínica, oncologia cutânea e cirurgia dermatológica, no mesmo consultório.
+          Meu foco é o câncer de pele e a cirurgia dermatológica. A dermatologia clínica segue como parte
+          importante do consultório.
         </p>
       </div>
 
