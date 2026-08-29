@@ -40,8 +40,32 @@ para corrigir lá também.
 
 ## Documentos profissionais
 
-- [ ] CRM-PR (aparece no rodapé)
-- [ ] RQE (aparece no rodapé)
+- [x] CRM-PR 42453 e RQE 32324, lidos do site em produção, que busca esses valores no Firestore
+- [x] Nome completo de registro: Dra. Priscila de Cássia Francisco
+
+## Achados no site em produção
+
+Ao buscar o CRM no site no ar, apareceram duas coisas que valem aviso:
+
+1. **Convênios estão como "Plano A, Plano B, Plano C" e "Plano D, Plano E".** São valores de
+   exemplo que nunca foram substituídos e estão públicos hoje na página de onde encontrar.
+2. **Os horários aparecem como "09:00hh - 17:00hh"**, com "h" duplicado, por causa de como o
+   componente antigo monta a string.
+
+Nenhum dos dois afeta o site novo, que não herda esse código, mas a cliente provavelmente não
+sabe que estão assim.
+
+## Conflito de endereços entre as fontes
+
+O site em produção lista **Clínica Pró-saúde** (Rua São Vicente, 55, Juvevê) e **INC**.
+O Linktree lista **Curantis**, **INC** e **Marcelino Champagnat**.
+
+O Linktree é mantido pelo Instagram e o site está parado há cerca de dois anos, então adotei o
+Linktree como fonte mais recente. Mas isso é dedução, não confirmação.
+
+- [ ] Ela ainda atende na Clínica Pró-saúde? Se sim, precisa voltar para o site.
+- [ ] Horários por unidade. Os que constam em produção são Pró-saúde de segunda a sexta, das
+      08:00 às 18:00, e INC de segunda a sexta, das 09:00 às 17:00.
 
 ## Conteúdo médico
 

@@ -74,8 +74,10 @@ const Footer = (): React.JSX.Element => {
           {/* Sem ano: a home é gerada estaticamente, então new Date() congelaria
               o ano do build e mostraria um valor defasado até o próximo deploy.
               Aviso de copyright não depende de ano para valer. */}
+          {/* Nome completo de registro aqui, como no site antigo: é a linha que
+              acompanha o CRM. O nome curto fica para a marca. */}
           <span>
-            © {site.doctor}. {site.crm}, {site.rqe}.
+            © {site.doctorFullName}. {site.crm}, {site.rqe}.
           </span>
           <Link href="/politica-de-privacidade" className="underline underline-offset-4 hover:text-ink">
             Política de privacidade

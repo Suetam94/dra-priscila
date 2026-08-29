@@ -83,13 +83,17 @@ export const secretary = {
 }
 
 export const site = {
+  /** Nome de marca, como aparece no logo e na navegação. */
   doctor: 'Priscila Francisco',
+  /** Nome completo de registro, usado junto do CRM. Vem do site no ar. */
+  doctorFullName: 'Dra. Priscila de Cássia Francisco',
   city: 'Curitiba, PR',
   url: 'https://drapriscilafrancisco.com.br',
   // TODO: confirmar o perfil exato. O Linktree é o único link verificado.
   instagram: 'https://linktr.ee/priscila.francisco',
-  crm: '[CRM-PR xxxxx]',
-  rqe: '[RQE xxxxx]'
+  // Lidos do site em produção, que busca esses valores no Firestore.
+  crm: 'CRM-PR 42453',
+  rqe: 'RQE 32324'
 }
 
 /** Monta o link do WhatsApp com código do país e mensagem inicial. */
