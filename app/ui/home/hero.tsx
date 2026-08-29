@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { bookingHref } from '@/app/lib/site'
 import { buttonClasses, textLinkClasses } from '@/app/ui/general/button'
 import { ArrowIcon } from '@/app/ui/general/icons'
 
@@ -19,7 +20,7 @@ const Hero = (): React.JSX.Element => (
           micrográfica de Mohs, em Curitiba.
         </p>
         <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
-          <Link href="/marque-sua-consulta" className={buttonClasses()}>
+          <Link href={bookingHref} className={buttonClasses()}>
             Agende sua consulta
           </Link>
           <Link href="#mohs" className={textLinkClasses()}>

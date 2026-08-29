@@ -3,7 +3,7 @@ import Link from 'next/link'
 import BrandLockup from '@/app/ui/general/brand-lockup'
 import CreatedBy from '@/app/ui/general/created-by'
 import { InstagramIcon, MapPinIcon, PhoneIcon } from '@/app/ui/general/icons'
-import { ownPractice, pageLinks, site, whatsappUrl } from '@/app/lib/site'
+import { bookingHref, ownPractice, pageLinks, site, whatsappUrl } from '@/app/lib/site'
 
 const Footer = (): React.JSX.Element => {
   return (
@@ -33,7 +33,7 @@ const Footer = (): React.JSX.Element => {
                 </Link>
               ))}
               <Link
-                href="/marque-sua-consulta"
+                href={bookingHref}
                 className="py-2 text-[0.94rem] text-ink-mid transition-colors hover:text-ink"
               >
                 Agendar consulta

@@ -6,7 +6,7 @@ import BrandLockup from '@/app/ui/general/brand-lockup'
 import HeaderNav from '@/app/ui/general/header-nav'
 import MobileMenu from '@/app/ui/general/menu-mobile'
 import { InstagramIcon, MapPinIcon, PhoneIcon } from '@/app/ui/general/icons'
-import { ownPractice, site, whatsappUrl } from '@/app/lib/site'
+import { bookingHref, ownPractice, site, whatsappUrl } from '@/app/lib/site'
 
 // Server Component. O header tem fundo sólido e uma cor só: não depende de
 // JavaScript de scroll para ficar legível.
@@ -46,7 +46,7 @@ const Header = (): React.JSX.Element => {
         <div className="relative mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-3 sm:px-8">
           <BrandLockup height={44} />
           <HeaderNav />
-          <Link href="/marque-sua-consulta" className={clsx(buttonClasses('sm'), 'hidden lg:inline-flex')}>
+          <Link href={bookingHref} className={clsx(buttonClasses('sm'), 'hidden lg:inline-flex')}>
             Agendar consulta
           </Link>
           <MobileMenu />

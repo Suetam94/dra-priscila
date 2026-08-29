@@ -96,6 +96,15 @@ export const site = {
   rqe: 'RQE 32324'
 }
 
+/**
+ * Destino de todo botão de agendamento. Aponta para a seção de unidades da
+ * home, onde cada endereço tem WhatsApp direto, em vez da página antiga
+ * /marque-sua-consulta, que ainda lê clínicas do Firestore e lista uma unidade
+ * onde ela não atende mais. O prefixo "/" faz funcionar a partir de qualquer
+ * página interna.
+ */
+export const bookingHref = '/#onde-atendo'
+
 /** Monta o link do WhatsApp com código do país e mensagem inicial. */
 export const whatsappUrl = (phone: string, message = 'Olá, gostaria de marcar uma consulta.'): string =>
   `https://wa.me/55${phone}?text=${encodeURIComponent(message)}`

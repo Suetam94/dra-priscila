@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
 import { buttonClasses } from '@/app/ui/general/button'
-import { sectionLinks } from '@/app/lib/site'
+import { bookingHref, sectionLinks } from '@/app/lib/site'
 
 const MobileMenu = (): React.JSX.Element => {
   const [isOpen, setIsOpen] = useState(false)
@@ -59,7 +59,7 @@ const MobileMenu = (): React.JSX.Element => {
                 </Link>
               ))}
             </nav>
-            <Link href="/marque-sua-consulta" className={clsx(buttonClasses(), 'mb-6 mt-4 w-full')}>
+            <Link href={bookingHref} className={clsx(buttonClasses(), 'mb-6 mt-4 w-full')}>
               Agendar consulta
             </Link>
           </div>
