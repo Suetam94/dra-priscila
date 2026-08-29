@@ -15,17 +15,18 @@ const MohsFeature = (): React.JSX.Element => (
   <section className="bg-navy text-on-navy" id="mohs">
     <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 sm:px-8 lg:grid-cols-2 lg:gap-16 lg:py-24">
       <div className="grid justify-items-start gap-5">
-        <p className="text-xs font-bold uppercase tracking-[0.16em] text-coral">
-          Cirurgia micrográfica de Mohs
-        </p>
+        {/* Esta seção não existia no site antigo: é o único bloco de texto novo
+            da home. O título usa o termo exato que já constava nas áreas de
+            atuação. A descrição da técnica precisa da revisão dela antes de ir
+            ao ar, por ser conteúdo médico assinado por uma profissional. */}
         <h2 className="font-serif text-3xl font-medium text-white sm:text-4xl">
-          Como funciona a cirurgia de Mohs
+          Cirurgia Micrográfica de Mohs
         </h2>
         <hr className="h-0.5 w-12 border-0 bg-coral" />
         <p className="text-on-navy-mid">
-          É a técnica indicada sobretudo para tumores no rosto, onde cada milímetro de pele preservada
-          muda o resultado. No Brasil, exige formação específica reconhecida pela Sociedade Brasileira de
-          Cirurgia Dermatológica.
+          Técnica de tratamento cirúrgico do câncer de pele, indicada sobretudo para tumores no rosto. No
+          Brasil, exige formação específica reconhecida pela Sociedade Brasileira de Cirurgia
+          Dermatológica.
         </p>
         {/* Trecho literal da biografia dela no site antigo. */}
         <p className="font-serif text-lg italic text-stone">

@@ -8,11 +8,10 @@ const Locations = (): React.JSX.Element => (
   <section className="border-y border-rule bg-page-alt py-16 lg:py-24" id="onde-atendo">
     <div className="mx-auto max-w-6xl px-5 sm:px-8">
       <div className="mb-10 grid max-w-2xl gap-4 lg:mb-12">
-        <p className="text-xs font-bold uppercase tracking-[0.16em] text-coral-ink">Onde atendo</p>
-        <h2 className="font-serif text-3xl font-medium text-ink sm:text-4xl">Três endereços em Curitiba</h2>
-        <p className="text-ink-mid">
-          O agendamento é feito direto com cada unidade, por WhatsApp ou pela central de marcação.
-        </p>
+        {/* Título como no site antigo. */}
+        <h2 className="font-serif text-3xl font-medium text-ink sm:text-4xl">
+          Onde você pode me encontrar?
+        </h2>
       </div>
 
       {/* O consultório dela vem destacado; os hospitais e clínicas onde ela

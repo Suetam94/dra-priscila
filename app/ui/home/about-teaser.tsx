@@ -28,10 +28,8 @@ const AboutTeaser = (): React.JSX.Element => (
   <section className="py-16 lg:py-24" id="sobre">
     <div className="mx-auto grid max-w-6xl gap-10 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
       <div className="grid justify-items-start gap-5 self-start">
-        <p className="text-xs font-bold uppercase tracking-[0.16em] text-coral-ink">Quem sou</p>
-        <h2 className="font-serif text-3xl font-medium text-ink sm:text-4xl">
-          Curitibana de nascimento e de coração
-        </h2>
+        {/* Título como no site antigo. */}
+        <h2 className="font-serif text-3xl font-medium text-ink sm:text-4xl">Quem sou</h2>
         {/* Trecho literal da biografia que ela escreveu para o site antigo. */}
         <blockquote className="border-l-2 border-coral pl-5 font-serif text-xl italic leading-relaxed text-ink">
           A possibilidade de tratar meu paciente de uma forma completa, desde o diagnóstico, tratamento

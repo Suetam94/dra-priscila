@@ -8,7 +8,7 @@ import { ArrowIcon } from '@/app/ui/general/icons'
 const services = [
   {
     numeral: 'i',
-    title: 'Oncologia cutânea',
+    title: 'Oncologia Cutânea',
     items: [
       'Diagnóstico e seguimento de pacientes com história de câncer de pele.',
       'Tratamento clínico do câncer de pele.',
@@ -18,7 +18,7 @@ const services = [
   },
   {
     numeral: 'ii',
-    title: 'Cirurgia dermatológica geral',
+    title: 'Cirurgia Dermatológica Geral',
     items: [
       'Tratamento cirúrgico de lesões cutâneas diversas, como cistos, nevos e xantelasmas.',
       'Planejamento da cicatriz como parte da decisão cirúrgica.'
@@ -26,7 +26,7 @@ const services = [
   },
   {
     numeral: 'iii',
-    title: 'Dermatologia clínica',
+    title: 'Dermatologia Clínica',
     items: [
       'Tratamento de doenças de pele de uma forma geral, como acne, melasma e dermatites.',
       'Doenças cutâneas imunomediadas, como psoríase, dermatite atópica e urticária, desde as fases iniciais até o uso de medicamentos sistêmicos como os imunobiológicos.'
@@ -38,12 +38,8 @@ const ServicesTeaser = (): React.JSX.Element => (
   <section className="py-16 lg:py-24" id="atuacao">
     <div className="mx-auto max-w-6xl px-5 sm:px-8">
       <div className="mx-auto mb-12 grid max-w-2xl justify-items-center gap-4 text-center lg:mb-14">
-        <p className="text-xs font-bold uppercase tracking-[0.16em] text-coral-ink">Áreas de atuação</p>
-        <h2 className="font-serif text-3xl font-medium text-ink sm:text-4xl">O que eu trato</h2>
-        <p className="text-ink-mid">
-          Meu foco é o câncer de pele e a cirurgia dermatológica. A dermatologia clínica segue como parte
-          importante do consultório.
-        </p>
+        {/* Título como no site antigo. */}
+        <h2 className="font-serif text-3xl font-medium text-ink sm:text-4xl">Áreas de Atuação</h2>
       </div>
 
       <div className="grid gap-6 md:grid-cols-3">
