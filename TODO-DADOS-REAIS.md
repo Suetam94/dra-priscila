@@ -7,9 +7,13 @@ Checklist do que ainda depende de confirmação da cliente antes de publicar.
 Extraídos do Linktree dela em 28/08/2026. **Todos precisam ser confirmados com ela**, principalmente
 os telefones, porque foram lidos de página pública e não de fonte oficial.
 
+A **Clínica Curantis é o consultório próprio dela**. Os outros dois são locais onde ela
+também atende, e o site trata os três nessa hierarquia. O telefone da Curantis é o que
+aparece no topo e no rodapé de todas as páginas.
+
 | Local | Endereço | WhatsApp |
 | --- | --- | --- |
-| Clínica Curantis | Av. Sete de Setembro, 4698, Sala 1305, Batel | (41) 98455-2223 |
+| Clínica Curantis (consultório próprio) | Av. Sete de Setembro, 4698, Sala 1305, Batel | (41) 98455-2223 |
 | INC, Shopping Pátio Batel | Av. do Batel, 1868, Batel, 80420-090 (do site antigo) | (41) 3028-8545 (confirmar DDD) |
 | Hospital Marcelino Champagnat | (endereço a confirmar) | (41) 98444-2402 |
 | Secretária pessoal | (não se aplica) | (41) 99188-7594 |

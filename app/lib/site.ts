@@ -42,6 +42,8 @@ export interface Clinic {
   phoneLabel: string
   /** Central de marcação própria da unidade, quando existe. */
   bookingUrl?: string
+  /** O consultório dela. Os demais são locais onde ela também atende. */
+  isOwnPractice?: boolean
 }
 
 export const clinics: Clinic[] = [
@@ -49,7 +51,8 @@ export const clinics: Clinic[] = [
     name: 'Clínica Curantis',
     address: 'Av. Sete de Setembro, 4698, sala 1305, Batel, Curitiba, PR',
     phone: '41984552223',
-    phoneLabel: '(41) 98455-2223'
+    phoneLabel: '(41) 98455-2223',
+    isOwnPractice: true
   },
   {
     // Endereço e central de marcação vêm do site antigo, onde o INC já
@@ -67,6 +70,9 @@ export const clinics: Clinic[] = [
     phoneLabel: '(41) 98444-2402'
   }
 ]
+
+export const ownPractice = clinics.find((clinic) => clinic.isOwnPractice) ?? clinics[0]
+export const otherPlaces = clinics.filter((clinic) => clinic !== ownPractice)
 
 export const secretary = {
   label: 'Secretária pessoal',

@@ -3,11 +3,9 @@ import Link from 'next/link'
 import BrandLockup from '@/app/ui/general/brand-lockup'
 import CreatedBy from '@/app/ui/general/created-by'
 import { InstagramIcon, MapPinIcon, PhoneIcon } from '@/app/ui/general/icons'
-import { clinics, pageLinks, site, whatsappUrl } from '@/app/lib/site'
+import { ownPractice, pageLinks, site, whatsappUrl } from '@/app/lib/site'
 
 const Footer = (): React.JSX.Element => {
-  const main = clinics[0]
-
   return (
     <footer className="border-t border-rule bg-page-alt pb-8 pt-14">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
@@ -48,16 +46,16 @@ const Footer = (): React.JSX.Element => {
             <div className="grid gap-3 text-[0.94rem] text-ink-mid">
               <p className="flex items-start gap-2">
                 <MapPinIcon size={16} className="mt-1 shrink-0 text-coral-ink" />
-                {main.address}
+                {ownPractice.address}
               </p>
               <a
-                href={whatsappUrl(main.phone)}
+                href={whatsappUrl(ownPractice.phone)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-start gap-2 transition-colors hover:text-ink"
               >
                 <PhoneIcon size={16} className="mt-1 shrink-0 text-coral-ink" />
-                {main.phoneLabel}
+                {ownPractice.phoneLabel}
               </a>
               <a
                 href={site.instagram}

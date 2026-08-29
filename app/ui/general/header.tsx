@@ -6,13 +6,11 @@ import BrandLockup from '@/app/ui/general/brand-lockup'
 import HeaderNav from '@/app/ui/general/header-nav'
 import MobileMenu from '@/app/ui/general/menu-mobile'
 import { InstagramIcon, MapPinIcon, PhoneIcon } from '@/app/ui/general/icons'
-import { clinics, site, whatsappUrl } from '@/app/lib/site'
+import { ownPractice, site, whatsappUrl } from '@/app/lib/site'
 
 // Server Component. O header tem fundo sólido e uma cor só: não depende de
 // JavaScript de scroll para ficar legível.
 const Header = (): React.JSX.Element => {
-  const main = clinics[0]
-
   return (
     <>
       <div className="bg-navy text-sm text-on-navy-mid">
@@ -23,13 +21,13 @@ const Header = (): React.JSX.Element => {
               {site.city}
             </span>
             <a
-              href={whatsappUrl(main.phone)}
+              href={whatsappUrl(ownPractice.phone)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 transition-colors hover:text-on-navy"
             >
               <PhoneIcon size={14} />
-              {main.phoneLabel}
+              {ownPractice.phoneLabel}
             </a>
           </div>
           <a

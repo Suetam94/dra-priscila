@@ -2,7 +2,7 @@ import React from 'react'
 import clsx from 'clsx'
 import { buttonClasses, textLinkClasses } from '@/app/ui/general/button'
 import { ArrowIcon, MapPinIcon, WhatsappIcon } from '@/app/ui/general/icons'
-import { clinics, secretary, whatsappUrl } from '@/app/lib/site'
+import { otherPlaces, ownPractice, secretary, whatsappUrl } from '@/app/lib/site'
 
 const Locations = (): React.JSX.Element => (
   <section className="border-y border-rule bg-page-alt py-16 lg:py-24" id="onde-atendo">
@@ -15,10 +15,35 @@ const Locations = (): React.JSX.Element => (
         </p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-3">
-        {clinics.map(({ name, address, phone, phoneLabel, bookingUrl }) => (
+      {/* O consultório dela vem destacado; os hospitais e clínicas onde ela
+          também atende ficam agrupados depois. */}
+      <article className="grid gap-6 border border-rule-strong bg-page p-8 sm:p-10 md:grid-cols-[1.3fr_1fr] md:items-end">
+        <div className="grid gap-3">
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-coral-ink">Consultório próprio</p>
+          <h3 className="font-serif text-2xl font-medium text-ink sm:text-3xl">{ownPractice.name}</h3>
+          <p className="flex items-start gap-2 text-ink-mid">
+            <MapPinIcon size={18} className="mt-1 shrink-0 text-coral-ink" />
+            {ownPractice.address}
+          </p>
+        </div>
+        <a
+          href={whatsappUrl(ownPractice.phone)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={clsx(buttonClasses(), 'w-full md:w-auto md:justify-self-end')}
+        >
+          <WhatsappIcon size={18} />
+          {ownPractice.phoneLabel}
+        </a>
+      </article>
+
+      <h3 className="mb-5 mt-12 text-xs font-bold uppercase tracking-[0.16em] text-ink-soft">
+        Também atendo em
+      </h3>
+      <div className="grid gap-6 md:grid-cols-2">
+        {otherPlaces.map(({ name, address, phone, phoneLabel, bookingUrl }) => (
           <article key={name} className="flex flex-col gap-4 border border-rule bg-page p-7">
-            <h3 className="font-serif text-xl font-medium text-ink">{name}</h3>
+            <h4 className="font-serif text-xl font-medium text-ink">{name}</h4>
             <p className="flex items-start gap-2 text-[0.95rem] text-ink-mid">
               <MapPinIcon size={17} className="mt-1 shrink-0 text-coral-ink" />
               {address}
