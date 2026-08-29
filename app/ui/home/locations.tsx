@@ -45,11 +45,14 @@ const Locations = (): React.JSX.Element => (
           de uma das unidades empurram os botões para alturas diferentes.
           A quarta faixa fica vazia em quem não tem central de marcação, e é
           justamente essa reserva que mantém os botões alinhados. */}
-      <div className="grid gap-6 md:grid-cols-2 md:gap-x-6 md:gap-y-4 md:grid-rows-[auto_auto_auto_auto]">
+      {/* O subgrid usa o gap declarado nele próprio, não o do pai. Os dois
+          precisam bater, senão as faixas do pai são dimensionadas com um
+          espaçamento e os cards desenhados com outro. */}
+      <div className="grid gap-6 md:grid-cols-2 md:gap-x-6 md:gap-y-5 md:grid-rows-[auto_auto_auto_auto]">
         {otherPlaces.map(({ name, address, phone, phoneLabel, bookingUrl }) => (
           <article
             key={name}
-            className="grid content-start gap-4 border border-rule bg-page p-7 md:row-span-4 md:grid-rows-subgrid md:gap-0"
+            className="grid content-start gap-5 border border-rule bg-page p-7 md:row-span-4 md:grid-rows-subgrid"
           >
             <h4 className="font-serif text-xl font-medium text-ink">{name}</h4>
             <p className="flex items-start gap-2 text-[0.95rem] text-ink-mid">
@@ -65,14 +68,20 @@ const Locations = (): React.JSX.Element => (
               <WhatsappIcon size={17} />
               {phoneLabel}
             </a>
-            <div className="self-end">
-              {bookingUrl && (
-                <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className={textLinkClasses()}>
-                  Central de marcação
-                  <ArrowIcon className="transition-transform group-hover:translate-x-1" />
-                </a>
-              )}
-            </div>
+            {/* Sem invólucro: um div vazio ainda consumiria um gap no fim dos
+                cards que não têm central de marcação. No desktop a faixa
+                continua reservada pelo row-span, que é o que alinha os botões. */}
+            {bookingUrl && (
+              <a
+                href={bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={clsx(textLinkClasses(), 'justify-self-start self-end')}
+              >
+                Central de marcação
+                <ArrowIcon className="transition-transform group-hover:translate-x-1" />
+              </a>
+            )}
           </article>
         ))}
       </div>
