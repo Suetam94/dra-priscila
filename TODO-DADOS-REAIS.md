@@ -55,17 +55,18 @@ Ao buscar o CRM no site no ar, apareceram duas coisas que valem aviso:
 Nenhum dos dois afeta o site novo, que não herda esse código, mas a cliente provavelmente não
 sabe que estão assim.
 
-## Conflito de endereços entre as fontes
+## Endereços: o Linktree é a fonte
 
 O site em produção lista **Clínica Pró-saúde** (Rua São Vicente, 55, Juvevê) e **INC**.
 O Linktree lista **Curantis**, **INC** e **Marcelino Champagnat**.
 
-O Linktree é mantido pelo Instagram e o site está parado há cerca de dois anos, então adotei o
-Linktree como fonte mais recente. Mas isso é dedução, não confirmação.
+**Decidido:** vale o Linktree. Ele é mantido junto ao Instagram, enquanto o site está parado há
+cerca de dois anos, e o que saiu de lá foi porque ela deixou de atender. A Pró-saúde fica fora.
 
-- [ ] Ela ainda atende na Clínica Pró-saúde? Se sim, precisa voltar para o site.
-- [ ] Horários por unidade. Os que constam em produção são Pró-saúde de segunda a sexta, das
-      08:00 às 18:00, e INC de segunda a sexta, das 09:00 às 17:00.
+- [ ] Horários por unidade. Os únicos números conhecidos vêm do site em produção e têm cerca de
+      dois anos: Pró-saúde de segunda a sexta das 08:00 às 18:00, e INC de segunda a sexta das
+      09:00 às 17:00. Não foram publicados no site novo, porque horário errado leva paciente a
+      porta fechada.
 
 ## Conteúdo médico
 
