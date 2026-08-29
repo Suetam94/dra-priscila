@@ -39,24 +39,33 @@ const Locations = (): React.JSX.Element => (
       <h3 className="mb-5 mt-12 text-xs font-bold uppercase tracking-[0.16em] text-ink-soft">
         Também atendo em
       </h3>
-      <div className="grid gap-6 md:grid-cols-2">
+      {/* subgrid: cada card ocupa as mesmas quatro faixas do pai, então título,
+          endereço, botão e link secundário assentam na mesma altura entre os
+          cards. Sem isso, o endereço que quebra em duas linhas e o link extra
+          de uma das unidades empurram os botões para alturas diferentes.
+          A quarta faixa fica vazia em quem não tem central de marcação, e é
+          justamente essa reserva que mantém os botões alinhados. */}
+      <div className="grid gap-6 md:grid-cols-2 md:gap-x-6 md:gap-y-4 md:grid-rows-[auto_auto_auto_auto]">
         {otherPlaces.map(({ name, address, phone, phoneLabel, bookingUrl }) => (
-          <article key={name} className="flex flex-col gap-4 border border-rule bg-page p-7">
+          <article
+            key={name}
+            className="grid content-start gap-4 border border-rule bg-page p-7 md:row-span-4 md:grid-rows-subgrid md:gap-0"
+          >
             <h4 className="font-serif text-xl font-medium text-ink">{name}</h4>
             <p className="flex items-start gap-2 text-[0.95rem] text-ink-mid">
               <MapPinIcon size={17} className="mt-1 shrink-0 text-coral-ink" />
               {address}
             </p>
-            <div className="mt-auto grid justify-items-start gap-4">
-              <a
-                href={whatsappUrl(phone)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={clsx(buttonClasses('sm'), 'w-full')}
-              >
-                <WhatsappIcon size={17} />
-                {phoneLabel}
-              </a>
+            <a
+              href={whatsappUrl(phone)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={clsx(buttonClasses('sm'), 'w-full self-end')}
+            >
+              <WhatsappIcon size={17} />
+              {phoneLabel}
+            </a>
+            <div className="self-end">
               {bookingUrl && (
                 <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className={textLinkClasses()}>
                   Central de marcação
