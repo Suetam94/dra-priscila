@@ -64,8 +64,10 @@ export const clinics: Clinic[] = [
     bookingUrl: 'https://inc.centraldemarcacao.com.br/'
   },
   {
+    // Endereço do hospital confirmado em duas fontes públicas independentes.
+    // O que falta é o dado que só ela tem: em qual consultório ou andar atende.
     name: 'Hospital Marcelino Champagnat',
-    address: '[Endereço completo a confirmar], Curitiba, PR',
+    address: 'Av. Presidente Affonso Camargo, 1399, Cristo Rei, Curitiba, PR, 80050-370',
     phone: '41984442402',
     phoneLabel: '(41) 98444-2402'
   }

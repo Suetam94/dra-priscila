@@ -15,7 +15,7 @@ aparece no topo e no rodapé de todas as páginas.
 | --- | --- | --- |
 | Clínica Curantis (consultório próprio) | Av. Sete de Setembro, 4698, Sala 1305, Batel | (41) 98455-2223 |
 | INC, Shopping Pátio Batel | Av. do Batel, 1868, Batel, 80420-090 (do site antigo) | (41) 3028-8545 (confirmar DDD) |
-| Hospital Marcelino Champagnat | (endereço a confirmar) | (41) 98444-2402 |
+| Hospital Marcelino Champagnat | Av. Presidente Affonso Camargo, 1399, Cristo Rei, 80050-370 (fonte pública) | (41) 98444-2402 |
 | Secretária pessoal | (não se aplica) | (41) 99188-7594 |
 
 O site antigo listava também a **Clínica Pró-saúde** (Rua São Vicente, 55, Juvevê), que não
@@ -26,6 +26,9 @@ O INC é a única unidade presente nas duas fontes, então o endereço e a centr
 (`inc.centraldemarcacao.com.br`) foram reaproveitados do site antigo.
 
 - [ ] Confirmar os três endereços completos, com CEP e sala
+- [ ] Sala ou andar onde ela atende dentro do Hospital Marcelino Champagnat. O endereço do
+      prédio veio de fonte pública, mas hospital grande sem indicação de consultório faz o
+      paciente se perder na chegada
 - [ ] Confirmar os telefones e qual deles é o canal preferido de agendamento
 - [ ] Confirmar dias e horários de atendimento em cada local
 - [ ] Convênios aceitos, ou se é particular
