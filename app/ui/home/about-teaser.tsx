@@ -1,6 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
-import { ArrowIcon } from '@/app/ui/general/icons'
 
 // Titulação conforme o site antigo (about-me.tsx, defaultSummary).
 const formation = [
@@ -65,14 +63,6 @@ const AboutTeaser = (): React.JSX.Element => (
             </li>
           ))}
         </ul>
-
-        <Link
-          href="/quem-sou"
-          className="inline-flex items-center gap-2 border-b border-current pb-0.5 text-sm font-bold text-coral-ink transition-colors hover:text-ink"
-        >
-          Ler a história completa
-          <ArrowIcon />
-        </Link>
       </div>
     </div>
   </section>
