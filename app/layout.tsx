@@ -44,9 +44,18 @@ export const metadata: Metadata = {
     { name: 'Mateus Vinícius da Silva', url: 'https://www.linkedin.com/in/mateus-vin%C3%ADcius-da-silva-8156301a5/' }
   ]
 }
+// suppressHydrationWarning cobre apenas os atributos desta tag, não os filhos.
+// Serve para extensões de navegador que escrevem no <html> antes do React
+// hidratar, como Dark Reader e tradutores. Comparando o HTML servido com o DOM
+// em navegador limpo, os atributos são idênticos, então isto não está
+// escondendo divergência vinda do nosso código.
 export default function RootLayout ({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-      <html className={`${garamond.variable} ${lato.variable} bg-page`} lang="pt-BR">
+      <html
+        className={`${garamond.variable} ${lato.variable} bg-page`}
+        lang="pt-BR"
+        suppressHydrationWarning
+      >
         <body>
           <Header />
           {children}

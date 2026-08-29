@@ -71,8 +71,11 @@ const Footer = (): React.JSX.Element => {
         </div>
 
         <div className="mt-10 grid gap-2 border-t border-rule pt-6 text-xs text-ink-soft md:grid-flow-col md:items-center md:justify-between">
+          {/* Sem ano: a home é gerada estaticamente, então new Date() congelaria
+              o ano do build e mostraria um valor defasado até o próximo deploy.
+              Aviso de copyright não depende de ano para valer. */}
           <span>
-            © {new Date().getFullYear()} {site.doctor}. {site.crm}, {site.rqe}.
+            © {site.doctor}. {site.crm}, {site.rqe}.
           </span>
           <Link href="/politica-de-privacidade" className="underline underline-offset-4 hover:text-ink">
             Política de privacidade
