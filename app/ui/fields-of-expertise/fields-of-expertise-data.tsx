@@ -27,12 +27,9 @@ const fieldsOfExpertiseData: IExpertiseItemProps[] = [
   }
 ]
 
-interface IFieldsOfExpertiseData {
-  data?:IExpertiseItemProps[]
-}
-
-const FieldsOfExpertiseData = ({ data }: IFieldsOfExpertiseData) => {
-  const fieldsOfExpertise = data !== undefined ? data : fieldsOfExpertiseData
+// A prop existia para receber a lista do Firestore. Sem ele, vale a lista fixa.
+const FieldsOfExpertiseData = () => {
+  const fieldsOfExpertise = fieldsOfExpertiseData
 
   return (
     <>

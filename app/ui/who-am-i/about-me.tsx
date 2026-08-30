@@ -4,11 +4,6 @@ import React from 'react'
 import Image from 'next/image'
 import { CheckCircle } from '@phosphor-icons/react'
 import TitleSection from '@/app/ui/section/title-section'
-import { IWhoIAmSectionDataWithId } from '@/app/lib/WhoIAm'
-
-interface IAboutMe {
-  aboutMe?: IWhoIAmSectionDataWithId
-}
 
 const defaultSummary = [
   'Médica pela Universidade Federal de Santa Catarina;',
@@ -22,16 +17,13 @@ const defaultSummary = [
 const defaultFullText =
   'Olá, meu nome é Priscila e sou curitibana de nascimento e de coração. A medicina nunca foi o caminho mais óbvio e pré-definido na minha vida, na verdade foi durante a minha primeira formação, em nutrição pela Universidade Federal do Paraná, que fui aos poucos me apaixonando pela clínica, pelo cuidar e pelo que a medicina pode fazer na vida de alguém. Concluí a faculdade, trabalhei, mas a pulguinha da medicina tinha realmente me picado, e anos depois dessa sementinha ser plantada me formava médica pela minha amada Universidade Federal de Santa Catarina. A escolha da especialidade também não foi óbvia e nem fácil, foi a versatilidade, a complexidade intrínseca e a admiração pelo trabalho de profissionais exemplares que me fizeram escolher a Dermatologia como minha área de atuação. Voltei então para minha cidade natal e no Hospital Santa Casa de Misericórdia de Curitiba fiz minha residência médica em Dermatologia. Entrei para a medicina por amar a clínica e sempre me considerei “da clínica médica”, mas aos poucos, e graças aos professores que tive na Santa Casa, outra área da dermatologia foi ganhando seu espaço na minha vida: a cirurgia dermatológica. A possibilidade de tratar meu paciente de uma forma completa, desde o diagnóstico, tratamento cirúrgico e seguimento, e ainda oferecendo a melhor técnica, me fez seguir minha formação, ainda no serviço de Dermatologia da Santa Casa de Curitiba, em oncologia cutânea, cirurgia dermatológica e cirurgia micrográfica de Mohs, hoje minha paixão. Atualmente me dedico a tratar minhas paixões iniciais, as doenças dermatológicas clínicas, e também o câncer de pele e cirurgia dermatológica de uma forma geral. Ambas ocupando lugares muito importantes no meu dia a dia.'
 
-const AboutMe = ({ aboutMe }: IAboutMe): React.JSX.Element => {
-  let title, fullText, summary, mainImageUrl
-
-  if (aboutMe !== undefined) {
-    ({ title, fullText, summary, mainImageUrl } = aboutMe)
-  }
-
-  const image = mainImageUrl && mainImageUrl !== '' ? mainImageUrl : '/about-me-1.png'
-  const summaryData = summary && summary.length > 0 ? summary : defaultSummary
-  const fullTextData = fullText && fullText !== '' ? fullText : defaultFullText
+// Conteúdo agora vem só das constantes acima, que já eram o padrão. A prop
+// existia para receber o documento do Firestore, que saiu do projeto.
+const AboutMe = (): React.JSX.Element => {
+  const title = 'Dra. Priscila Francisco'
+  const image = '/about-me-1.png'
+  const summaryData = defaultSummary
+  const fullTextData = defaultFullText
 
   return (
     <section className="w-full bg-base-gray">

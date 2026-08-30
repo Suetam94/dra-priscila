@@ -1,9 +1,6 @@
-'use server'
-
 import React from 'react'
 import TitleSection from '@/app/ui/section/title-section'
 import Clinic, { IClinicProps } from '@/app/ui/book-your-appointment/clinic'
-import { getClinics } from '@/app/lib/BookYourAppointment'
 
 const clinicsData: IClinicProps[] = [
   {
@@ -35,10 +32,10 @@ const clinicsData: IClinicProps[] = [
   }
 ]
 
-const BookAppointment = async (): Promise<React.JSX.Element> => {
-  const { data } = await getClinics()
-
-  const clinics = data && data.length > 0 ? data : clinicsData
+// A lista vem fixa daqui desde a saída do Firestore. Estes dados ainda são os
+// antigos e serão substituídos quando esta página for redesenhada.
+const BookAppointment = (): React.JSX.Element => {
+  const clinics = clinicsData
 
   return (
     <section className="w-full bg-base-gray">

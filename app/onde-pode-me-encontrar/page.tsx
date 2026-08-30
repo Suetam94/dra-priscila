@@ -1,10 +1,7 @@
-'use client'
-
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import TitleSection from '@/app/ui/section/title-section'
 import { IContactInfoProps } from '@/app/ui/where-can-you-find-me/contact-info'
 import ClinicPlace from '@/app/ui/where-can-you-find-me/clinic-place'
-import { getClinics } from '@/app/lib/WhereFindMe'
 
 const clinicsData: IContactInfoProps[] = [
   {
@@ -55,20 +52,10 @@ const clinicsData: IContactInfoProps[] = [
   }
 ]
 
+// Deixou de ser client component: existia estado só para receber o resultado
+// do Firestore. Sem a busca, a lista é estática e a página renderiza no servidor.
 const WhereToFindMe = (): React.JSX.Element => {
-  const [clinics, setClinics] = useState<IContactInfoProps[]>(clinicsData)
-
-  useEffect(() => {
-    const getClinicsData = async () => {
-      const { error, data } = await getClinics()
-
-      if (!error) {
-        setClinics(data ?? clinicsData)
-      }
-    }
-
-    (async () => await getClinicsData())()
-  }, [])
+  const clinics = clinicsData
 
   return (
     <section className="w-full px-4 pb-8 pt-3 bg-base-gray">
