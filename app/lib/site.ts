@@ -57,7 +57,7 @@ export interface Clinic {
 export const clinics: Clinic[] = [
   {
     name: 'Clínica Curantis',
-    address: 'Av. Sete de Setembro, 4698, sala 1305, Batel, Curitiba, PR',
+    address: 'Av. Sete de Setembro, 4698, sala 1305, Batel, Curitiba, PR, 80240-000',
     phone: '41984552223',
     phoneLabel: '(41) 98455-2223',
     isOwnPractice: true

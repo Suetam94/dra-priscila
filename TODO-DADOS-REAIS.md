@@ -13,7 +13,7 @@ aparece no topo e no rodapé de todas as páginas.
 
 | Local | Endereço | WhatsApp |
 | --- | --- | --- |
-| Clínica Curantis (consultório próprio) | Av. Sete de Setembro, 4698, Sala 1305, Batel | (41) 98455-2223 |
+| Clínica Curantis (consultório próprio) | Av. Sete de Setembro, 4698, Sala 1305, Batel, 80240-000 | (41) 98455-2223 |
 | INC, Shopping Pátio Batel | Av. do Batel, 1868, Batel, 80420-090 (do site antigo) | (41) 3028-8545 (confirmar DDD) |
 | Hospital Marcelino Champagnat | Av. Presidente Affonso Camargo, 1399, Cristo Rei, 80050-370 (fonte pública) | (41) 98444-2402 |
 | Secretária pessoal | (não se aplica) | (41) 99188-7594 |
@@ -25,10 +25,7 @@ Vale confirmar.
 O INC é a única unidade presente nas duas fontes, então o endereço e a central de marcação
 (`inc.centraldemarcacao.com.br`) foram reaproveitados do site antigo.
 
-- [ ] **CEP da Clínica Curantis.** É a única unidade sem CEP, e ela é o consultório
-      próprio dela. O CEP entra nos dados estruturados que o Google usa para busca
-      local, então a unidade principal é justamente a que está incompleta. As outras
-      duas já têm.
+- [x] CEP da Clínica Curantis: 80240-000. As três unidades agora têm endereço completo.
 - [ ] Sala ou andar onde ela atende dentro do Hospital Marcelino Champagnat. O endereço do
       prédio veio de fonte pública, mas hospital grande sem indicação de consultório faz o
       paciente se perder na chegada
