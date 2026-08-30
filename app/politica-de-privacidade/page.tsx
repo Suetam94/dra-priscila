@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Metadata } from 'next'
-import { site } from '@/app/lib/site'
+import { secretary, site } from '@/app/lib/site'
 
 export const metadata: Metadata = {
   title: 'Política de Privacidade | Dra. Priscila Francisco',
@@ -37,9 +37,11 @@ const sections = [
   },
   {
     title: '7. Contato',
-    // TODO: e-mail real. O site antigo publicou "contato@seusite.com", que é
-    // exemplo e nunca foi substituído.
-    body: 'Se você tiver alguma dúvida sobre esta política de privacidade, entre em contato pelo e-mail [e-mail de contato].'
+    // O site antigo publicava "contato@seusite.com", endereço de exemplo que
+    // nunca foi substituído, e não existe e-mail dela em nenhum dado nosso.
+    // A LGPD exige um canal de contato, então apontamos para o WhatsApp da
+    // secretária, que é um canal real e verificado.
+    body: `Se você tiver alguma dúvida sobre esta política de privacidade, ou quiser exercer os direitos descritos acima, entre em contato pelo WhatsApp ${secretary.phoneLabel}.`
   }
 ]
 

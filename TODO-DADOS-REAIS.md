@@ -107,10 +107,12 @@ que abre o aplicativo no celular e não custa JavaScript.
 
 ## Pendências abertas por essa limpeza
 
-- [ ] **O formulário de contato ficou sem lugar no site.** Ele existia no rodapé
-      antigo e some no novo, que leva para WhatsApp. O componente e o envio por
-      e-mail continuam no projeto, funcionando. Decidir: volta para alguma
-      seção, ou o WhatsApp basta e aí saem o `contact-form`, o `utils/email.ts`,
-      o nodemailer e os três segredos de SMTP.
-- [ ] **E-mail de contato na política de privacidade.** O site no ar publica
-      `contato@seusite.com`, que é exemplo e nunca foi substituído.
+- [x] **Formulário de contato removido.** Decidido que o WhatsApp basta. Saíram junto o
+      `utils/email.ts`, o nodemailer e os três segredos de SMTP. O site não usa mais
+      nenhuma variável de ambiente.
+- [x] **Contato da política de privacidade.** O site antigo publicava `contato@seusite.com`,
+      endereço de exemplo. Não existe e-mail dela em nenhum dado nosso, nem no repositório,
+      nem no histórico do git, nem no site em produção. A política agora aponta para o
+      WhatsApp da secretária, que é canal real e atende a exigência da LGPD.
+- [ ] Se ela tiver um e-mail profissional, vale colocar na política, porque pedido de
+      privacidade por escrito deixa rastro melhor que conversa de WhatsApp.
