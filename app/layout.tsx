@@ -3,6 +3,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Header from '@/app/ui/general/header'
 import Footer from '@/app/ui/general/footer'
+import StructuredData from '@/app/ui/general/structured-data'
+import { site } from '@/app/lib/site'
 import { EB_Garamond, Lato } from 'next/font/google'
 
 const garamond = EB_Garamond({
@@ -20,25 +22,33 @@ const lato = Lato({
   display: 'swap'
 })
 
-const title = 'Dra. Priscila Francisco | Cirurgia dermatológica e câncer de pele em Curitiba'
+// O Google corta o título por volta de 60 caracteres e a descrição por volta de
+// 155. Os valores anteriores tinham 77 e 205, então o fim ficava cortado no
+// resultado de busca. Estes cabem inteiros.
+const title = 'Dra. Priscila Francisco | Cirurgia de Mohs em Curitiba'
 const description =
-  'Dermatologista em Curitiba com foco em câncer de pele e cirurgia dermatológica, incluindo cirurgia micrográfica de Mohs. Diagnóstico, cirurgia e acompanhamento, além de atendimento em dermatologia clínica.'
+  'Dermatologista em Curitiba especializada em câncer de pele e cirurgia dermatológica, incluindo cirurgia micrográfica de Mohs.'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://drapriscilafrancisco.com.br'),
+  metadataBase: new URL(site.url),
   title,
   description,
   // A meta keywords foi removida: o Google a ignora desde 2009 e a lista antiga
   // ainda prometia estética e rejuvenescimento, que não constam nas áreas de
   // atuação que ela mesma definiu.
+  alternates: { canonical: '/' },
   openGraph: {
     title,
     description,
     type: 'website',
     url: '/',
     locale: 'pt_BR',
-    images: [{ url: '/my-image.jpeg', width: 1920, height: 1080, alt: 'Dra. Priscila Francisco' }]
+    siteName: `Dra. ${site.doctor}`,
+    // Dimensões conferidas no arquivo. Antes declarava 1920x1080, que não batia
+    // com os 2560x1440 reais.
+    images: [{ url: '/my-image.jpeg', width: 2560, height: 1440, alt: 'Dra. Priscila Francisco' }]
   },
+  twitter: { card: 'summary_large_image', title, description },
   robots: 'index, follow',
   authors: [
     { name: 'Mateus Vinícius da Silva', url: 'https://www.linkedin.com/in/mateus-vin%C3%ADcius-da-silva-8156301a5/' }
@@ -57,6 +67,7 @@ export default function RootLayout ({ children }: Readonly<{ children: React.Rea
         suppressHydrationWarning
       >
         <body>
+          <StructuredData />
           <Header />
           {children}
           <Footer />

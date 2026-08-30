@@ -25,7 +25,10 @@ Vale confirmar.
 O INC é a única unidade presente nas duas fontes, então o endereço e a central de marcação
 (`inc.centraldemarcacao.com.br`) foram reaproveitados do site antigo.
 
-- [ ] Confirmar os três endereços completos, com CEP e sala
+- [ ] **CEP da Clínica Curantis.** É a única unidade sem CEP, e ela é o consultório
+      próprio dela. O CEP entra nos dados estruturados que o Google usa para busca
+      local, então a unidade principal é justamente a que está incompleta. As outras
+      duas já têm.
 - [ ] Sala ou andar onde ela atende dentro do Hospital Marcelino Champagnat. O endereço do
       prédio veio de fonte pública, mas hospital grande sem indicação de consultório faz o
       paciente se perder na chegada
