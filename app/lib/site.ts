@@ -26,13 +26,21 @@ export const sectionLinks: SectionLink[] = [
   { href: '/#onde-atendo', sectionId: 'onde-atendo', label: 'Onde atendo' }
 ]
 
-/** Páginas completas. Ficam no rodapé e nos links "ver mais" de cada seção. */
+/**
+ * Rodapé. As páginas internas foram absorvidas pelas seções da home, então
+ * aqui também são âncoras. Os endereços antigos seguem funcionando por
+ * redirecionamento declarado no next.config.mjs.
+ */
 export const pageLinks: NavLink[] = [
-  { href: '/quem-sou', label: 'Quem sou' },
-  { href: '/areas-de-atuacao', label: 'Áreas de atuação' },
-  { href: '/onde-pode-me-encontrar', label: 'Onde me encontrar' },
-  { href: '/mais-sobre-a-dermatologia', label: 'Sobre a dermatologia' }
+  { href: '/#mohs', label: 'Cirurgia de Mohs' },
+  { href: '/#atuacao', label: 'Áreas de atuação' },
+  { href: '/#sobre', label: 'Quem sou' },
+  { href: '/#onde-atendo', label: 'Onde atendo' }
 ]
+
+/** Busca no Google Maps pelo endereço, que resolve melhor no celular do que um mapa embutido. */
+export const mapsUrl = (address: string): string =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`
 
 export interface Clinic {
   name: string

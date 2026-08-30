@@ -89,3 +89,28 @@ cerca de dois anos, e o que saiu de lá foi porque ela deixou de atender. A Pró
   com texto ilegível e anatomia incorreta.
 - [ ] Verificar licença de `clinical-dermatology.png`, `skin-surgery.png` e `cancer-dermatology.png`,
       que são banco de imagens de origem desconhecida.
+
+## Decisões de estrutura
+
+As páginas internas foram absorvidas pelas seções da home, porque repetiam o
+mesmo conteúdo: o `/quem-sou` trazia a mesma biografia e as mesmas titulações,
+e o `/areas-de-atuacao` as mesmas três áreas com os mesmos itens. Os endereços
+antigos continuam funcionando por redirecionamento permanente para a âncora
+correspondente, declarado no `next.config.mjs`.
+
+O blog foi removido. Os três posts apontavam para `/blog/...`, rota que nunca
+existiu, então eram 404 no site no ar, e ilustravam com imagens geradas por IA.
+Se ela quiser publicar conteúdo no futuro, vale construir de verdade.
+
+O mapa embutido saiu junto. Cada endereço agora é um link para o Google Maps,
+que abre o aplicativo no celular e não custa JavaScript.
+
+## Pendências abertas por essa limpeza
+
+- [ ] **O formulário de contato ficou sem lugar no site.** Ele existia no rodapé
+      antigo e some no novo, que leva para WhatsApp. O componente e o envio por
+      e-mail continuam no projeto, funcionando. Decidir: volta para alguma
+      seção, ou o WhatsApp basta e aí saem o `contact-form`, o `utils/email.ts`,
+      o nodemailer e os três segredos de SMTP.
+- [ ] **E-mail de contato na política de privacidade.** O site no ar publica
+      `contato@seusite.com`, que é exemplo e nunca foi substituído.

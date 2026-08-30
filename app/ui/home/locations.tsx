@@ -2,7 +2,7 @@ import React from 'react'
 import clsx from 'clsx'
 import { buttonClasses, textLinkClasses } from '@/app/ui/general/button'
 import { ArrowIcon, MapPinIcon, WhatsappIcon } from '@/app/ui/general/icons'
-import { otherPlaces, ownPractice, secretary, whatsappUrl } from '@/app/lib/site'
+import { mapsUrl, otherPlaces, ownPractice, secretary, whatsappUrl } from '@/app/lib/site'
 
 const Locations = (): React.JSX.Element => (
   <section className="border-y border-rule bg-page-alt py-16 lg:py-24" id="onde-atendo">
@@ -20,10 +20,17 @@ const Locations = (): React.JSX.Element => (
         <div className="grid gap-3">
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-coral-ink">Consultório próprio</p>
           <h3 className="font-serif text-2xl font-medium text-ink sm:text-3xl">{ownPractice.name}</h3>
-          <p className="flex items-start gap-2 text-ink-mid">
+          {/* O endereço é o próprio link para o mapa, que substitui o mapa
+              embutido da página antiga e abre o aplicativo no celular. */}
+          <a
+            href={mapsUrl(ownPractice.address)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-start gap-2 text-ink-mid transition-colors hover:text-ink"
+          >
             <MapPinIcon size={18} className="mt-1 shrink-0 text-coral-ink" />
             {ownPractice.address}
-          </p>
+          </a>
         </div>
         <a
           href={whatsappUrl(ownPractice.phone)}
@@ -55,10 +62,15 @@ const Locations = (): React.JSX.Element => (
             className="grid content-start gap-5 border border-rule bg-page p-7 md:row-span-4 md:grid-rows-subgrid"
           >
             <h4 className="font-serif text-xl font-medium text-ink">{name}</h4>
-            <p className="flex items-start gap-2 text-[0.95rem] text-ink-mid">
+            <a
+              href={mapsUrl(address)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-start gap-2 text-[0.95rem] text-ink-mid transition-colors hover:text-ink"
+            >
               <MapPinIcon size={17} className="mt-1 shrink-0 text-coral-ink" />
               {address}
-            </p>
+            </a>
             <a
               href={whatsappUrl(phone)}
               target="_blank"
