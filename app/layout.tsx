@@ -44,9 +44,17 @@ export const metadata: Metadata = {
     url: '/',
     locale: 'pt_BR',
     siteName: `Dra. ${site.doctor}`,
-    // Dimensões conferidas no arquivo. Antes declarava 1920x1080, que não batia
-    // com os 2560x1440 reais.
-    images: [{ url: '/my-image.jpeg', width: 2560, height: 1440, alt: 'Dra. Priscila Francisco' }]
+    // 1200x630 é a proporção que WhatsApp, Facebook e LinkedIn recortam sem
+    // perder conteúdo. O retrato cru servia de provisório, mas é 16:9 e cada
+    // rede cortava num lugar diferente.
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Dra. Priscila Francisco, dermatologista em Curitiba'
+      }
+    ]
   },
   twitter: { card: 'summary_large_image', title, description },
   robots: 'index, follow',

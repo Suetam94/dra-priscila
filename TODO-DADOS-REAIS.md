@@ -42,18 +42,13 @@ O INC mantém a central de marcação própria (`inc.centraldemarcacao.com.br`).
 ## Imagens
 
 - [x] `cirurgia-mohs.webp` (1440x1440), ela operando com lupa cirúrgica
-- [ ] Autorização de uso das fotos vindas do Instagram dela
-- [ ] Foto do consultório real. A `about-me-2.jpeg` é o Hospital Caridade, onde ela se
-      formou, e não onde atende. Usar como "consultório" seria enganoso
-- [ ] Imagem de compartilhamento (Open Graph). Hoje usa `/my-image.jpeg` como provisório
+- [x] Imagem de compartilhamento: `og-image.jpg`, 1200x630, montada com o retrato sobre a
+      paleta da marca. Não dependeu de arquivo novo
+- [x] Fotos: ela não vai fornecer mais nenhuma, e aprovou o site com as que temos
 
-### Imagens a remover do projeto
-
-- `about-me-1.png`: banco de imagens, é outra mulher de jaleco, não ela
-- `o_que_e_dermatologia_realista.png` e `tratamentos_dermatologicos_modernos.png`: geradas
-  por IA, com texto ilegível e anatomia incorreta
-- [ ] Verificar licença de `clinical-dermatology.png`, `skin-surgery.png` e
-      `cancer-dermatology.png`, que são banco de imagens de origem desconhecida
+Todas as imagens de origem duvidosa saíram do projeto: a foto de banco que mostrava outra
+mulher, as três ilustrações geradas por IA e os stocks de licença desconhecida. `public/`
+tem hoje 300KB e só contém o que o site serve.
 
 ## Contato
 
