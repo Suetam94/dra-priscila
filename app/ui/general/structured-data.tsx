@@ -45,7 +45,7 @@ const StructuredData = (): React.JSX.Element => {
         address: toPostalAddress(ownPractice.address),
         telephone: `+55${ownPractice.phone}`,
         areaServed: { '@type': 'City', name: CURITIBA.city },
-        sameAs: [site.instagram],
+        sameAs: [site.links],
         availableService: [
           {
             '@type': 'MedicalProcedure',

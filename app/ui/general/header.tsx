@@ -5,7 +5,7 @@ import { buttonClasses } from '@/app/ui/general/button'
 import BrandLockup from '@/app/ui/general/brand-lockup'
 import HeaderNav from '@/app/ui/general/header-nav'
 import MobileMenu from '@/app/ui/general/menu-mobile'
-import { InstagramIcon, MapPinIcon, PhoneIcon } from '@/app/ui/general/icons'
+import { LinkIcon, MapPinIcon, PhoneIcon } from '@/app/ui/general/icons'
 import { bookingHref, ownPractice, site, whatsappUrl } from '@/app/lib/site'
 
 // Server Component. O header tem fundo sólido e uma cor só: não depende de
@@ -31,13 +31,13 @@ const Header = (): React.JSX.Element => {
             </a>
           </div>
           <a
-            href={site.instagram}
+            href={site.links}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 transition-colors hover:text-on-navy"
           >
-            <InstagramIcon size={14} />
-            Instagram
+            <LinkIcon size={14} />
+            Todos os contatos
           </a>
         </div>
       </div>
