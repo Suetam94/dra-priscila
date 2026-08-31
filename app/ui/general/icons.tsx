@@ -35,12 +35,11 @@ export const PhoneIcon = ({ size = 16, className }: IconProps): React.JSX.Elemen
   </svg>
 )
 
-// Elo de corrente, não o glifo do Instagram: o destino é a página de links
-// dela, e um ícone de rede social prometeria um perfil que o link não entrega.
-export const LinkIcon = ({ size = 16, className }: IconProps): React.JSX.Element => (
+export const InstagramIcon = ({ size = 16, className }: IconProps): React.JSX.Element => (
   <svg {...base(size)} className={className}>
-    <path d="M8.5 11.5a3 3 0 0 0 4.24 0l2.4-2.4a3 3 0 0 0-4.24-4.25l-.9.9" strokeLinecap="round" />
-    <path d="M11.5 8.5a3 3 0 0 0-4.24 0l-2.4 2.4a3 3 0 0 0 4.24 4.25l.9-.9" strokeLinecap="round" />
+    <rect x="3" y="3" width="14" height="14" rx="4" />
+    <circle cx="10" cy="10" r="3.2" />
+    <circle cx="14.3" cy="5.7" r="0.6" fill="currentColor" stroke="none" />
   </svg>
 )
 

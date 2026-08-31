@@ -64,9 +64,8 @@ O INC mantém a central de marcação própria (`inc.centraldemarcacao.com.br`).
       a exigência da LGPD de oferecer um canal
 - [ ] Se ela tiver um e-mail profissional, vale colocar na política: pedido de privacidade
       por escrito deixa rastro melhor que conversa de WhatsApp
-- [ ] O @ do Instagram dela. O link de rede social hoje aponta para o Linktree e está
-      rotulado como "Todos os contatos", porque o Linktree não publica o endereço do perfil
-      e prometer Instagram levando a outro lugar seria impreciso
+- [x] Instagram: @priscila.c.francisco. O @ não acompanha o slug do Linktree, que é
+      priscila.francisco. Está no header, no rodapé e no sameAs dos dados estruturados
 
 ## Decisões de estrutura
 

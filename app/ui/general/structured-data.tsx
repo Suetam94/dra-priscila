@@ -45,7 +45,9 @@ const StructuredData = (): React.JSX.Element => {
         address: toPostalAddress(ownPractice.address),
         telephone: `+55${ownPractice.phone}`,
         areaServed: { '@type': 'City', name: CURITIBA.city },
-        sameAs: [site.links],
+        // sameAs é onde o Google associa o site aos perfis oficiais da pessoa,
+        // o que ajuda a consolidar a identidade dela entre as fontes.
+        sameAs: [site.instagram, site.links],
         availableService: [
           {
             '@type': 'MedicalProcedure',

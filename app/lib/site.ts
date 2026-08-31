@@ -97,9 +97,11 @@ export const site = {
   doctorFullName: 'Dra. Priscila de Cássia Francisco',
   city: 'Curitiba, PR',
   url: 'https://drapriscilafrancisco.com.br',
-  // Linktree, e não Instagram: é a página de links dela, e o próprio Linktree
-  // não publica o endereço do perfil. Rotular como "Instagram" seria impreciso.
-  // TODO: se ela passar o @ do Instagram, vale trocar por um link direto.
+  // O @ não acompanha o slug do Linktree: lá é priscila.francisco, aqui
+  // priscila.c.francisco, com o C de Cássia.
+  instagram: 'https://www.instagram.com/priscila.c.francisco/',
+  // Página de links dela. Não aparece na interface, porque duplica os contatos
+  // que já estão na página, mas entra no sameAs dos dados estruturados.
   links: 'https://linktr.ee/priscila.francisco',
   // Lidos do site em produção, que busca esses valores no Firestore.
   crm: 'CRM-PR 42453',

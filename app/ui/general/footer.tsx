@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import BrandLockup from '@/app/ui/general/brand-lockup'
 import CreatedBy from '@/app/ui/general/created-by'
-import { LinkIcon, MapPinIcon, PhoneIcon } from '@/app/ui/general/icons'
+import { InstagramIcon, MapPinIcon, PhoneIcon } from '@/app/ui/general/icons'
 import { bookingHref, ownPractice, pageLinks, site, whatsappUrl } from '@/app/lib/site'
 
 const Footer = (): React.JSX.Element => {
@@ -58,13 +58,13 @@ const Footer = (): React.JSX.Element => {
                 {ownPractice.phoneLabel}
               </a>
               <a
-                href={site.links}
+                href={site.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-start gap-2 transition-colors hover:text-ink"
               >
-                <LinkIcon size={16} className="mt-1 shrink-0 text-coral-ink" />
-                Todos os contatos
+                <InstagramIcon size={16} className="mt-1 shrink-0 text-coral-ink" />
+                Instagram
               </a>
             </div>
           </div>
