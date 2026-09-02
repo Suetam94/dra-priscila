@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { bookingHref } from '@/app/lib/site'
+import { bookingHref, externalLink } from '@/app/lib/site'
 import { buttonClasses, textLinkClasses } from '@/app/ui/general/button'
 import { ArrowIcon } from '@/app/ui/general/icons'
 
@@ -20,9 +20,9 @@ const Hero = (): React.JSX.Element => (
           micrográfica de Mohs, em Curitiba.
         </p>
         <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
-          <Link href={bookingHref} className={buttonClasses()}>
+          <a href={bookingHref} {...externalLink} className={buttonClasses()}>
             Agende sua consulta
-          </Link>
+          </a>
           <Link href="#mohs" className={textLinkClasses()}>
             Cirurgia de Mohs
             <ArrowIcon className="transition-transform group-hover:translate-x-1" />

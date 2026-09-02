@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Metadata } from 'next'
-import { secretary, site } from '@/app/lib/site'
+import { ownPractice, site } from '@/app/lib/site'
 
 export const metadata: Metadata = {
   title: 'Política de Privacidade | Dra. Priscila Francisco',
@@ -39,9 +39,10 @@ const sections = [
     title: '7. Contato',
     // O site antigo publicava "contato@seusite.com", endereço de exemplo que
     // nunca foi substituído, e não existe e-mail dela em nenhum dado nosso.
-    // A LGPD exige um canal de contato, então apontamos para o WhatsApp da
-    // secretária, que é um canal real e verificado.
-    body: `Se você tiver alguma dúvida sobre esta política de privacidade, ou quiser exercer os direitos descritos acima, entre em contato pelo WhatsApp ${secretary.phoneLabel}.`
+    // A LGPD exige um canal de contato, então apontamos para o WhatsApp do
+    // consultório próprio dela, que já aparece na página e é canal público.
+    // O número pessoal da secretária saiu do site a pedido dela.
+    body: `Se você tiver alguma dúvida sobre esta política de privacidade, ou quiser exercer os direitos descritos acima, entre em contato pelo WhatsApp ${ownPractice.phoneLabel}, da ${ownPractice.name}.`
   }
 ]
 

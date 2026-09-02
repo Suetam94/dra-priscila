@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
-import { bookingHref } from '@/app/lib/site'
+import { bookingHref, externalLink } from '@/app/lib/site'
 import clsx from 'clsx'
 import { buttonClasses } from '@/app/ui/general/button'
 
@@ -47,9 +46,9 @@ const MohsFeature = (): React.JSX.Element => (
             </li>
           ))}
         </ol>
-        <Link href={bookingHref} className={clsx(buttonClasses(), 'mt-2')}>
+        <a href={bookingHref} {...externalLink} className={clsx(buttonClasses(), 'mt-2')}>
           Agende sua consulta
-        </Link>
+        </a>
       </div>
 
       <figure className="m-0">

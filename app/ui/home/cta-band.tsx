@@ -1,6 +1,5 @@
 import React from 'react'
-import Link from 'next/link'
-import { bookingHref } from '@/app/lib/site'
+import { bookingHref, externalLink } from '@/app/lib/site'
 import { buttonClasses } from '@/app/ui/general/button'
 
 const CtaBand = (): React.JSX.Element => (
@@ -10,9 +9,9 @@ const CtaBand = (): React.JSX.Element => (
       <h2 className="max-w-[22ch] font-serif text-3xl font-medium text-white sm:text-4xl lg:text-5xl">
         Marque sua consulta
       </h2>
-      <Link href={bookingHref} className={buttonClasses()}>
+      <a href={bookingHref} {...externalLink} className={buttonClasses()}>
         Agende sua consulta
-      </Link>
+      </a>
     </div>
   </section>
 )

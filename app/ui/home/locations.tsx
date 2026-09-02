@@ -2,7 +2,7 @@ import React from 'react'
 import clsx from 'clsx'
 import { buttonClasses, textLinkClasses } from '@/app/ui/general/button'
 import { ArrowIcon, MapPinIcon, WhatsappIcon } from '@/app/ui/general/icons'
-import { mapsUrl, otherPlaces, ownPractice, secretary, whatsappUrl } from '@/app/lib/site'
+import { mapsUrl, otherPlaces, ownPractice, whatsappUrl } from '@/app/lib/site'
 
 const Locations = (): React.JSX.Element => (
   <section className="border-y border-rule bg-page-alt py-16 lg:py-24" id="onde-atendo">
@@ -97,18 +97,6 @@ const Locations = (): React.JSX.Element => (
           </article>
         ))}
       </div>
-
-      <p className="mt-8 text-[0.95rem] text-ink-mid">
-        {secretary.label}:{' '}
-        <a
-          href={whatsappUrl(secretary.phone)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-bold text-coral-ink underline underline-offset-4 hover:text-ink"
-        >
-          {secretary.phoneLabel}
-        </a>
-      </p>
     </div>
   </section>
 )

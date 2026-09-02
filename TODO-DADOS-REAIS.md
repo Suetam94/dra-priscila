@@ -12,12 +12,14 @@ também atende, e o site trata os três nessa hierarquia.
 | Clínica Curantis (consultório próprio) | Av. Sete de Setembro, 4698, Sala 1305, Batel, 80240-000 | (41) 98455-2223 |
 | INC, Shopping Pátio Batel | Av. do Batel, 1868, Batel, 80420-090 | (41) 3028-8545 |
 | Hospital Marcelino Champagnat | Av. Presidente Affonso Camargo, 1399, Cristo Rei, 80050-370 | (41) 98444-2402 |
-| Secretária pessoal | (não se aplica) | (41) 99188-7594 |
 
 Os telefones e os dois últimos endereços foram lidos de fontes públicas, não de fonte
 oficial, então precisam de conferência com ela antes de publicar.
 
 O INC mantém a central de marcação própria (`inc.centraldemarcacao.com.br`).
+
+Os botões gerais de agendamento abrem o Linktree dela, que é onde ela mesma mantém os
+canais atualizados. Os cards de cada unidade continuam com o WhatsApp direto.
 
 - [x] CEP da Clínica Curantis: 80240-000. As três unidades têm endereço completo.
 - [ ] Conferir os três telefones e definir qual é o canal preferido de agendamento
@@ -55,8 +57,9 @@ tem hoje 300KB e só contém o que o site serve.
 - [x] Formulário de contato removido. O WhatsApp é o canal, e com ele saíram o envio por
       e-mail, o nodemailer e os três segredos de SMTP. O site não usa mais nenhuma
       variável de ambiente
-- [x] Contato da política de privacidade aponta para o WhatsApp da secretária, que atende
-      a exigência da LGPD de oferecer um canal
+- [x] Contato da política de privacidade aponta para o WhatsApp da Clínica Curantis, que
+      atende a exigência da LGPD de oferecer um canal. O número pessoal da secretária saiu
+      do site
 - [ ] Se ela tiver um e-mail profissional, vale colocar na política: pedido de privacidade
       por escrito deixa rastro melhor que conversa de WhatsApp
 - [x] Instagram: @priscila.c.francisco. O @ não acompanha o slug do Linktree, que é

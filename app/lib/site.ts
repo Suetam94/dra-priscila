@@ -84,12 +84,6 @@ export const clinics: Clinic[] = [
 export const ownPractice = clinics.find((clinic) => clinic.isOwnPractice) ?? clinics[0]
 export const otherPlaces = clinics.filter((clinic) => clinic !== ownPractice)
 
-export const secretary = {
-  label: 'Secretária pessoal',
-  phone: '41991887594',
-  phoneLabel: '(41) 99188-7594'
-}
-
 export const site = {
   /** Nome de marca, como aparece no logo e na navegação. */
   doctor: 'Priscila Francisco',
@@ -100,8 +94,9 @@ export const site = {
   // O @ não acompanha o slug do Linktree: lá é priscila.francisco, aqui
   // priscila.c.francisco, com o C de Cássia.
   instagram: 'https://www.instagram.com/priscila.c.francisco/',
-  // Página de links dela. Não aparece na interface, porque duplica os contatos
-  // que já estão na página, mas entra no sameAs dos dados estruturados.
+  // Página de links dela, para onde apontam os botões de agendamento. Ela
+  // mantém esses canais atualizados por conta própria. Também entra no
+  // sameAs dos dados estruturados.
   links: 'https://linktr.ee/priscila.francisco',
   // Lidos do site em produção, que busca esses valores no Firestore.
   crm: 'CRM-PR 42453',
@@ -109,13 +104,15 @@ export const site = {
 }
 
 /**
- * Destino de todo botão de agendamento. Aponta para a seção de unidades da
- * home, onde cada endereço tem WhatsApp direto, em vez da página antiga
- * /marque-sua-consulta, que ainda lê clínicas do Firestore e lista uma unidade
- * onde ela não atende mais. O prefixo "/" faz funcionar a partir de qualquer
- * página interna.
+ * Destino dos botões gerais de agendamento. Aponta para a página de links
+ * dela, que é onde ela mesma mantém os canais atualizados. Os cards de
+ * unidade continuam com o WhatsApp direto de cada clínica, que é o caminho
+ * curto para quem já sabe onde quer ser atendido.
  */
-export const bookingHref = '/#onde-atendo'
+export const bookingHref = site.links
+
+/** Atributos de link que sai do site, repetidos em todo botão de agendamento. */
+export const externalLink = { target: '_blank', rel: 'noopener noreferrer' } as const
 
 /** Monta o link do WhatsApp com código do país e mensagem inicial. */
 export const whatsappUrl = (phone: string, message = 'Olá, gostaria de marcar uma consulta.'): string =>
