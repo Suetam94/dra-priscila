@@ -1,6 +1,6 @@
 // Conteúdo estático do site. Substitui o que antes vinha do Firestore.
-// Os dados de contato foram extraídos do Linktree da médica e ainda precisam
-// de confirmação dela. Ver TODO-DADOS-REAIS.md.
+// Os dados de contato vêm do Linktree da médica, confirmados por ela. A
+// procedência de cada um está em DADOS-REAIS.md.
 
 export interface NavLink {
   href: string
