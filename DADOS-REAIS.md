@@ -1,6 +1,7 @@
-# Dados reais pendentes
+# Dados reais
 
-Checklist do que ainda depende de confirmação da cliente antes de publicar.
+De onde veio cada dado do site e o que ela decidiu não publicar. Não há mais nada
+pendente de confirmação dela.
 
 ## Locais de atendimento
 
@@ -13,8 +14,9 @@ também atende, e o site trata os três nessa hierarquia.
 | INC, Shopping Pátio Batel | Av. do Batel, 1868, Batel, 80420-090 | (41) 3028-8545 |
 | Hospital Marcelino Champagnat | Av. Presidente Affonso Camargo, 1399, Cristo Rei, 80050-370 | (41) 98444-2402 |
 
-Os telefones e os dois últimos endereços foram lidos de fontes públicas, não de fonte
-oficial, então precisam de conferência com ela antes de publicar.
+Os três telefones vêm do Linktree dela, que é fonte dela mesma. O endereço do INC já
+constava no site antigo e o do Marcelino Champagnat foi confirmado em duas fontes
+públicas independentes.
 
 O INC mantém a central de marcação própria (`inc.centraldemarcacao.com.br`).
 
@@ -22,14 +24,12 @@ Os botões gerais de agendamento abrem o Linktree dela, que é onde ela mesma ma
 canais atualizados. Os cards de cada unidade continuam com o WhatsApp direto.
 
 - [x] CEP da Clínica Curantis: 80240-000. As três unidades têm endereço completo.
-- [ ] Conferir os três telefones e definir qual é o canal preferido de agendamento
-- [ ] Sala ou andar onde ela atende dentro do Hospital Marcelino Champagnat. Hospital
-      grande sem indicação de consultório faz o paciente se perder na chegada
-- [ ] Dias e horários de atendimento em cada unidade. Nada foi publicado, porque horário
-      errado leva paciente a porta fechada
-- [ ] Convênios aceitos, ou se o atendimento é particular
-- [ ] Confirmar que ela realmente não atende mais na Clínica Pró-saúde, que constava no
-      site antigo e não aparece mais nos canais atuais
+- [x] Telefones conferidos: os três são os do Linktree dela
+- [x] Ela não atende mais na Clínica Pró-saúde, que constava no site antigo. Confirmado
+- [x] Sala dentro do Hospital Marcelino Champagnat: ela dispensou
+- [x] Dias e horários de atendimento: fica sem, por decisão dela. Quem agenda passa pelo
+      Linktree ou pelo WhatsApp da unidade, onde o horário é informado na hora
+- [x] Convênios: fica sem, por decisão dela
 
 ## Documentos profissionais
 
@@ -38,8 +38,7 @@ canais atualizados. Os cards de cada unidade continuam com o WhatsApp direto.
 
 ## Conteúdo médico
 
-- [ ] Ela precisa revisar e aprovar o texto que explica a cirurgia de Mohs, por ser
-      conteúdo médico assinado por ela
+- [x] Ela leu e aprovou o texto que explica a cirurgia de Mohs
 
 ## Imagens
 
@@ -60,8 +59,8 @@ tem hoje 300KB e só contém o que o site serve.
 - [x] Contato da política de privacidade aponta para o WhatsApp da Clínica Curantis, que
       atende a exigência da LGPD de oferecer um canal. O número pessoal da secretária saiu
       do site
-- [ ] Se ela tiver um e-mail profissional, vale colocar na política: pedido de privacidade
-      por escrito deixa rastro melhor que conversa de WhatsApp
+- [x] E-mail na política: fica o número, por decisão dela. O WhatsApp da Curantis é o
+      canal único de contato do site
 - [x] Instagram: @priscila.c.francisco. O @ não acompanha o slug do Linktree, que é
       priscila.francisco. Está no header, no rodapé e no sameAs dos dados estruturados
 
