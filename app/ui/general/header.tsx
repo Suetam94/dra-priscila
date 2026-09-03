@@ -1,36 +1,57 @@
-'use client'
-
 import React from 'react'
-import Image from 'next/image'
-import { usePathname } from 'next/navigation'
-import { InstagramLogo } from '@phosphor-icons/react'
-import Link from 'next/link'
+import clsx from 'clsx'
+import { buttonClasses } from '@/app/ui/general/button'
+import BrandLockup from '@/app/ui/general/brand-lockup'
+import HeaderNav from '@/app/ui/general/header-nav'
 import MobileMenu from '@/app/ui/general/menu-mobile'
+import { InstagramIcon, MapPinIcon, PhoneIcon } from '@/app/ui/general/icons'
+import { bookingHref, externalLink, ownPractice, site, whatsappUrl } from '@/app/lib/site'
 
+// Server Component. O header tem fundo sólido e uma cor só: não depende de
+// JavaScript de scroll para ficar legível.
 const Header = (): React.JSX.Element => {
-  const pathname = usePathname()
-
-  if (pathname.includes('admin')) {
-    return <></>
-  }
-
   return (
-    <header className="w-full relative bg-base-blue">
-      <div className="max-w-7xl mx-auto flex justify-between items-center p-2 lg:px-8 lg:gap-10">
-        <Link className="pl-2" href="/">
-          <Image src="/logo-header.png" alt="Dra. Priscila Dermatologista" width={190} height={70} />
-        </Link>
-        <div className="hidden lg:flex lg:justify-between lg:gap-7 items-center text-center font-bold">
-          <Link href="/quem-sou" className="text-base-gray hover:text-white transition-colors duration-300">Quem Sou</Link>
-          <Link href="/areas-de-atuacao" className="text-base-gray hover:text-white transition-colors duration-300">Áreas de Atuação</Link>
-          <Link href="/onde-pode-me-encontrar" className="text-base-gray hover:text-white transition-colors duration-300">Onde Pode Me Encontrar</Link>
-          <Link href="/mais-sobre-a-dermatologia" className="text-base-gray hover:text-white transition-colors duration-300">Saiba Mais Sobre a Dermatologia</Link>
-          <Link href="/marque-sua-consulta" className="text-base-gray hover:text-white transition-colors duration-300">Marque a Sua Consulta</Link>
-          <InstagramLogo className="text-base-gray hover:text-white transition-colors duration-300" size="32" weight="light" />
+    <>
+      <div className="bg-navy text-sm text-on-navy-mid">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-7 gap-y-1 px-5 py-2 sm:px-8 md:justify-between">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
+            <span className="inline-flex items-center gap-2">
+              <MapPinIcon size={14} />
+              {site.city}
+            </span>
+            <a
+              href={whatsappUrl(ownPractice.phone)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 transition-colors hover:text-on-navy"
+            >
+              <PhoneIcon size={14} />
+              {ownPractice.phoneLabel}
+            </a>
+          </div>
+          <a
+            href={site.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 transition-colors hover:text-on-navy"
+          >
+            <InstagramIcon size={14} />
+            Instagram
+          </a>
         </div>
-        <MobileMenu />
       </div>
-    </header>
+
+      <header className="sticky top-0 z-50 border-b border-rule bg-page">
+        <div className="relative mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-3 sm:px-8">
+          <BrandLockup height={44} />
+          <HeaderNav />
+          <a href={bookingHref} {...externalLink} className={clsx(buttonClasses('sm'), 'hidden lg:inline-flex')}>
+            Agendar consulta
+          </a>
+          <MobileMenu />
+        </div>
+      </header>
+    </>
   )
 }
 

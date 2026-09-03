@@ -1,50 +1,71 @@
 'use client'
 
-import React, { useState } from 'react'
-import { List, X } from '@phosphor-icons/react'
-import clsx from 'clsx'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import clsx from 'clsx'
+import { buttonClasses } from '@/app/ui/general/button'
+import { bookingHref, externalLink, sectionLinks } from '@/app/lib/site'
 
 const MobileMenu = (): React.JSX.Element => {
   const [isOpen, setIsOpen] = useState(false)
+  const pathname = usePathname()
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen)
-  }
+  // fecha a gaveta ao navegar para outra página
+  useEffect(() => { setIsOpen(false) }, [pathname])
 
-  const closeMenu = () => {
-    setIsOpen(false)
-  }
+  useEffect(() => {
+    if (!isOpen) return
+
+    const onKeyDown = (event: KeyboardEvent): void => {
+      if (event.key === 'Escape') setIsOpen(false)
+    }
+
+    document.addEventListener('keydown', onKeyDown)
+    return () => { document.removeEventListener('keydown', onKeyDown) }
+  }, [isOpen])
 
   return (
-    <div className="lg:hidden">
-      <button onClick={toggleMenu} className="p-2">
-        {isOpen ? <X size={32} /> : <List size={25} weight="bold" className="text-base-gray" />}
-      </button>
-      <div
-        className={clsx(
-          'fixed top-0 left-0 w-full h-full bg-base-gray text-base-blue flex flex-col items-center justify-center transition-transform duration-300 z-10',
-          {
-            'transform translate-x-0': isOpen,
-            'transform -translate-x-full': !isOpen
-          }
-        )}
+    <>
+      <button
+        type="button"
+        onClick={() => { setIsOpen((open) => !open) }}
+        aria-expanded={isOpen}
+        aria-controls="mobile-drawer"
+        className="inline-flex items-center gap-2 border border-rule-strong px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-ink lg:hidden"
       >
-        <div className="flex items-center justify-between w-full px-4 py-4 bg-base-gray fixed top-0">
-          <h2 className="text-xl font-bold">Menu</h2>
-          <button onClick={toggleMenu} className="p-2">
-            <X size={32} />
-          </button>
+        {isOpen ? 'Fechar' : 'Menu'}
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.6} aria-hidden>
+          {isOpen
+            ? <path d="M4 4l8 8M12 4l-8 8" strokeLinecap="round" />
+            : <path d="M2 4h12M2 8h12M2 12h12" strokeLinecap="round" />}
+        </svg>
+      </button>
+
+      {isOpen && (
+        <div id="mobile-drawer" className="absolute inset-x-0 top-full border-t border-rule bg-page lg:hidden">
+          {/* onClick além do efeito de rota: os links do header são âncoras da
+              própria home, então navegar entre seções não muda o pathname e a
+              gaveta ficaria aberta. */}
+          <div className="mx-auto max-w-6xl px-5 sm:px-8" onClick={() => { setIsOpen(false) }}>
+            <nav className="flex flex-col py-2" aria-label="Navegação do menu">
+              {sectionLinks.map(({ href, label }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="border-b border-rule py-4 font-serif text-xl text-ink last:border-b-0"
+                >
+                  {label}
+                </Link>
+              ))}
+            </nav>
+            <a href={bookingHref} {...externalLink} className={clsx(buttonClasses(), 'mb-6 mt-4 w-full')}>
+              Agendar consulta
+            </a>
+          </div>
         </div>
-        <div className="mt-16 flex flex-col items-center space-y-4 p-4 w-full">
-          <Link href="/quem-sou" className="block text-xl px-4 py-2 rounded-md hover:bg-base-blue hover:text-white transition-colors duration-300" onClick={closeMenu}>Quem Sou</Link>
-          <Link href="/areas-de-atuacao" className="block text-xl px-4 py-2 rounded-md hover:bg-base-blue hover:text-white transition-colors duration-300" onClick={closeMenu}>Áreas de Atuação</Link>
-          <Link href="/onde-pode-me-encontrar" className="block text-xl px-4 py-2 rounded-md hover:bg-base-blue hover:text-white transition-colors duration-300" onClick={closeMenu}>Onde Pode Me Encontrar</Link>
-          <Link href="/mais-sobre-a-dermatologia" className="block text-xl px-4 py-2 rounded-md hover:bg-base-blue hover:text-white transition-colors duration-300" onClick={closeMenu}>Saiba Mais Sobre a Dermatologia</Link>
-          <Link href="/marque-sua-consulta" className="block text-xl px-4 py-2 rounded-md hover:bg-base-blue hover:text-white transition-colors duration-300" onClick={closeMenu}>Marque a Sua Consulta</Link>
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   )
 }
 

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { buttonClasses, textLinkClasses } from '@/app/ui/general/button'
 
 const CookieConsent = (): React.JSX.Element => {
   const [isVisible, setIsVisible] = useState(true)
@@ -29,27 +30,21 @@ const CookieConsent = (): React.JSX.Element => {
   if (!isVisible) return <></>
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 p-4 bg-base-blue text-base-gray shadow-lg rounded-t-lg z-50">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
-        <p className="text-center md:text-left mb-4 md:mb-0">
+    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-rule bg-navy p-4">
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-1 md:flex-row">
+        <p className="text-center text-sm text-on-navy-mid md:text-left">
           Utilizamos cookies para melhorar sua experiência em nosso site. Ao continuar navegando, você concorda com a
           nossa{' '}
-          <Link href="/politica-de-privacidade" className="text-base-pink underline">
+          <Link href="/politica-de-privacidade" className="text-coral underline underline-offset-4">
             Política de Privacidade
           </Link>
           .
         </p>
-        <div className="flex space-x-4">
-          <button
-            onClick={handleAccept}
-            className="bg-base-gray text-base-blue py-2 px-4 rounded-md hover:bg-base-pink transition duration-300"
-          >
+        <div className="flex shrink-0 items-center gap-6">
+          <button onClick={handleAccept} className={buttonClasses('sm')}>
             Aceitar
           </button>
-          <button
-            onClick={handleDecline}
-            className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 transition duration-300"
-          >
+          <button onClick={handleDecline} className={textLinkClasses()}>
             Recusar
           </button>
         </div>
